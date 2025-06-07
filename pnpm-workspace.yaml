@@ -2,3 +2,7 @@ onlyBuiltDependencies:
   - "@tailwindcss/oxide"
   - "sharp"
   - "unrs-resolver"
+  - "msw"
+
+packages:
+  - "."
