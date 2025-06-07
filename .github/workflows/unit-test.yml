@@ -1,0 +1,29 @@
+name: unit-test
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  unit-test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v2
+        with:
+          version: 10.11.0
+          run_install: false
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: "pnpm"
+
+      - name: 의존성 설치
+        run: pnpm install --frozen-lockfile
+
+      - name: 단위 테스트 실행
+        run: pnpm test
