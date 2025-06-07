@@ -9,7 +9,10 @@ const createJestConfig = nextJest({
 // Jest에 적용할 커스텀 설정
 const customJestConfig: Config = {
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
-  testEnvironment: "jest-environment-jsdom",
+  testEnvironment: "jest-fixed-jsdom",
+  testEnvironmentOptions: {
+    customExportConditions: [""],
+  },
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
   },
