@@ -87,6 +87,7 @@ const config = {
       },
       fontFamily: {
         pretendard: ["var(--font-pretendard)"],
+        numans: ["var(--font-numans)"],
       },
     },
   },
