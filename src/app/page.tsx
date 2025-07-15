@@ -12,16 +12,16 @@ export default function Home() {
             Pretendard Heading 스타일
           </h2>
           <div className="space-y-2 rounded-lg bg-white p-6 shadow-sm">
-            <p className="font-heading1 text-[--color-black]">
+            <p className="font-heading1 text-black">
               font-heading1 (1.75rem, 700) - 메인 제목 - Black
             </p>
-            <p className="font-heading2 text-[--color-gray8]">
+            <p className="font-heading2 text-gray8">
               font-heading2 (1.75rem, 600) - 섹션 제목 - Gray8
             </p>
-            <p className="font-heading3 text-[--color-blue4]">
+            <p className="font-heading3 text-blue4">
               font-heading3 (1.5rem, 700) - 서브 제목 - Blue4
             </p>
-            <p className="font-heading4 text-[--color-gray7]">
+            <p className="font-heading4 text-gray7">
               font-heading4 (1.5rem, 600) - 서브 제목 - Gray7
             </p>
           </div>
@@ -31,22 +31,22 @@ export default function Home() {
         <section className="space-y-4">
           <h2 className="font-heading2 text-gray-800">Pretendard Sub 스타일</h2>
           <div className="space-y-2 rounded-lg bg-white p-6 shadow-sm">
-            <p className="font-sub1 text-[--color-black]">
+            <p className="font-sub1 text-black">
               font-sub1 (1.25rem, 700) - 서브 제목 1 - Black
             </p>
-            <p className="font-sub2 text-[--color-gray8]">
+            <p className="font-sub2 text-gray8">
               font-sub2 (1.25rem, 600) - 서브 제목 2 - Gray8
             </p>
-            <p className="font-sub3 text-[--color-blue4]">
+            <p className="font-sub3 text-blue4">
               font-sub3 (1.125rem, 700) - 서브 제목 3 - Blue4
             </p>
-            <p className="font-sub4 text-[--color-gray7]">
+            <p className="font-sub4 text-gray7">
               font-sub4 (1.125rem, 600) - 서브 제목 4 - Gray7
             </p>
-            <p className="font-sub5 text-[--color-gray6]">
+            <p className="font-sub5 text-gray6">
               font-sub5 (1rem, 600) - 서브 제목 5 - Gray6
             </p>
-            <p className="font-sub6 text-[--color-gray5]">
+            <p className="font-sub6 text-gray5">
               font-sub6 (0.875rem, 600) - 서브 제목 6 - Gray5
             </p>
           </div>
@@ -58,22 +58,22 @@ export default function Home() {
             Pretendard Body 스타일
           </h2>
           <div className="space-y-2 rounded-lg bg-white p-6 shadow-sm">
-            <p className="font-body1 text-[--color-black]">
+            <p className="font-body1 text-black">
               font-body1 (1.125rem, 500) - 본문 1 Medium - Black
             </p>
-            <p className="font-body2 text-[--color-gray8]">
+            <p className="font-body2 text-gray8">
               font-body2 (1.125rem, 400) - 본문 2 Regular - Gray8
             </p>
-            <p className="font-body3 text-[--color-gray7]">
+            <p className="font-body3 text-gray7">
               font-body3 (1rem, 500) - 본문 3 Medium - Gray7
             </p>
-            <p className="font-body4 text-[--color-gray6]">
+            <p className="font-body4 text-gray6">
               font-body4 (1rem, 400) - 본문 4 Regular - Gray6
             </p>
-            <p className="font-body5 text-[--color-gray5]">
+            <p className="font-body5 text-gray5">
               font-body5 (0.875rem, 500) - 본문 5 Medium - Gray5
             </p>
-            <p className="font-body6 text-[--color-gray4]">
+            <p className="font-body6 text-gray4">
               font-body6 (0.875rem, 400) - 본문 6 Regular - Gray4
             </p>
           </div>
@@ -85,13 +85,13 @@ export default function Home() {
             Pretendard Caption 스타일
           </h2>
           <div className="space-y-2 rounded-lg bg-white p-6 shadow-sm">
-            <p className="font-caption1 text-[--color-blue4]">
+            <p className="font-caption1 text-blue4">
               font-caption1 (0.75rem, 600) - 캡션 1 Semibold - Blue4
             </p>
-            <p className="font-caption2 text-[--color-gray6]">
+            <p className="font-caption2 text-gray6">
               font-caption2 (0.75rem, 500) - 캡션 2 Medium - Gray6
             </p>
-            <p className="font-caption3 text-[--color-gray5]">
+            <p className="font-caption3 text-gray5">
               font-caption3 (0.75rem, 400) - 캡션 3 Regular - Gray5
             </p>
           </div>
@@ -103,7 +103,7 @@ export default function Home() {
             Pretendard Underlined 스타일
           </h2>
           <div className="space-y-2 rounded-lg bg-white p-6 shadow-sm">
-            <p className="font-underlined1 text-[--color-blue3]">
+            <p className="font-underlined1 text-blue3">
               font-underlined1 (0.875rem, 400) - 밑줄 텍스트 - Blue3
             </p>
           </div>
@@ -113,16 +113,16 @@ export default function Home() {
         <section className="space-y-4">
           <h2 className="font-heading2 text-gray-800">Numans Body 스타일</h2>
           <div className="space-y-2 rounded-lg bg-white p-6 shadow-sm">
-            <p className="font-numans-body1 text-[--color-black]">
+            <p className="font-numans-body1 text-black">
               font-numans-body1 (1.25rem, 400) - Numans 본문 1 - Black
             </p>
-            <p className="font-numans-body2 text-[--color-gray8]">
+            <p className="font-numans-body2 text-gray8">
               font-numans-body2 (1.125rem, 400) - Numans 본문 2 - Gray8
             </p>
-            <p className="font-numans-body3 text-[--color-gray7]">
+            <p className="font-numans-body3 text-gray7">
               font-numans-body3 (1rem, 400) - Numans 본문 3 - Gray7
             </p>
-            <p className="font-numans-body4 text-[--color-gray6]">
+            <p className="font-numans-body4 text-gray6">
               font-numans-body4 (0.875rem, 400) - Numans 본문 4 - Gray6
             </p>
           </div>
@@ -132,10 +132,10 @@ export default function Home() {
         <section className="space-y-4">
           <h2 className="font-heading2 text-gray-800">Numans Caption 스타일</h2>
           <div className="space-y-2 rounded-lg bg-white p-6 shadow-sm">
-            <p className="font-numans-caption1 text-[--color-red3]">
+            <p className="font-numans-caption1 text-red3">
               font-numans-caption1 (0.75rem, 700) - Numans 캡션 1 Bold - Red3
             </p>
-            <p className="font-numans-caption2 text-[--color-gray5]">
+            <p className="font-numans-caption2 text-gray5">
               font-numans-caption2 (0.625rem, 400) - Numans 캡션 2 Regular -
               Gray5
             </p>
@@ -203,18 +203,16 @@ export default function Home() {
         <section className="space-y-4">
           <h2 className="font-heading2 text-gray-800">실제 사용 예시</h2>
           <div className="space-y-4 rounded-lg bg-white p-6 shadow-sm">
-            <h3 className="font-heading3 text-[--color-black]">
-              프로젝트 제목
-            </h3>
-            <p className="font-body1 text-[--color-gray8]">
+            <h3 className="font-heading3 text-black">프로젝트 제목</h3>
+            <p className="font-body1 text-gray8">
               이것은 프로젝트의 메인 설명입니다. 사용자가 읽기 편한 크기와 줄
               간격으로 설정되어 있습니다.
             </p>
             <div className="flex items-center gap-2">
-              <span className="font-caption3 text-[--color-gray5]">
+              <span className="font-caption3 text-gray5">
                 작성일: 2024년 1월 15일
               </span>
-              <span className="font-caption2 text-[--color-blue3]">#태그</span>
+              <span className="font-caption2 text-blue3">#태그</span>
             </div>
             <div className="flex flex-wrap gap-2">
               <div className="bg-badge-purple font-caption3 rounded px-2 py-1 text-white">
