@@ -6,6 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
+    "restart": "rm -rf .next && pnpm dev",
     "lint": "next lint",
     "test": "jest",
     "test:watch": "jest --watch"

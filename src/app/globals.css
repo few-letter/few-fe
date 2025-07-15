@@ -3,11 +3,46 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  /* Spacing Scale */
+  --spacing: 1px; /* 1px 단위로 설정하여 p-16 = 16px */
+  --font-size: 1px; /* 1px 단위로 설정하여 text-sm = 14px */
+  --border-width: 1px; /* 1px 단위로 설정하여 border-sm = 1px */
+
+  /* Design System Color */
+  --color-black: #0c121b;
+  --color-white: #ffffff;
+  --color-gray1: #f7f7f7;
+  --color-gray2: #f0f1f5;
+  --color-gray3: #e0e5eb;
+  --color-gray4: #bfc7d4;
+  --color-gray5: #a1acbd;
+  --color-gray6: #818ca0;
+  --color-gray7: #657084;
+  --color-gray8: #4c5667;
+  --color-gray9: #37404f;
+  --color-gray10: #212531;
+  --color-blue1: #eaf7ff;
+  --color-blue2: #7ae1fe;
+  --color-blue3: #14beee;
+  --color-blue4: #073068;
+  --color-red1: #ffeeee;
+  --color-red2: #ff6b6b;
+  --color-red3: #ff5152;
+  /* Design System Badge Color*/
+  --color-badge-purple: #8931ff;
+  --color-badge-yellow: #ffa01b;
+  --color-badge-pink: #f62e95;
+  --color-badge-blue: #1f82f9;
+  --color-badge-red: #fd3b3f;
+  --color-badge-green: #11b8ba;
+  --font-pretendard: var(--font-pretendard);
+  --font-numans: var(--font-numans);
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -41,6 +76,167 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer utilities {
+  .font-heading1 {
+    font-family: var(--font-pretendard);
+    font-size: 1.75rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  .font-heading2 {
+    font-family: var(--font-pretendard);
+    font-size: 1.75rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  .font-heading3 {
+    font-family: var(--font-pretendard);
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  .font-heading4 {
+    font-family: var(--font-pretendard);
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  .font-sub1 {
+    font-family: var(--font-pretendard);
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  .font-sub2 {
+    font-family: var(--font-pretendard);
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  .font-sub3 {
+    font-family: var(--font-pretendard);
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  .font-sub4 {
+    font-family: var(--font-pretendard);
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  .font-sub5 {
+    font-family: var(--font-pretendard);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  .font-sub6 {
+    font-family: var(--font-pretendard);
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  .font-body1 {
+    font-family: var(--font-pretendard);
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  .font-body2 {
+    font-family: var(--font-pretendard);
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .font-body3 {
+    font-family: var(--font-pretendard);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  .font-body4 {
+    font-family: var(--font-pretendard);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .font-body5 {
+    font-family: var(--font-pretendard);
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  .font-body6 {
+    font-family: var(--font-pretendard);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .font-caption1 {
+    font-family: var(--font-pretendard);
+    font-size: 0.75rem;
+    font-weight: 600;
+    line-height: 1.5;
+  }
+  .font-caption2 {
+    font-family: var(--font-pretendard);
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  .font-caption3 {
+    font-family: var(--font-pretendard);
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .font-underlined1 {
+    font-family: var(--font-pretendard);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+    text-decoration: underline;
+  }
+
+  .font-numans-body1 {
+    font-family: var(--font-numans);
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .font-numans-body2 {
+    font-family: var(--font-numans);
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .font-numans-body3 {
+    font-family: var(--font-numans);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .font-numans-body4 {
+    font-family: var(--font-numans);
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .font-numans-caption1 {
+    font-family: var(--font-numans);
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  .font-numans-caption2 {
+    font-family: var(--font-numans);
+    font-size: 0.625rem;
+    font-weight: 400;
+    line-height: 1.5;
+  }
 }
 
 :root {
@@ -110,13 +306,4 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
 }
