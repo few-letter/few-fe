@@ -4,6 +4,11 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
+  /* Spacing Scale */
+  --spacing: 1px; /* 1px 단위로 설정하여 p-16 = 16px */
+  --font-size: 1px; /* 1px 단위로 설정하여 text-sm = 14px */
+  --border-width: 1px; /* 1px 단위로 설정하여 border-sm = 1px */
+
   /* Design System Color */
   --color-black: #0c121b;
   --color-white: #ffffff;
