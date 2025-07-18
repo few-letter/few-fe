@@ -6,6 +6,10 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "FEW, AI Daily Letter",
   description: "Website for AI Daily Letter, FEW",
+  keywords: ["AI", "News Letter", "FEW"],
+  authors: [{ name: "FEW", url: "https://github.com/few-letter" }],
+  creator: "FEW",
+  publisher: "FEW",
 };
 
 export default function RootLayout({
