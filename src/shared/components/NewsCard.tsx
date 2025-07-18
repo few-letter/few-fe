@@ -1,3 +1,4 @@
+import { useCallback, useMemo } from "react";
 import { cn } from "@/lib/utils";
 import { Badge, type Category } from "@/shared/components";
 
@@ -18,11 +19,11 @@ export default function NewsCard({
   category,
 }: NewsCardProps) {
   return (
-    <div className="relative max-w-460">
+    <div className="relative">
       {/* 메인 카드 */}
       <div
         className={cn(
-          "flex h-412 w-full overflow-hidden rounded-sm",
+          "flex h-412 rounded-sm",
           "bg-opacity70 bg-cover bg-center bg-no-repeat",
           "relative",
         )}
@@ -50,49 +51,58 @@ export default function NewsCard({
             </Link>
             <p className="font-body6 text-gray4 line-clamp-3">{description}</p>
           </div>
-          <div className="space-y-12">
-            <p className="font-caption1 text-gray5">관련기사</p>
-            <div className="space-y-8">
-              <InlineLink
-                link="/news/1"
-                title="기사제목이 길어진 경우 어떻게 될까?기사제목이 길어진 경우 어떻게 될까?기사제목이 길어진 경우 어떻게 될까?"
-              />
-              <InlineLink
-                link="/news/2"
-                title="기사제목이 길어진 경우 어떻게 될까?기사제목이 길어진 경우 어떻게 될까?기사제목이 길어진 경우 어떻게 될까?"
-              />
-              <InlineLink
-                link="/news/3"
-                title="기사제목이 길어진 경우 어떻게 될까?기사제목이 길어진 경우 어떻게 될까?기사제목이 길어진 경우 어떻게 될까?"
-              />
-            </div>
+          {/* 관련기사 - lg 이상에서만 카드 안에 표시 */}
+          <div className="hidden space-y-12 lg:block">
+            <RelatedNewsContent />
           </div>
         </div>
+        {/* 우측 하단 파란색 접힘 삼각형 */}
+        <div
+          className="bg-blue2 absolute right-0 bottom-0 z-20 h-40 w-80"
+          style={{
+            clipPath: "polygon(0 100%, 100% 0, 0 0)",
+          }}
+        />
       </div>
-
-      {/* 우측 하단 파란색 접힘 삼각형 */}
-      <div
-        className="bg-blue2 absolute right-0 bottom-0 z-20 h-40 w-80"
-        style={{
-          clipPath: "polygon(0 100%, 100% 0, 0 0)",
-        }}
-      />
+      {/* 관련기사 - lg 미만에서는 카드 밖에 표시 */}
+      <div className="mt-16 space-y-12 lg:hidden">
+        <RelatedNewsContent />
+      </div>
     </div>
   );
 }
 
-export const InlineLink = ({
-  link,
-  title,
-}: {
-  link: string;
-  title: string;
-}) => {
+const RelatedNewsContent = () => {
+  return (
+    <>
+      <p className="font-caption1 text-gray5">관련기사</p>
+      <div className="space-y-8">
+        <InlineLink
+          link="/news/1"
+          title="기사제목이 길어진 경우 어떻게 될까?기사제목이 길어진 경우 어떻게 될까?기사제목이 길어진 경우 어떻게 될까?"
+        />
+        <InlineLink
+          link="/news/2"
+          title="기사제목이 길어진 경우 어떻게 될까?기사제목이 길어진 경우 어떻게 될까?기사제목이 길어진 경우 어떻게 될까?"
+        />
+        <InlineLink
+          link="/news/3"
+          title="기사제목이 길어진 경우 어떻게 될까?기사제목이 길어진 경우 어떻게 될까?기사제목이 길어진 경우 어떻게 될까?"
+        />
+      </div>
+    </>
+  );
+};
+
+const InlineLink = ({ link, title }: { link: string; title: string }) => {
   return (
     <div className="flex flex-row items-center gap-8">
       <Link
         href={link}
-        className="font-body5 text-gray2 visited:text-blue2 max-w-[calc(100%-72px)] truncate"
+        className={cn(
+          "font-body5 text-gray10 lg:text-gray2 visited:text-blue2 truncate",
+          "max-w-full lg:max-w-[calc(100%-72px)]",
+        )}
       >
         {title}
       </Link>
