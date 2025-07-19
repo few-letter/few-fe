@@ -7,7 +7,7 @@ export default function Header({ underline = true }: { underline?: boolean }) {
         underline ? "border-b-1" : "border-b-0"
       }`}
     >
-      <div className="flex flex-1 justify-between">
+      <div className="flex max-w-1200 flex-1 justify-between">
         <Image
           src="/images/logo/Logo_FEW_Dark.png"
           alt="logo"
