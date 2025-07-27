@@ -8,13 +8,13 @@ interface ArrowButtonProps {
   onClick: () => void;
 }
 
-export default function ArrowButton({
+export const ArrowButton = ({
   direction = "left",
   size = 24,
   disabled,
   onClick,
   ...props
-}: ArrowButtonProps & ButtonHTMLAttributes<HTMLButtonElement>) {
+}: ArrowButtonProps & ButtonHTMLAttributes<HTMLButtonElement>) => {
   return (
     <button
       {...props}
@@ -56,4 +56,4 @@ export default function ArrowButton({
       </svg>
     </button>
   );
-}
+};

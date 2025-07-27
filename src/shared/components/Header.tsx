@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-export default function Header({ underline = true }: { underline?: boolean }) {
+export const Header = ({ underline = true }: { underline?: boolean }) => {
   return (
     <div
       className={`border-gray3 flex w-full items-center justify-center border-b-1 px-16 py-16 ${

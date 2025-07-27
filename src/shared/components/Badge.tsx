@@ -34,7 +34,7 @@ interface BadgeProps {
   className?: string;
 }
 
-export default function Badge({ category, className }: BadgeProps) {
+export const Badge = ({ category, className }: BadgeProps) => {
   return (
     <div
       className={cn(
@@ -45,4 +45,4 @@ export default function Badge({ category, className }: BadgeProps) {
       {BADGE_CONFIG[category].label}
     </div>
   );
-}
+};

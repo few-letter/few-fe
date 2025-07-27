@@ -12,12 +12,12 @@ interface NewsCardProps {
   image: string;
 }
 
-export default function NewsCard({
+export const NewsCard = ({
   title,
   description,
   image,
   category,
-}: NewsCardProps) {
+}: NewsCardProps) => {
   return (
     <div className="relative">
       {/* 메인 카드 */}
@@ -70,7 +70,7 @@ export default function NewsCard({
       </div>
     </div>
   );
-}
+};
 
 const RelatedNewsContent = () => {
   return (
