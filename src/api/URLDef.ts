@@ -1,14 +1,10 @@
-import { env } from "process";
-
 import type { SearchParams } from "../shared/types";
 
 export class URLDef {
-  private baseURL: string;
   private path: string;
   private searchParams: SearchParams;
 
   constructor(path: string, searchParams?: SearchParams) {
-    this.baseURL = env.NEXT_PUBLIC_BASE_URL || "";
     this.path = path;
     this.searchParams = searchParams || "";
   }
@@ -56,13 +52,13 @@ export class URLDef {
     return "";
   }
 
-  public getURL(): URL {
-    const cleanBaseURL = this.baseURL.replace(/\/$/, "");
+  public generateURL(host: string): URL {
+    const cleanHost = host.replace(/\/$/, "");
     const cleanPath = this.path.startsWith("/") ? this.path : `/${this.path}`;
     const searchParams = this.getSearchParams();
 
     return new URL(
-      `${cleanBaseURL}${cleanPath}${searchParams ? `?${searchParams}` : ""}`,
+      `${cleanHost}${cleanPath}${searchParams ? `?${searchParams}` : ""}`,
     );
   }
 }

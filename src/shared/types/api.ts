@@ -13,8 +13,12 @@ type SearchParams =
   | Record<string, SearchParamsValue> // 객체
   | SearchParamsArray; // 배열
 
-/**
- * @description HTTPClient에서 사용하는 타입들
- */
+type HTTPMethod = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
+type PathWithParams = [string, SearchParams?];
+interface Middlewares {
+  onRequest: ((request: Request) => Request)[];
+  onResponse: ((response: Response) => Response)[];
+  onError: ((request: Request, response: Response, error: Error) => Error)[];
+}
 
-export type { SearchParams };
+export type { SearchParams, HTTPMethod, Middlewares, PathWithParams };
