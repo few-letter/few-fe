@@ -1,6 +1,6 @@
-import { env } from "process";
 import { URLDef } from "./URLDef";
 import { HTTPError } from "./error/HTTPError";
+import type { TypedResponse } from "@/shared/types/api";
 
 import type {
   Middlewares,
@@ -8,12 +8,12 @@ import type {
   PathWithParams,
 } from "@/shared/types/api";
 
-class HTTPClient {
+export class HTTPClient {
   private baseURL: string;
   private middlewares: Middlewares;
 
   constructor() {
-    this.baseURL = env.NEXT_PUBLIC_API_URL || "";
+    this.baseURL = process.env.NEXT_PUBLIC_API_URL || "";
     this.middlewares = {
       onRequest: [],
       onResponse: [],
@@ -29,13 +29,13 @@ class HTTPClient {
     return this;
   }
 
-  private async _fetch(
+  private async _fetch<T>(
     url: URLDef,
     method: HTTPMethod,
     options: RequestInit = {},
-  ): Promise<Response> {
+  ): Promise<TypedResponse<T>> {
     let request: Request;
-    let response: Response;
+    let response: TypedResponse<T>;
 
     try {
       request = new Request(url.generateURL(this.baseURL), {
@@ -47,7 +47,7 @@ class HTTPClient {
         request = middleware(request);
       });
 
-      let response = await fetch(request);
+      response = await fetch(request);
 
       this.middlewares.onResponse.forEach((middleware) => {
         response = middleware(response);
@@ -62,26 +62,26 @@ class HTTPClient {
       let processedError = error as Error;
 
       this.middlewares.onError.forEach((middleware) => {
-        processedError = middleware(request, response, processedError);
+        processedError = middleware(processedError);
       });
 
       throw processedError;
     }
   }
 
-  public async get(
+  public async get<T>(
     [path, searchParams]: PathWithParams,
     options: RequestInit = {},
-  ): Promise<Response> {
+  ): Promise<TypedResponse<T>> {
     const urlDef = new URLDef(path, searchParams);
     return this._fetch(urlDef, "GET", options);
   }
 
-  public async post(
+  public async post<T>(
     [path, searchParams]: PathWithParams,
     body?: unknown,
     options: RequestInit = {},
-  ): Promise<Response> {
+  ): Promise<TypedResponse<T>> {
     const urlDef = new URLDef(path, searchParams);
     const requestOptions: RequestInit = {
       ...options,
@@ -94,11 +94,11 @@ class HTTPClient {
     return this._fetch(urlDef, "POST", requestOptions);
   }
 
-  public async put(
+  public async put<T>(
     [path, searchParams]: PathWithParams,
     body?: unknown,
     options: RequestInit = {},
-  ): Promise<Response> {
+  ): Promise<TypedResponse<T>> {
     const urlDef = new URLDef(path, searchParams);
     const requestOptions: RequestInit = {
       ...options,
@@ -111,11 +111,11 @@ class HTTPClient {
     return this._fetch(urlDef, "PUT", requestOptions);
   }
 
-  public async patch(
+  public async patch<T>(
     [path, searchParams]: PathWithParams,
     body?: unknown,
     options: RequestInit = {},
-  ): Promise<Response> {
+  ): Promise<TypedResponse<T>> {
     const urlDef = new URLDef(path, searchParams);
     const requestOptions: RequestInit = {
       ...options,
@@ -128,13 +128,11 @@ class HTTPClient {
     return this._fetch(urlDef, "PATCH", requestOptions);
   }
 
-  public async delete(
+  public async delete<T>(
     [path, searchParams]: PathWithParams,
     options: RequestInit = {},
-  ): Promise<Response> {
+  ): Promise<TypedResponse<T>> {
     const urlDef = new URLDef(path, searchParams);
     return this._fetch(urlDef, "DELETE", options);
   }
 }
-
-export default HTTPClient;

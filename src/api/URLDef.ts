@@ -58,7 +58,8 @@ export class URLDef {
     const searchParams = this.getSearchParams();
 
     return new URL(
-      `${cleanHost}${cleanPath}${searchParams ? `?${searchParams}` : ""}`,
+      `${cleanPath}${searchParams ? `?${searchParams}` : ""}`,
+      cleanHost,
     );
   }
 }

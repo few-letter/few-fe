@@ -15,10 +15,21 @@ type SearchParams =
 
 type HTTPMethod = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 type PathWithParams = [string, SearchParams?];
+
 interface Middlewares {
   onRequest: ((request: Request) => Request)[];
   onResponse: ((response: Response) => Response)[];
-  onError: ((request: Request, response: Response, error: Error) => Error)[];
+  onError: ((error: Error) => Error)[];
 }
 
-export type { SearchParams, HTTPMethod, Middlewares, PathWithParams };
+interface TypedResponse<T = unknown> extends Response {
+  data?: T;
+}
+
+export type {
+  SearchParams,
+  HTTPMethod,
+  Middlewares,
+  PathWithParams,
+  TypedResponse,
+};
