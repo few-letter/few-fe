@@ -1,5 +1,6 @@
 import { URLDef } from "./URLDef";
-import { HTTPError } from "./error/HTTPError";
+import { HTTPError, JSONParsedError } from "./error";
+
 import type { TypedResponse } from "@/shared/types/api";
 
 import type {
@@ -33,7 +34,7 @@ export class HTTPClient {
     url: URLDef,
     method: HTTPMethod,
     options: RequestInit = {},
-  ): Promise<TypedResponse<T>> {
+  ): Promise<T> {
     let request: Request;
     let response: TypedResponse<T>;
 
@@ -53,11 +54,19 @@ export class HTTPClient {
         response = middleware(response);
       });
 
-      if (response.status >= 400) {
-        throw new HTTPError(request, response, options);
-      }
+      const responseClone = response.clone();
+      const requestClone = request.clone();
 
-      return response;
+      if (response.status >= 400) {
+        throw new HTTPError(requestClone, responseClone, options);
+      }
+      try {
+        const parsedResponse = await response.json();
+
+        return parsedResponse;
+      } catch (error) {
+        throw new JSONParsedError(requestClone, options);
+      }
     } catch (error) {
       let processedError = error as Error;
 
@@ -72,7 +81,7 @@ export class HTTPClient {
   public async get<T>(
     [path, searchParams]: PathWithParams,
     options: RequestInit = {},
-  ): Promise<TypedResponse<T>> {
+  ): Promise<T> {
     const urlDef = new URLDef(path, searchParams);
     return this._fetch(urlDef, "GET", options);
   }
@@ -81,7 +90,7 @@ export class HTTPClient {
     [path, searchParams]: PathWithParams,
     body?: unknown,
     options: RequestInit = {},
-  ): Promise<TypedResponse<T>> {
+  ): Promise<T> {
     const urlDef = new URLDef(path, searchParams);
     const requestOptions: RequestInit = {
       ...options,
@@ -98,7 +107,7 @@ export class HTTPClient {
     [path, searchParams]: PathWithParams,
     body?: unknown,
     options: RequestInit = {},
-  ): Promise<TypedResponse<T>> {
+  ): Promise<T> {
     const urlDef = new URLDef(path, searchParams);
     const requestOptions: RequestInit = {
       ...options,
@@ -115,7 +124,7 @@ export class HTTPClient {
     [path, searchParams]: PathWithParams,
     body?: unknown,
     options: RequestInit = {},
-  ): Promise<TypedResponse<T>> {
+  ): Promise<T> {
     const urlDef = new URLDef(path, searchParams);
     const requestOptions: RequestInit = {
       ...options,
@@ -131,7 +140,7 @@ export class HTTPClient {
   public async delete<T>(
     [path, searchParams]: PathWithParams,
     options: RequestInit = {},
-  ): Promise<TypedResponse<T>> {
+  ): Promise<T> {
     const urlDef = new URLDef(path, searchParams);
     return this._fetch(urlDef, "DELETE", options);
   }

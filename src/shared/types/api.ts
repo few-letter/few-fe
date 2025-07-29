@@ -18,7 +18,7 @@ type PathWithParams = [string, SearchParams?];
 
 interface Middlewares {
   onRequest: ((request: Request) => Request)[];
-  onResponse: ((response: Response) => Response)[];
+  onResponse: (<T>(response: TypedResponse<T>) => TypedResponse<T>)[];
   onError: ((error: Error) => Error)[];
 }
 

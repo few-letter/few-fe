@@ -1,4 +1,4 @@
-const loggerMiddleware = <T>(
+export const loggerMiddleware = <T>(
   input: T,
   phase: "request" | "response" | "error",
 ): T => {
@@ -8,5 +8,3 @@ const loggerMiddleware = <T>(
 
   return input;
 };
-
-export { loggerMiddleware };
