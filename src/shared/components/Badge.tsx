@@ -1,48 +1,29 @@
 import { cn } from "@/lib/utils";
+import { CATEGORY_CODE_TO_COLOR } from "@/shared/constants";
 
-const BADGE_CONFIG = {
-  TECH: {
-    color: "text-badge-purple",
-    label: "기술",
-  },
-  BUSINESS: {
-    color: "text-badge-yellow",
-    label: "비지니스",
-  },
-  APPLE: {
-    color: "text-badge-pink",
-    label: "애플",
-  },
-  ECONOMY: {
-    color: "text-badge-blue",
-    label: "경제",
-  },
-  ELECTROIC_CAR: {
-    color: "text-badge-red",
-    label: "전기차",
-  },
-  POLITICS: {
-    color: "text-badge-green",
-    label: "정치",
-  },
-} as const;
-
-export type Category = keyof typeof BADGE_CONFIG;
+import type { CategoryCode, CodeValueResponse } from "@/shared/types";
 
 interface BadgeProps {
-  category: Category;
+  categoryCode: CategoryCode;
+  categories: CodeValueResponse[];
   className?: string;
 }
 
-export const Badge = ({ category, className }: BadgeProps) => {
+export const Badge = ({ categoryCode, categories, className }: BadgeProps) => {
+  const color = CATEGORY_CODE_TO_COLOR[categoryCode];
+  const label = categories.find(
+    (category) => category.code === categoryCode,
+  )?.value;
+
   return (
     <div
       className={cn(
-        `${BADGE_CONFIG[category].color} font-caption2 w-fit rounded-sm bg-white px-8 py-4`,
+        "text-gray8",
+        `${color} font-caption2 w-fit rounded-sm bg-white px-8 py-4`,
         className,
       )}
     >
-      {BADGE_CONFIG[category].label}
+      {label}
     </div>
   );
 };

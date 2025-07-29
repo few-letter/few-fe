@@ -51,9 +51,10 @@ interface BrowseGroupGenResponses {
   groups: BrowseGroupGenResponse[];
 }
 
+type CategoryCode = 0 | 2 | 4 | 8 | 16 | 32;
 interface BrowseGroupGenResponse {
   id: number; //int64
-  category: number; //int32
+  category: CategoryCode; //int32
   selectedGroupIds: string;
   headline: string;
   summary: string;
@@ -84,7 +85,10 @@ export type {
   SuccessBodyBrowseContentResponses, //GET contents
   SuccessBodyBrowseContentResponse, //GET contents/{id}
   SuccessBodyBrowseGroupGenResponses, //GET contents/groups
-  BrowseGroupGenResponses,
+  CategoryCode,
+  BrowseGroupGenResponse,
+  GroupSourceHeadlineData,
   SuccessBodyListCodeValueResponse, //GET contents/categories
+  CodeValueResponse,
   Success, //POST contents/schedule, POST contents/groups/schedule
 };
