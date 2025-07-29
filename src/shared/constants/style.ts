@@ -9,5 +9,6 @@ const CATEGORY_CODE_TO_COLOR: Record<CategoryCode, string> = {
   16: "text-badge-blue",
   32: "text-badge-red",
 } as const;
+const MIN_SWIPE_DISTANCE = 50;
 
-export { INDICATOR_TOTAL_WIDTH, CATEGORY_CODE_TO_COLOR };
+export { INDICATOR_TOTAL_WIDTH, CATEGORY_CODE_TO_COLOR, MIN_SWIPE_DISTANCE };

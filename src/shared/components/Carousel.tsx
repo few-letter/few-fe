@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { INDICATOR_TOTAL_WIDTH } from "@/shared/constants";
+import { INDICATOR_TOTAL_WIDTH, MIN_SWIPE_DISTANCE } from "@/shared/constants";
 
 import { ArrowButton } from "./ArrowButton";
 
@@ -22,6 +22,10 @@ export const Carousel = <T,>({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(numColumns);
   const [isDesktop, setIsDesktop] = useState(false);
+
+  // 터치 제스처를 위한 상태
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
   const totalSlides = Math.ceil(items.length / itemsPerView);
   const indicatorWidth = Math.round(INDICATOR_TOTAL_WIDTH / totalSlides);
@@ -58,9 +62,50 @@ export const Carousel = <T,>({
     setCurrentIndex((prev) => (prev < totalSlides - 1 ? prev + 1 : 0));
   };
 
+  // 터치 이벤트 핸들러들
+  const onTouchStart = (e: React.TouchEvent | React.MouseEvent) => {
+    setTouchEnd(null);
+    if ("targetTouches" in e) {
+      setTouchStart(e.targetTouches[0].clientX);
+    } else {
+      setTouchStart(e.clientX);
+    }
+  };
+
+  const onTouchMove = (e: React.TouchEvent | React.MouseEvent) => {
+    if ("targetTouches" in e) {
+      setTouchEnd(e.targetTouches[0].clientX);
+    } else {
+      setTouchEnd(e.clientX);
+    }
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > MIN_SWIPE_DISTANCE;
+    const isRightSwipe = distance < -MIN_SWIPE_DISTANCE;
+
+    if (isLeftSwipe) {
+      goToNext();
+    }
+    if (isRightSwipe) {
+      goToPrevious();
+    }
+  };
+
   return (
     <div className={cn("relative w-full", className)}>
-      <div className="overflow-hidden">
+      <div
+        className="overflow-hidden"
+        onMouseDown={onTouchStart}
+        onMouseMove={onTouchMove}
+        onMouseUp={onTouchEnd}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+      >
         <div className="flex flex-col gap-24 md:flex-row">
           {getCurrentItems().map((item, index) => {
             return (
@@ -90,7 +135,7 @@ export const Carousel = <T,>({
           />
         </div>
         {totalSlides > 1 && (
-          <div className="flex flex-row gap-12">
+          <div className="hidden flex-row gap-12 md:flex">
             <ArrowButton
               disabled={currentIndex === 0}
               direction="left"
@@ -107,6 +152,20 @@ export const Carousel = <T,>({
             />
           </div>
         )}
+        {/* 인디케이터 - 768px 미만 */}
+        <div className="flex flex-row gap-4 md:hidden">
+          {Array.from({ length: totalSlides }).map((_, index) => {
+            return (
+              <div
+                key={index}
+                className={cn(
+                  "bg-gray3 h-6 w-6 rounded-full",
+                  currentIndex === index && "bg-gray10",
+                )}
+              />
+            );
+          })}
+        </div>
       </div>
     </div>
   );

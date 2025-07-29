@@ -95,17 +95,16 @@ const RelatedNewsContent = ({
 
 const InlineLink = ({ headline, url }: { headline: string; url?: string }) => {
   return url ? (
-    <div className="flex flex-row items-center gap-8">
-      <Link
-        target="_blank"
-        href={url}
-        className={cn(
-          "font-body5 text-gray10 lg:text-gray2 visited:text-blue2 truncate",
-          "max-w-full lg:max-w-[calc(100%-72px)]",
-        )}
-      >
-        {headline}
-      </Link>
+    <Link
+      target="_blank"
+      href={url}
+      className={cn(
+        "flex flex-row items-center gap-8",
+        "font-body5 text-gray10 lg:text-gray2 visited:text-blue2 truncate",
+        "max-w-full lg:max-w-[calc(100%-72px)]",
+      )}
+    >
+      <span>{headline}</span>
       <Image
         src="/images/icons/Icon_Link.png"
         alt="Link icon"
@@ -113,7 +112,7 @@ const InlineLink = ({ headline, url }: { headline: string; url?: string }) => {
         height={16}
         className="flex-shrink-0"
       />
-    </div>
+    </Link>
   ) : (
     <div className="flex flex-row items-center gap-8">
       <span className="font-body5 text-gray4 max-w-full truncate lg:max-w-[calc(100%-72px)]">
