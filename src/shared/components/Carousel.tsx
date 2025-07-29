@@ -1,10 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { cn } from "@/lib/utils";
 import { INDICATOR_TOTAL_WIDTH, MIN_SWIPE_DISTANCE } from "@/shared/constants";
 
 import { ArrowButton } from "./ArrowButton";
+
+import type { TouchEvent, MouseEvent } from "react";
 
 interface CarouselProps<T> {
   items: T[];
@@ -22,8 +24,8 @@ export const Carousel = <T,>({
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerView, setItemsPerView] = useState(numColumns);
   const [isDesktop, setIsDesktop] = useState(false);
+  const [lastSlideOffset, setLastSlideOffset] = useState(0);
 
-  // 터치 제스처를 위한 상태
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
@@ -32,10 +34,10 @@ export const Carousel = <T,>({
 
   useEffect(() => {
     const updateItemsPerView = () => {
-      const desktop = window.innerWidth >= 768;
-      setIsDesktop(desktop);
+      const isDesktop = window.innerWidth >= 768;
+      setIsDesktop(isDesktop);
 
-      if (desktop) {
+      if (isDesktop) {
         setItemsPerView(numColumns);
       } else {
         setItemsPerView(1);
@@ -47,40 +49,45 @@ export const Carousel = <T,>({
     return () => window.removeEventListener("resize", updateItemsPerView);
   }, [numColumns]);
 
-  const getCurrentItems = () => {
-    const startIndex = currentIndex * itemsPerView;
-    const endIndex = startIndex + itemsPerView;
-    const currentItems = items.slice(startIndex, endIndex);
-    return currentItems;
-  };
+  useEffect(() => {
+    const residue = items.length % itemsPerView;
+    const newTotalSlides = Math.ceil(items.length / itemsPerView);
 
-  const goToPrevious = () => {
+    if (currentIndex >= newTotalSlides) {
+      setCurrentIndex(newTotalSlides - 1);
+    }
+    if (residue > 0) {
+      setLastSlideOffset((residue / itemsPerView) * 100);
+    }
+  }, [items.length, itemsPerView, currentIndex]);
+
+  const goToPrevious = useCallback(() => {
     setCurrentIndex((prev) => (prev > 0 ? prev - 1 : totalSlides - 1));
-  };
+  }, [totalSlides]);
 
-  const goToNext = () => {
+  const goToNext = useCallback(() => {
     setCurrentIndex((prev) => (prev < totalSlides - 1 ? prev + 1 : 0));
-  };
+  }, [totalSlides]);
 
-  // 터치 이벤트 핸들러들
-  const onTouchStart = (e: React.TouchEvent | React.MouseEvent) => {
+  const onTouchStart = useCallback((e: TouchEvent | MouseEvent) => {
     setTouchEnd(null);
+
     if ("targetTouches" in e) {
       setTouchStart(e.targetTouches[0].clientX);
     } else {
       setTouchStart(e.clientX);
     }
-  };
+  }, []);
 
-  const onTouchMove = (e: React.TouchEvent | React.MouseEvent) => {
+  const onTouchMove = useCallback((e: TouchEvent | MouseEvent) => {
     if ("targetTouches" in e) {
       setTouchEnd(e.targetTouches[0].clientX);
     } else {
       setTouchEnd(e.clientX);
     }
-  };
+  }, []);
 
-  const onTouchEnd = () => {
+  const onTouchEnd = useCallback(() => {
     if (!touchStart || !touchEnd) return;
 
     const distance = touchStart - touchEnd;
@@ -93,7 +100,21 @@ export const Carousel = <T,>({
     if (isRightSwipe) {
       goToPrevious();
     }
-  };
+  }, [goToNext, goToPrevious, touchStart, touchEnd]);
+
+  const transformStyle = useMemo(() => {
+    const validIndex = Math.min(currentIndex, totalSlides - 1);
+    const isLastSlideOffsetExist =
+      isDesktop && validIndex === totalSlides - 1 && lastSlideOffset > 0;
+    const translateX = isLastSlideOffsetExist
+      ? -((validIndex - 1) * 100 + lastSlideOffset)
+      : -(validIndex * 100);
+
+    return {
+      transform: `translateX(${translateX}%)`,
+      transition: "transform 0.3s ease-in-out",
+    };
+  }, [currentIndex, totalSlides, isDesktop, lastSlideOffset]);
 
   return (
     <div className={cn("relative w-full", className)}>
@@ -106,14 +127,24 @@ export const Carousel = <T,>({
         onTouchMove={onTouchMove}
         onTouchEnd={onTouchEnd}
       >
-        <div className="flex flex-col gap-24 md:flex-row">
-          {getCurrentItems().map((item, index) => {
+        <div
+          className={cn("flex flex-row flex-nowrap", isDesktop && "gap-24")}
+          style={{
+            ...transformStyle,
+          }}
+        >
+          {items.map((item, index) => {
             return (
               <div
-                key={currentIndex * itemsPerView + index}
-                className="w-full min-w-0"
+                key={index}
+                className={cn("w-full min-w-0 flex-shrink-0")}
+                style={{
+                  width: `calc(${100 / itemsPerView}% - ${
+                    isDesktop ? "24px" : "0px"
+                  })`,
+                }}
               >
-                {item && renderItem(item, currentIndex * itemsPerView + index)}
+                {item && renderItem(item, index)}
               </div>
             );
           })}
@@ -156,7 +187,8 @@ export const Carousel = <T,>({
         <div className="flex flex-row gap-4 md:hidden">
           {Array.from({ length: totalSlides }).map((_, index) => {
             return (
-              <div
+              <button
+                onClick={() => setCurrentIndex(index)}
                 key={index}
                 className={cn(
                   "bg-gray3 h-6 w-6 rounded-full",
