@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { INDICATOR_TOTAL_WIDTH } from "@/shared/constants";
@@ -61,15 +63,10 @@ export const Carousel = <T,>({
       <div className="overflow-hidden">
         <div className="flex flex-col gap-24 md:flex-row">
           {getCurrentItems().map((item, index) => {
-            const width = isDesktop ? `${100 / numColumns}%` : "100%";
             return (
               <div
                 key={currentIndex * itemsPerView + index}
-                className="min-w-0"
-                style={{
-                  width: width,
-                  flexShrink: isDesktop ? 0 : undefined,
-                }}
+                className="w-full min-w-0"
               >
                 {item && renderItem(item, currentIndex * itemsPerView + index)}
               </div>
