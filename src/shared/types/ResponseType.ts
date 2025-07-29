@@ -84,6 +84,7 @@ export type {
   SuccessBodyBrowseContentResponses, //GET contents
   SuccessBodyBrowseContentResponse, //GET contents/{id}
   SuccessBodyBrowseGroupGenResponses, //GET contents/groups
+  BrowseGroupGenResponses,
   SuccessBodyListCodeValueResponse, //GET contents/categories
   Success, //POST contents/schedule, POST contents/groups/schedule
 };
