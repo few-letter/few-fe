@@ -3,7 +3,7 @@ import type { CategoryCode } from "../types";
 const INDICATOR_TOTAL_WIDTH = 300;
 const CATEGORY_CODE_TO_COLOR: Record<CategoryCode, string> = {
   0: "text-badge-pink",
-  2: "bg-badge-purple",
+  2: "text-badge-purple",
   4: "text-badge-yellow",
   8: "text-badge-green",
   16: "text-badge-blue",
