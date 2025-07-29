@@ -1,9 +1,6 @@
-"use client";
-
 import {
   isServer,
   QueryClient,
-  QueryClientProvider,
   type DefaultOptions,
 } from "@tanstack/react-query";
 
@@ -12,10 +9,9 @@ const makeQueryClient = (options?: DefaultOptions) =>
     defaultOptions: options,
   });
 
-//클라이언트 쿼리(싱글톤)
 let browserQueryClient: QueryClient | undefined = undefined;
 
-const getQueryClient = () => {
+export const getQueryClient = () => {
   if (isServer) {
     return makeQueryClient({
       queries: {
@@ -31,21 +27,8 @@ const getQueryClient = () => {
         queries: {
           refetchOnWindowFocus: false,
           retry: 0,
-          gcTime: Infinity,
         },
       });
     return browserQueryClient;
   }
-};
-
-export const QueryClientProviders = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const queryClient = getQueryClient();
-
-  return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
-  );
 };

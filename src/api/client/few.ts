@@ -1,5 +1,5 @@
-import { HTTPClient } from "./HTTPClient";
-import { loggerMiddleware } from "./middleware/logger";
+import { HTTPClient } from "@/api/HTTPClient";
+import { loggerMiddleware } from "@/api/middleware";
 
 const few = new HTTPClient();
 
