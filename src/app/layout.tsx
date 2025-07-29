@@ -1,6 +1,7 @@
 import "./globals.css";
 import { pretendard, numans } from "@/fonts";
-import { QueryClientProviders } from "@/shared/providers/queryClient";
+import { QueryClientProviders } from "@/shared/providers";
+
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {

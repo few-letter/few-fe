@@ -4,29 +4,35 @@ import { formatDateToYYYYMMDD } from "@/shared/utils";
 
 import type {
   SuccessBodyBrowseGroupGenResponses,
-  BrowseGroupGenResponses,
+  BrowseGroupGenResponse,
 } from "../types";
-import type { QueryClient } from "@tanstack/react-query";
+import type { QueryClient, UseQueryOptions } from "@tanstack/react-query";
 
 const getGroups = async ({
   date,
 }: {
   date: string;
-}): Promise<BrowseGroupGenResponses> => {
+}): Promise<SuccessBodyBrowseGroupGenResponses> => {
   const response = await few.get<SuccessBodyBrowseGroupGenResponses>([
     API_ROUTES.GROUPS,
     { date },
   ]);
 
-  return response.data;
+  return response;
 };
 
-const prefetchGroups = async (serverQueryClient: QueryClient) => {
-  const date = formatDateToYYYYMMDD(new Date());
-  await serverQueryClient.prefetchQuery({
+const getGroupsOptions = (
+  date: string,
+): UseQueryOptions<
+  SuccessBodyBrowseGroupGenResponses,
+  unknown,
+  BrowseGroupGenResponse[]
+> => {
+  return {
     queryKey: [QUERY_KEY.GET_GROUPS, date],
     queryFn: () => getGroups({ date }),
-  });
+    select: (data) => data.data.groups,
+  };
 };
 
-export { prefetchGroups };
+export { getGroupsOptions };

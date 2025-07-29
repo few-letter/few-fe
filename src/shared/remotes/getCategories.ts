@@ -1,23 +1,32 @@
 import { few } from "@/api/client/few";
 import { API_ROUTES, QUERY_KEY } from "@/shared/constants";
+import { getQueryClient } from "@/api/client/queryClient";
 
-import type { SuccessBodyListCodeValueResponse } from "@/shared/types";
-import type { QueryClient } from "@tanstack/react-query";
+import type {
+  SuccessBodyListCodeValueResponse,
+  CodeValueResponse,
+} from "@/shared/types";
+import type { UseQueryOptions } from "@tanstack/react-query";
 
 const getCategories = async () => {
   const response = await few.get<SuccessBodyListCodeValueResponse>([
     API_ROUTES.CATEGORIES,
   ]);
 
-  return response.data;
+  return response;
 };
 
-const prefetchCategories = async (serverQueryClient: QueryClient) => {
-  await serverQueryClient.prefetchQuery({
+const getCategoriesOptions = (): UseQueryOptions<
+  SuccessBodyListCodeValueResponse,
+  unknown,
+  CodeValueResponse[]
+> => {
+  return {
     queryKey: [QUERY_KEY.GET_CATEGORIES],
-    queryFn: getCategories,
+    queryFn: () => getCategories(),
+    select: (data) => data.data,
     staleTime: Infinity,
-  });
+  };
 };
 
-export { prefetchCategories };
+export { getCategoriesOptions };
