@@ -1,12 +1,11 @@
 import { few } from "@/api/client/few";
 import { API_ROUTES, QUERY_KEY } from "@/shared/constants";
-import { formatDateToYYYYMMDD } from "@/shared/utils";
 
 import type {
   SuccessBodyBrowseGroupGenResponses,
   BrowseGroupGenResponse,
 } from "../types";
-import type { QueryClient, UseQueryOptions } from "@tanstack/react-query";
+import type { UseQueryOptions } from "@tanstack/react-query";
 
 const getGroups = async ({
   date,

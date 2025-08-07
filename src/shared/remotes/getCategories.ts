@@ -1,6 +1,5 @@
 import { few } from "@/api/client/few";
 import { API_ROUTES, QUERY_KEY } from "@/shared/constants";
-import { getQueryClient } from "@/api/client/queryClient";
 
 import type {
   SuccessBodyListCodeValueResponse,

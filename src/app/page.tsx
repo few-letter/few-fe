@@ -1,8 +1,4 @@
-import {
-  dehydrate,
-  HydrationBoundary,
-  QueryClient,
-} from "@tanstack/react-query";
+import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 import { Header } from "@/shared/components";
 import { DailyFewHeader, DailyFewSection } from "@/shared/widgets";

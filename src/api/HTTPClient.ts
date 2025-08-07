@@ -64,7 +64,7 @@ export class HTTPClient {
         const parsedResponse = await response.json();
 
         return parsedResponse;
-      } catch (error) {
+      } catch {
         throw new JSONParsedError(requestClone, options);
       }
     } catch (error) {
