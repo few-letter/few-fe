@@ -2,7 +2,11 @@
 
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { cn } from "@/lib/utils";
-import { INDICATOR_TOTAL_WIDTH, MIN_SWIPE_DISTANCE } from "@/shared/constants";
+import {
+  INDICATOR_TOTAL_WIDTH,
+  MIN_SWIPE_DISTANCE,
+  CAROUSEL_GAP,
+} from "@/shared/constants";
 
 import { ArrowButton } from "./ArrowButton";
 
@@ -106,12 +110,13 @@ export const Carousel = <T,>({
     const validIndex = Math.min(currentIndex, totalSlides - 1);
     const isLastSlideOffsetExist =
       isDesktop && validIndex === totalSlides - 1 && lastSlideOffset > 0;
+    const gap = validIndex > 0 ? (validIndex + 1) * CAROUSEL_GAP : 0;
     const translateX = isLastSlideOffsetExist
       ? -((validIndex - 1) * 100 + lastSlideOffset)
       : -(validIndex * 100);
 
     return {
-      transform: `translateX(${translateX}%)`,
+      transform: `translateX(calc(${translateX}% - ${gap}px))`,
       transition: "transform 0.3s ease-in-out",
     };
   }, [currentIndex, totalSlides, isDesktop, lastSlideOffset]);
@@ -128,7 +133,7 @@ export const Carousel = <T,>({
         onTouchEnd={onTouchEnd}
       >
         <div
-          className={cn("flex flex-row flex-nowrap", isDesktop && "gap-24")}
+          className={cn("flex flex-row flex-nowrap", `gap-${CAROUSEL_GAP}`)}
           style={{
             ...transformStyle,
           }}
@@ -139,9 +144,7 @@ export const Carousel = <T,>({
                 key={index}
                 className={cn("w-full min-w-0 flex-shrink-0")}
                 style={{
-                  width: `calc(${100 / itemsPerView}% - ${
-                    isDesktop ? "24px" : "0px"
-                  })`,
+                  width: `calc(${100 / itemsPerView}%)`,
                 }}
               >
                 {item && renderItem(item, index)}
