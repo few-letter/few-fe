@@ -63,7 +63,7 @@ export const Carousel = <T,>({
     if (residue > 0) {
       setLastSlideOffset((residue / itemsPerView) * 100);
     }
-  }, [items.length, itemsPerView, currentIndex]);
+  }, [items.length, itemsPerView]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const goToPrevious = useCallback(() => {
     setCurrentIndex((prev) => (prev > 0 ? prev - 1 : totalSlides - 1));
@@ -110,7 +110,9 @@ export const Carousel = <T,>({
     const validIndex = Math.min(currentIndex, totalSlides - 1);
     const isLastSlideOffsetExist =
       isDesktop && validIndex === totalSlides - 1 && lastSlideOffset > 0;
-    const gap = validIndex > 0 ? (validIndex + 1) * CAROUSEL_GAP : 0;
+    const gapCount = isDesktop ? validIndex + 1 : validIndex;
+
+    const gap = validIndex > 0 ? gapCount * CAROUSEL_GAP : 0;
     const translateX = isLastSlideOffsetExist
       ? -((validIndex - 1) * 100 + lastSlideOffset)
       : -(validIndex * 100);
@@ -124,7 +126,17 @@ export const Carousel = <T,>({
   return (
     <div className={cn("relative w-full", className)}>
       <div
-        className="overflow-hidden"
+        className="overflow-hidden focus:outline-none"
+        aria-label="carousel"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === "ArrowLeft") {
+            goToPrevious();
+          }
+          if (e.key === "ArrowRight") {
+            goToNext();
+          }
+        }}
         onMouseDown={onTouchStart}
         onMouseMove={onTouchMove}
         onMouseUp={onTouchEnd}

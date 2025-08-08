@@ -11,15 +11,15 @@ interface BadgeProps {
 
 export const Badge = ({ categoryCode, categories, className }: BadgeProps) => {
   const color = CATEGORY_CODE_TO_COLOR[categoryCode];
-  const label = categories.find(
-    (category) => category.code === categoryCode,
-  )?.value;
+  const label =
+    categories.find((category) => category.code === categoryCode)?.value ?? "";
 
   return (
     <div
       className={cn(
         "text-gray8",
-        `${color} font-caption2 w-fit rounded-sm bg-white px-8 py-4`,
+        color,
+        "font-caption2 w-fit rounded-sm bg-white px-8 py-4",
         className,
       )}
     >
