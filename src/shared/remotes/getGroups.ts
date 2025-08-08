@@ -30,7 +30,6 @@ const getGroupsOptions = (
   return {
     queryKey: [QUERY_KEY.GET_GROUPS, date],
     queryFn: () => getGroups({ date }),
-    select: (data) => data.data.groups,
   };
 };
 

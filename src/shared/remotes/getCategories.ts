@@ -23,7 +23,6 @@ const getCategoriesOptions = (): UseQueryOptions<
   return {
     queryKey: [QUERY_KEY.GET_CATEGORIES],
     queryFn: () => getCategories(),
-    select: (data) => data.data,
     staleTime: Infinity,
   };
 };

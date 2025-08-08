@@ -15,8 +15,8 @@ export default async function Home() {
     getCategoriesOptions(),
   );
   const groupsResponse = await queryClient.fetchQuery(getGroupsOptions(today));
-  const categoriesData = getCategoriesOptions().select!(categoriesResponse);
-  const groupsData = getGroupsOptions(today).select!(groupsResponse);
+  const categoriesData = categoriesResponse.data;
+  const groupsData = groupsResponse.data.groups;
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
