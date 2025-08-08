@@ -32,8 +32,8 @@
     "@typescript-eslint/no-unused-vars": "warn",
     "simple-import-sort/exports": "warn",
     "react/display-name": "off",
-    "@next/next/no-img-element": "off",
-    "@typescript-eslint/no-explicit-any": "warn",
+    "@next/next/no-img-element": "warn",
+    "@typescript-eslint/no-explicit-any": "error",
     "simple-import-sort/imports": [
       "warn",
       {
@@ -44,10 +44,6 @@
           ["^[a-zA-Z/-]+$"],
           ["^@api/(.*)$"],
           ["^@shared/(.*)$"],
-          ["^@workbook/(.*)$"],
-          ["^@subscription/(.*)$"],
-          ["^@article/(.*)$"],
-          ["^@quiz/(.*)$"],
           ["^@main/(.*)$"],
           ["^[./]", ".*"]
         ]

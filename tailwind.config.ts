@@ -1,3 +1,5 @@
+import animatePlugin from "tailwindcss-animate";
+
 import type { Config } from "tailwindcss";
 
 const config = {
@@ -9,7 +11,7 @@ const config = {
     "./src/stories/**/*.{js,ts,jsx,tsx}",
     "./src/**/**/**/*.{js,ts,jsx,tsx}",
   ],
-  plugins: [require("tailwindcss-animate")],
+  plugins: [animatePlugin],
 } satisfies Config;
 
 export default config;

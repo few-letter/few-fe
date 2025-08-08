@@ -1,5 +1,2 @@
-//type
-export interface LogData {
-  from: string;
-  to: string;
-}
+export * from "./api";
+export * from "./ResponseType";
