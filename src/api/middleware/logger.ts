@@ -9,7 +9,7 @@ export const loggerMiddleware = <T>(
   switch (phase) {
     case "request":
       if (input instanceof Request) {
-        console.log(`[currentPhase: ${phase}`, {
+        console.log(`[currentPhase: ${phase}]`, {
           url: input.url,
           method: input.method,
           headers: Object.fromEntries(input.headers.entries()),
