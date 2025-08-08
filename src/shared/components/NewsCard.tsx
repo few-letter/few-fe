@@ -80,9 +80,9 @@ const RelatedNewsContent = ({
     <>
       <p className="font-caption1 text-gray5">관련기사</p>
       <div className="space-y-8">
-        {relatedNews.map((news) => (
+        {relatedNews.map((news, i) => (
           <InlineLink
-            key={news.headline}
+            key={`${news.headline}-${i}`}
             headline={news.headline}
             url={news.url}
           />

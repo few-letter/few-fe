@@ -18,15 +18,17 @@ export const getQueryClient = () => {
         staleTime: 60 * 1000,
         refetchOnWindowFocus: false,
         retry: 0,
-        gcTime: 1000 * 60 * 5, //5분 뒤에 캐시 삭제
+        gcTime: 1000 * 60 * 5,
       },
     });
   } else {
     if (!browserQueryClient)
       browserQueryClient = makeQueryClient({
         queries: {
+          staleTime: 60 * 1000,
           refetchOnWindowFocus: false,
-          retry: 0,
+          retry: 1,
+          gcTime: 1000 * 60 * 5,
         },
       });
     return browserQueryClient;
