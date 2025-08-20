@@ -1,8 +1,6 @@
 import Link from "next/link";
-import { formatKoreanDate } from "../utils";
 
-export const DailyFewHeader = () => {
-  const currentDate = formatKoreanDate(new Date());
+export const DailyFewHeader = ({ currentDate }: { currentDate: string }) => {
   return (
     <div className="pt-16 pb-16 lg:pt-60 lg:pb-24">
       <div className="hidden lg:block">
