@@ -1,7 +1,11 @@
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 import { Header } from "@/shared/components";
-import { DailyFewHeader, DailyFewSection } from "@/shared/widgets";
+import {
+  DailyFewHeader,
+  DailyFewSection,
+  DailyFewSummary,
+} from "@/shared/widgets";
 
 import { getGroupsOptions, getCategoriesOptions } from "@/shared/remotes";
 import { getQueryClient } from "@/api/client/queryClient";
@@ -38,9 +42,7 @@ export default async function Home() {
         </section>
         <div className="bg-gray2 h-16 w-full lg:hidden" />
         <section className="px-16">
-          <div className="text-gray9 font-heading3 pt-40 pb-16 text-center lg:pb-24 lg:text-left">
-            한줄 요약 few.
-          </div>
+          <DailyFewSummary categories={categoriesData} />
         </section>
       </main>
     </HydrationBoundary>
