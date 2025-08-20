@@ -14,7 +14,7 @@ const getGroups = async ({
 }): Promise<SuccessBodyBrowseGroupGenResponses> => {
   const response = await few.get<SuccessBodyBrowseGroupGenResponses>([
     API_ROUTES.GROUPS,
-    { date },
+    { date, cache: "no-store" },
   ]);
 
   return response;

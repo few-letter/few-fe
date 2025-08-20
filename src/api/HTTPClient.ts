@@ -14,7 +14,7 @@ export class HTTPClient {
   private middlewares: Middlewares;
 
   constructor() {
-    this.baseURL = process.env.NEXT_PUBLIC_API_URL || "";
+    this.baseURL = process.env.API_URL || "";
     this.middlewares = {
       onRequest: [],
       onResponse: [],
