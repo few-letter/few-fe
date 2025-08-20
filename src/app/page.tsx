@@ -5,10 +5,10 @@ import { DailyFewHeader, DailyFewSection } from "@/shared/widgets";
 
 import { getGroupsOptions, getCategoriesOptions } from "@/shared/remotes";
 import { getQueryClient } from "@/api/client/queryClient";
-import { formatDateToYYYYMMDD } from "@/shared/utils";
+import { formatDateToYYYYMMDD, getRefreshDate } from "@/shared/utils";
 
 export default async function Home() {
-  const today = formatDateToYYYYMMDD(new Date());
+  const today = formatDateToYYYYMMDD(getRefreshDate(new Date()));
   const queryClient = getQueryClient();
 
   const categoriesResponse = await queryClient.fetchQuery(

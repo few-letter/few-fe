@@ -14,4 +14,17 @@ const formatDateToYYYYMMDD = (date: Date): string => {
   return `${year}-${month}-${day}`;
 };
 
-export { formatKoreanDate, formatDateToYYYYMMDD };
+const getRefreshDate = (date: Date): Date => {
+  const REFRESH_HOUR = 5;
+  const currentHour = date.getHours();
+
+  if (currentHour < REFRESH_HOUR) {
+    const previousDay = new Date(date);
+    previousDay.setDate(date.getDate() - 1);
+    return previousDay;
+  }
+
+  return new Date(date);
+};
+
+export { formatKoreanDate, formatDateToYYYYMMDD, getRefreshDate };
