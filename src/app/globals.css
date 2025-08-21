@@ -29,6 +29,8 @@
   --color-red1: #ffeeee;
   --color-red2: #ff6b6b;
   --color-red3: #ff5152;
+  /* Temporary Color */
+  --color-news-highlight: #5a7d8a;
   /* Design System Badge Color*/
   --color-badge-purple: #8931ff;
   --color-badge-yellow: #ffa01b;
