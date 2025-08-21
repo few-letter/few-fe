@@ -16,6 +16,7 @@ export const DailyFewSection = ({
       items={news}
       renderItem={(item) => (
         <NewsCard
+          highlightTexts={item.highlightTexts}
           categories={categories}
           categoryCode={item.category}
           headline={item.headline}
