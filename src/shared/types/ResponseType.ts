@@ -34,7 +34,7 @@ interface BrowseContentsResponse {
 }
 
 interface CodeValueResponse {
-  code: number; //int32
+  code: CategoryCode; //int32
   value: string;
 }
 
@@ -83,6 +83,7 @@ interface Success {
 
 export type {
   SuccessBodyBrowseContentResponses, //GET contents
+  BrowseContentsResponse,
   SuccessBodyBrowseContentResponse, //GET contents/{id}
   SuccessBodyBrowseGroupGenResponses, //GET contents/groups
   CategoryCode,

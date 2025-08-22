@@ -8,7 +8,7 @@ import type {
   GroupSourceHeadlineData,
   CategoryCode,
   CodeValueResponse,
-} from "../types";
+} from "@/shared/types";
 
 interface NewsCardProps {
   categoryCode: CategoryCode;
