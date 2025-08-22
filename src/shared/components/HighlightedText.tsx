@@ -1,12 +1,16 @@
+import { cn } from "@/lib/utils";
+
 import { HIGHLIGHT_MATCH_SENSITIVITY } from "@/shared/constants";
 import { findHighlightMatches } from "@/shared/utils";
 
 export const HighlightedText = ({
   text,
   highlightTexts,
+  highlightColor = "bg-news-highlight",
 }: {
   text: string;
   highlightTexts: string[];
+  highlightColor?: string;
 }) => {
   const matches = findHighlightMatches(
     text,
@@ -27,7 +31,7 @@ export const HighlightedText = ({
     }
 
     parts.push(
-      <span key={index} className="bg-news-highlight rounded px-1">
+      <span key={index} className={cn("rounded px-1", highlightColor)}>
         {text.slice(match.start, match.end)}
       </span>,
     );
