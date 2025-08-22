@@ -29,7 +29,7 @@ interface BrowseContentsResponse {
   headline: string;
   summary: string;
   highlightTexts: string[];
-  createdAt: Date;
+  createdAt: string; // ISO 8601 날짜 문자열
   category: CodeValueResponse;
 }
 
@@ -60,7 +60,7 @@ interface BrowseGroupGenResponse {
   summary: string;
   highlightTexts: string[];
   groupSourceHeadlines: GroupSourceHeadlineData[];
-  createdAt: Date;
+  createdAt: string; // ISO 8601 날짜 문자열
 }
 
 interface GroupSourceHeadlineData {
