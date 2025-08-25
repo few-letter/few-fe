@@ -1,7 +1,9 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { CategoryList } from "@/shared/components/CategoryList";
+
+import { CategoryList } from "@/shared/components";
+import { DailyContentList } from "@/shared/widgets/DailyContentList";
 
 import type { CodeValueResponse } from "@/shared/types";
 
@@ -14,6 +16,7 @@ export const DailyFewSummary = ({
   const searchParams = useSearchParams();
   const selectedCategory = searchParams.get("category") || "all";
   const totalCategories = [{ code: "all", value: "전체" }, ...categories];
+
   return (
     <>
       <div className="text-gray9 font-heading3 pt-40 pb-16 text-center lg:pb-24 lg:text-left">
@@ -31,13 +34,16 @@ export const DailyFewSummary = ({
           <CategoryList
             categories={totalCategories}
             currentCategoryCode={selectedCategory}
-            handleClick={(code) => {
+            handleClick={(code: string | number) => {
               router.push(`?category=${code}`, { scroll: false });
             }}
           />
         </nav>
         <article className="w-full">
-          <div className="bg-gray2 h-14 w-full"></div>
+          <DailyContentList
+            category={selectedCategory}
+            categories={categories}
+          />
         </article>
       </div>
     </>
