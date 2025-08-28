@@ -147,9 +147,7 @@ export const Carousel = <T,>({
       >
         <div
           className={cn("flex flex-row flex-nowrap", `gap-${CAROUSEL_GAP}`)}
-          style={{
-            ...transformStyle,
-          }}
+          style={transformStyle}
         >
           {items.map((item, index) => {
             return (

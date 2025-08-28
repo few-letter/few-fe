@@ -12,10 +12,10 @@ const getGroups = async ({
 }: {
   date: string;
 }): Promise<SuccessBodyBrowseGroupGenResponses> => {
-  const response = await few.get<SuccessBodyBrowseGroupGenResponses>([
-    API_ROUTES.GROUPS,
-    { date, cache: "no-store" },
-  ]);
+  const response = await few.get<SuccessBodyBrowseGroupGenResponses>(
+    [API_ROUTES.GROUPS, { date }],
+    { cache: "no-store" },
+  );
 
   return response;
 };

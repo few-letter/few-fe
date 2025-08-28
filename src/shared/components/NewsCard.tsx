@@ -2,7 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-import { Badge, HighlightedText } from "@/shared/components";
+import { Badge } from "./Badge";
+import { HighlightedText } from "./HighlightedText";
 
 import type {
   GroupSourceHeadlineData,
@@ -100,6 +101,7 @@ const InlineLink = ({ headline, url }: { headline: string; url?: string }) => {
   return url ? (
     <Link
       target="_blank"
+      rel="noreferrer noopener"
       href={url}
       className={cn(
         "flex flex-row items-center gap-8",

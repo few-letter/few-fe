@@ -25,6 +25,7 @@ export const DailyContentList = ({
     isFetchingNextPage,
     isLoading,
     isError,
+    refetch,
   } = useInfiniteQuery(getInfiniteContentsOptions(category));
 
   const observerRef = useRef<HTMLDivElement | null>(null);
@@ -70,7 +71,7 @@ export const DailyContentList = ({
           콘텐츠를 불러오는 중 오류가 발생했습니다.
         </p>
         <button
-          onClick={() => window.location.reload()}
+          onClick={() => void refetch()}
           className="bg-blue2 font-body4 hover:bg-blue3 rounded-sm px-16 py-8 text-white transition-colors"
         >
           다시 시도

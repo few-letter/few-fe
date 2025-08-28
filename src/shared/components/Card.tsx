@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-import { Badge } from "@/shared/components";
+import { Badge } from "./Badge";
 import { formatDateToYYYYMMDD } from "@/shared/utils";
 
 import type { CategoryCode, CodeValueResponse } from "@/shared/types";
@@ -29,6 +29,7 @@ export const Card = ({
     <Link
       href={link}
       target="_blank"
+      rel="noreferrer noopener"
       className={cn(
         "group border-gray2 relative flex flex-col overflow-hidden rounded-sm border-1",
       )}
