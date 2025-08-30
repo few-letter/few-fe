@@ -1,6 +1,8 @@
 import "./globals.css";
+
 import { pretendard, numans } from "@/fonts";
 import { QueryClientProviders } from "@/shared/providers";
+import { Header } from "@/shared/components";
 
 import type { Metadata } from "next";
 
@@ -21,6 +23,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className={`${pretendard.className} ${numans.variable}`}>
       <body className="antialiased">
+        <Header />
         <QueryClientProviders>{children}</QueryClientProviders>
         <footer className="flex h-80 flex-col items-center justify-center">
           <p className="font-caption1 text-gray7">
