@@ -29,12 +29,12 @@ interface BrowseContentsResponse {
   headline: string;
   summary: string;
   highlightTexts: string[];
-  createdAt: Date;
+  createdAt: string; // ISO 8601 날짜 문자열
   category: CodeValueResponse;
 }
 
 interface CodeValueResponse {
-  code: number; //int32
+  code: CategoryCode; //int32
   value: string;
 }
 
@@ -60,7 +60,7 @@ interface BrowseGroupGenResponse {
   summary: string;
   highlightTexts: string[];
   groupSourceHeadlines: GroupSourceHeadlineData[];
-  createdAt: Date;
+  createdAt: string; // ISO 8601 날짜 문자열
 }
 
 interface GroupSourceHeadlineData {
@@ -83,6 +83,7 @@ interface Success {
 
 export type {
   SuccessBodyBrowseContentResponses, //GET contents
+  BrowseContentsResponse,
   SuccessBodyBrowseContentResponse, //GET contents/{id}
   SuccessBodyBrowseGroupGenResponses, //GET contents/groups
   CategoryCode,

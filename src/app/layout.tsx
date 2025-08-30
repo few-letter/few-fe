@@ -22,6 +22,11 @@ export default function RootLayout({
     <html lang="ko" className={`${pretendard.className} ${numans.variable}`}>
       <body className="antialiased">
         <QueryClientProviders>{children}</QueryClientProviders>
+        <footer className="flex h-80 flex-col items-center justify-center">
+          <p className="font-caption1 text-gray7">
+            © 2025. FEW. All rights reserved.
+          </p>
+        </footer>
       </body>
     </html>
   );

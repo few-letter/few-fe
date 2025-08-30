@@ -111,14 +111,15 @@ export const Carousel = <T,>({
     const isLastSlideOffsetExist =
       isDesktop && validIndex === totalSlides - 1 && lastSlideOffset > 0;
     const gapCount = isDesktop ? validIndex + 1 : validIndex;
-
     const gap = validIndex > 0 ? gapCount * CAROUSEL_GAP : 0;
     const translateX = isLastSlideOffsetExist
       ? -((validIndex - 1) * 100 + lastSlideOffset)
       : -(validIndex * 100);
 
     return {
-      transform: `translateX(calc(${translateX}% - ${gap}px))`,
+      transform: isDesktop
+        ? `translateX(${translateX}%)`
+        : `translateX(calc(${translateX}% - ${gap}px))`,
       transition: "transform 0.3s ease-in-out",
     };
   }, [currentIndex, totalSlides, isDesktop, lastSlideOffset]);
@@ -146,9 +147,7 @@ export const Carousel = <T,>({
       >
         <div
           className={cn("flex flex-row flex-nowrap", `gap-${CAROUSEL_GAP}`)}
-          style={{
-            ...transformStyle,
-          }}
+          style={transformStyle}
         >
           {items.map((item, index) => {
             return (
@@ -156,7 +155,9 @@ export const Carousel = <T,>({
                 key={index}
                 className={cn("w-full min-w-0 flex-shrink-0")}
                 style={{
-                  width: `calc(${100 / itemsPerView}%)`,
+                  width: isDesktop
+                    ? `calc(${100 / itemsPerView}% - ${CAROUSEL_GAP}px)`
+                    : `calc(${100 / itemsPerView}%)`,
                 }}
               >
                 {item && renderItem(item, index)}

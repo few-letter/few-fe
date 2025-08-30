@@ -1,19 +1,21 @@
-import { cn } from "@/lib/utils";
-import { Badge } from "@/shared/components";
-
 import Link from "next/link";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
+
+import { Badge } from "./Badge";
+import { HighlightedText } from "./HighlightedText";
 
 import type {
   GroupSourceHeadlineData,
   CategoryCode,
   CodeValueResponse,
-} from "../types";
+} from "@/shared/types";
 
 interface NewsCardProps {
   categoryCode: CategoryCode;
   headline: string;
   summary: string;
+  highlightTexts: string[];
   relatedNews: GroupSourceHeadlineData[];
   categories: CodeValueResponse[];
   image?: string;
@@ -23,6 +25,7 @@ export const NewsCard = ({
   categories,
   headline,
   summary,
+  highlightTexts,
   categoryCode,
   relatedNews,
   image,
@@ -48,7 +51,9 @@ export const NewsCard = ({
           <div className="space-y-12">
             <Badge categoryCode={categoryCode} categories={categories} />
             <div className="font-sub2 line-clamp-2 text-white">{headline}</div>
-            <p className="font-body6 text-gray4 line-clamp-3">{summary}</p>
+            <p className="font-body6 text-gray4 line-clamp-3">
+              <HighlightedText text={summary} highlightTexts={highlightTexts} />
+            </p>
           </div>
           {/* 관련기사 - lg 이상에서만 카드 안에 표시 */}
           <div className="hidden space-y-12 lg:block">
@@ -96,6 +101,7 @@ const InlineLink = ({ headline, url }: { headline: string; url?: string }) => {
   return url ? (
     <Link
       target="_blank"
+      rel="noreferrer noopener"
       href={url}
       className={cn(
         "flex flex-row items-center gap-8",
