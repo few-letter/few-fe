@@ -6,3 +6,4 @@ export * from "./Carousel";
 export * from "./HighlightedText";
 export * from "./CategoryList";
 export * from "./Card";
+export * from "./Banner";
