@@ -8,20 +8,24 @@ export const Header = ({ underline = true }: { underline?: boolean }) => {
         underline ? "border-b-1" : "border-b-0"
       }`}
     >
-      <Link href="/" className="flex max-w-1200 flex-1 justify-between">
-        <Image
-          src="/images/logo/Logo_FEW_Dark.png"
-          alt="logo"
-          width={64}
-          height={32}
-        />
+      <div className="flex max-w-1200 flex-1 justify-between">
+        <Link href="/">
+          <Image
+            src="/images/logo/Logo_FEW_Dark.png"
+            alt="logo"
+            width={64}
+            height={32}
+          />
+        </Link>
         <p className="flex items-center justify-center">
           <span className="font-sub5 text-gray8 hidden md:block">
             보고싶은 뉴스 선택하고&nbsp;
           </span>
-          <span className="font-sub5 text-blue3">무료 구독하기</span>
+          <span className="font-sub5 text-blue3">
+            <Link href="/subscribe">무료 구독하기</Link>
+          </span>
         </p>
-      </Link>
+      </div>
     </div>
   );
-}
+};
