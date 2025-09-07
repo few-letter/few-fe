@@ -3,6 +3,7 @@ export const API_ROUTES = {
   GROUPS: "/api/v1/contents/groups", //DailyFew List
   CONTENTS: "/api/v1/contents", //카테고리 별 컨텐츠 목록
   CONTENT_DETAIL: (id: string) => `/api/v1/contents/${id}`, //컨텐츠 상세
+  SUBSCRIBE: "/api/v1/subscriptions", //구독
 } as const;
 
 export const QUERY_KEY = {

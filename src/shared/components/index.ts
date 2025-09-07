@@ -7,3 +7,7 @@ export * from "./HighlightedText";
 export * from "./CategoryList";
 export * from "./Card";
 export * from "./Banner";
+export * from "./LottieComponent";
+export * from "./Checkboxes";
+export * from "./EmailInput";
+export * from "./Toast";

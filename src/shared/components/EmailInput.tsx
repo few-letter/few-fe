@@ -1,0 +1,78 @@
+"use client";
+
+import { useState, useEffect } from "react";
+import { cn } from "@/lib/utils";
+
+import type { ChangeEvent } from "react";
+
+interface EmailInputProps {
+  value: string;
+  onEmailChange: (email: string) => void;
+  label?: string;
+  name?: string;
+  placeholder?: string;
+  errorMessage?: string;
+}
+
+export const EmailInput = ({
+  label,
+  name,
+  value,
+  placeholder = "",
+  errorMessage = "",
+  onEmailChange,
+}: EmailInputProps) => {
+  const [email, setEmail] = useState(value || "");
+  const [error, setError] = useState("");
+
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    onEmailChange?.(value);
+
+    if (value === "") {
+      setError("");
+    } else if (!validateEmail(value)) {
+      setError(errorMessage);
+    } else {
+      setError("");
+    }
+  };
+
+  useEffect(() => {
+    setEmail(value || "");
+  }, [value]);
+
+  return (
+    <div className="flex flex-col">
+      {label && (
+        <label htmlFor="email" className="font-sub6 text-gray9 mb-12">
+          {label}
+        </label>
+      )}
+      <input
+        type="email"
+        id="email"
+        name={name}
+        value={email}
+        onChange={handleEmailChange}
+        placeholder={placeholder}
+        className={cn(
+          "bg-gray2 font-body6 text-gray10 rounded-sm border px-16 py-12 transition-all duration-200 focus:outline-none",
+          error
+            ? "border-red3 bg-red1 focus:border-red3"
+            : "border-gray3 focus:border-blue3",
+        )}
+      />
+      {error && (
+        <div className="text-red3 text-12 font-body6 mt-8 flex items-center">
+          {error}
+        </div>
+      )}
+    </div>
+  );
+};
