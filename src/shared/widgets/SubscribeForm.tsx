@@ -41,7 +41,6 @@ export const SubscribeForm = ({ categories }: SubscribeFormProps) => {
     }
 
     //POST
-    
   };
 
   const handleToastClose = () => {
@@ -76,8 +75,9 @@ export const SubscribeForm = ({ categories }: SubscribeFormProps) => {
           />
         </div>
         <button
+          disabled
           type="submit"
-          className="bg-blue2 font-sub6 hover:bg-blue3 w-full rounded-sm py-16 text-white transition-colors"
+          className="bg-gray10 font-sub6 disabled:bg-gray4 disabled:text-gray7 w-full rounded-sm py-16 text-white transition-colors"
         >
           구독하기
         </button>
