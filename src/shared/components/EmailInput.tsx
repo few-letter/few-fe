@@ -1,13 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { cn } from "@/lib/utils";
+import { validateEmail } from "@/shared/utils/util";
 
 import type { ChangeEvent } from "react";
 
 interface EmailInputProps {
   value: string;
-  onEmailChange: (email: string) => void;
+  onChange: (value: string) => void;
   label?: string;
   name?: string;
   placeholder?: string;
@@ -15,37 +16,29 @@ interface EmailInputProps {
 }
 
 export const EmailInput = ({
+  value,
+  onChange,
   label,
   name,
-  value,
   placeholder = "",
   errorMessage = "",
-  onEmailChange,
 }: EmailInputProps) => {
-  const [email, setEmail] = useState(value || "");
-  const [error, setError] = useState("");
-
-  const validateEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  };
+  const [error, setError] = useState(value ? errorMessage : "");
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    onEmailChange?.(value);
 
     if (value === "") {
       setError("");
+      onChange(value);
     } else if (!validateEmail(value)) {
       setError(errorMessage);
+      onChange(value);
     } else {
       setError("");
+      onChange(value);
     }
   };
-
-  useEffect(() => {
-    setEmail(value || "");
-  }, [value]);
 
   return (
     <div className="flex flex-col">
@@ -58,7 +51,7 @@ export const EmailInput = ({
         type="email"
         id="email"
         name={name}
-        value={email}
+        value={value}
         onChange={handleEmailChange}
         placeholder={placeholder}
         className={cn(
