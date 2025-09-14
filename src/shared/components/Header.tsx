@@ -10,12 +10,7 @@ export const Header = ({ underline = true }: { underline?: boolean }) => {
     >
       <div className="flex max-w-1200 flex-1 justify-between">
         <Link href="/">
-          <Image
-            src="/images/logo/Logo_FEW_Dark.png"
-            alt="logo"
-            width={64}
-            height={32}
-          />
+          <Image src="/images/logo/few.png" alt="logo" width={64} height={32} />
         </Link>
         <p className="flex items-center justify-center">
           <span className="font-sub5 text-gray8 hidden md:block">
