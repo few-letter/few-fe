@@ -48,6 +48,8 @@ export class HTTPClient {
         request = middleware(request);
       });
 
+      const requestClone = request.clone();
+
       response = await fetch(request);
 
       this.middlewares.onResponse.forEach((middleware) => {
@@ -55,10 +57,11 @@ export class HTTPClient {
       });
 
       const responseClone = response.clone();
-      const requestClone = request.clone();
 
       if (response.status >= 400) {
-        throw new HTTPError(requestClone, responseClone, options);
+        const error = new HTTPError(requestClone, responseClone, options);
+        await error.setErrorMessage();
+        throw error;
       }
       try {
         const parsedResponse = await response.json();
