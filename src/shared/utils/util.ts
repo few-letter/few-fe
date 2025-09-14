@@ -115,4 +115,9 @@ const findHighlightMatches = (
   return sortedMatches;
 };
 
-export { calculateSimilarity, findHighlightMatches };
+const validateEmail = (email: string): boolean => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+};
+
+export { calculateSimilarity, findHighlightMatches, validateEmail };

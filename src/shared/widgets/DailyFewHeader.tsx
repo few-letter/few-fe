@@ -8,7 +8,7 @@ export const DailyFewHeader = ({ currentDate }: { currentDate: string }) => {
         <span className="font-heading4 text-gray10">&nbsp;데일리 few.</span>
       </div>
       <div className="block rounded-sm bg-black px-16 py-12 lg:hidden">
-        <Link href="/" className="font-body5 text-blue3">
+        <Link href="/subscribe" className="font-body5 text-blue3">
           🗞️ 보고 싶은 카테고리 무료 구독
         </Link>
       </div>
