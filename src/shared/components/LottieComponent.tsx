@@ -3,10 +3,12 @@
 import { useEffect, useRef } from "react";
 import lottie from "lottie-web";
 
+import type { CSSProperties } from "react";
+
 interface LottieComponentProps {
   animationData: unknown;
   className?: string;
-  style?: React.CSSProperties;
+  style?: CSSProperties;
 }
 
 export const LottieComponent = ({

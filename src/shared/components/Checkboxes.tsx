@@ -35,34 +35,32 @@ export const Checkboxes = <T extends { code: CodeType; value: string }>({
 
       <fieldset className="flex gap-8">
         {options.map((option) => {
-          const optionCode = String(option.code);
-
           return (
             <div
               onClick={(e) => {
                 e.preventDefault();
-                toggleChecked(optionCode);
+                toggleChecked(option.code);
               }}
               key={option.code}
               className={cn(
                 "group cursor-pointer rounded-sm px-12 py-8 transition-colors",
-                value.includes(optionCode)
+                value.includes(option.code)
                   ? "bg-blue2 hover:bg-blue3"
                   : "bg-gray2 hover:bg-gray3",
               )}
             >
-              <label htmlFor={optionCode} className="cursor-pointer">
+              <label htmlFor={String(option.code)} className="cursor-pointer">
                 <input
                   type="checkbox"
-                  id={optionCode}
+                  id={String(option.code)}
                   name={name}
-                  value={optionCode}
+                  value={option.code}
                   className="appearance-none"
                 />
                 <span
                   className={cn(
                     "font-body6 transition-colors",
-                    value.includes(optionCode)
+                    value.includes(option.code)
                       ? "font-sub6 text-gray10"
                       : "text-gray10 group-hover:text-gray9",
                   )}
