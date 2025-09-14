@@ -81,6 +81,24 @@ interface Success {
   message: string;
 }
 
+/**
+ * POST subscriptions
+ */
+
+interface PostRequestBody {
+  email: string;
+  categoryCodes: CategoryCode[];
+}
+
+interface BrowseSubscriptionResponse {
+  subscribedCategories: CodeValueResponse[];
+}
+
+interface SuccessBodyPostSubscriptionsResponse {
+  data: BrowseSubscriptionResponse;
+  message: string;
+}
+
 export type {
   SuccessBodyBrowseContentResponses, //GET contents
   BrowseContentsResponse,
@@ -92,4 +110,6 @@ export type {
   SuccessBodyListCodeValueResponse, //GET contents/categories
   CodeValueResponse,
   Success, //POST contents/schedule, POST contents/groups/schedule
+  SuccessBodyPostSubscriptionsResponse, //POST subscriptions
+  PostRequestBody,
 };
