@@ -2,7 +2,6 @@ export class HTTPError extends Error {
   public response: Response;
   public request: Request;
   public options: RequestInit;
-  public message: string = "";
 
   constructor(request: Request, response: Response, options: RequestInit) {
     const code =
@@ -17,10 +16,5 @@ export class HTTPError extends Error {
     this.response = response;
     this.request = request;
     this.options = options;
-  }
-
-  async setErrorMessage() {
-    const error = await this.response.json();
-    this.message = error.message;
   }
 }
