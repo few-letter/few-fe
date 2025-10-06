@@ -36,7 +36,7 @@ export const CategoryList = <
                 handleClick(category.code);
               }}
             >
-              emoji<span className="block lg:hidden">{emoji}</span>
+              <span className="block lg:hidden">{emoji}</span>
               <span>{category.value}</span>
             </li>
           );
