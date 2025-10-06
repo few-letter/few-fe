@@ -1,6 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
+import { CATEGORY_CODE_TO_EMOJI } from "@/shared/constants";
 
 import type { CategoryCode } from "@/shared/types";
 
@@ -33,8 +34,9 @@ export const Checkboxes = <T extends { code: CodeType; value: string }>({
     <div className="flex flex-col gap-12">
       {label && <label className="font-sub6 text-gray9">{label}</label>}
 
-      <fieldset className="flex gap-8">
+      <fieldset className="flex flex-wrap justify-center gap-8">
         {options.map((option) => {
+          const emoji = CATEGORY_CODE_TO_EMOJI[option.code as CategoryCode];
           return (
             <div
               onClick={(e) => {
@@ -65,7 +67,7 @@ export const Checkboxes = <T extends { code: CodeType; value: string }>({
                       : "text-gray10 group-hover:text-gray9",
                   )}
                 >
-                  {option.value}
+                  {`${emoji} ${option.value}`}
                 </span>
               </label>
             </div>
