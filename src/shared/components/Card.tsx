@@ -31,7 +31,7 @@ export const Card = ({
       target="_blank"
       rel="noreferrer noopener"
       className={cn(
-        "group border-gray2 relative flex flex-col overflow-hidden rounded-sm border-1",
+        "group border-gray2 relative flex flex-col overflow-hidden rounded-sm",
       )}
     >
       <div
@@ -51,7 +51,9 @@ export const Card = ({
         <div className="space-y-12">
           <Badge categoryCode={categoryCode} categories={categories} />
           <div className="font-sub2 text-gray9 line-clamp-2">{headline}</div>
-          <p className="font-body6 text-gray7 line-clamp-3">{summary}</p>
+          <p className="font-body6 text-gray7 line-clamp-5 sm:line-clamp-4">
+            {summary}
+          </p>
           <p className="font-body6 text-gray7">
             {formatDateToYYYYMMDD(createdAt)}
           </p>
