@@ -51,7 +51,7 @@ export const NewsCard = ({
           <div className="space-y-12">
             <Badge categoryCode={categoryCode} categories={categories} />
             <div className="font-sub2 line-clamp-2 text-white">{headline}</div>
-            <p className="font-body6 text-gray4 line-clamp-3">
+            <p className="font-body6 text-gray4 line-clamp-4">
               <HighlightedText text={summary} highlightTexts={highlightTexts} />
             </p>
           </div>
