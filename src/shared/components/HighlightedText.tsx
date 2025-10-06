@@ -6,7 +6,7 @@ import { findHighlightMatches } from "@/shared/utils";
 export const HighlightedText = ({
   text,
   highlightTexts,
-  highlightColor = "bg-news-highlight",
+  highlightColor = "bg-news-highlight text-white",
 }: {
   text: string;
   highlightTexts: string[];
