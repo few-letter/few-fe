@@ -82,13 +82,24 @@ const extractExactMatchingPart = (
     startHint + highlightText.length + 100,
   );
 
-  // 첫 번째 토큰의 위치 찾기
+  // 첫 번째 토큰의 위치 찾기 (startHint와 가장 가까운 위치 우선)
+  const lowerText = text.toLowerCase();
+  const lowerFirstToken = tokens[0]?.toLowerCase() ?? "";
+  const firstTokenLength = tokens[0]?.length ?? 0;
+
   let matchStart = -1;
-  for (let i = searchStart; i < searchEnd; i++) {
-    const substr = text.substring(i, i + (tokens[0]?.length || 0));
-    if (substr.toLowerCase() === tokens[0]?.toLowerCase()) {
-      matchStart = i;
-      break;
+  let bestDistance = Infinity;
+
+  for (let i = searchStart; i <= searchEnd - firstTokenLength; i++) {
+    if (lowerText.startsWith(lowerFirstToken, i)) {
+      const distance = Math.abs(i - startHint);
+      if (distance < bestDistance) {
+        matchStart = i;
+        bestDistance = distance;
+        if (distance === 0) {
+          break;
+        }
+      }
     }
   }
 
@@ -96,7 +107,7 @@ const extractExactMatchingPart = (
 
   // 토큰들을 순서대로 찾으면서 연속적으로 매칭되는 부분 추출
   let currentPos = matchStart;
-  let lastMatchEnd = matchStart + (tokens[0]?.length || 0);
+  let lastMatchEnd = matchStart + firstTokenLength;
 
   for (let i = 1; i < tokens.length; i++) {
     const token = tokens[i];
@@ -235,8 +246,15 @@ const findHighlightMatches = (
     // 3. 슬라이딩 윈도우 방식으로 부분 문자열 매칭
     if (!foundInSentence) {
       const highlightLen = cleanHighlight.length;
-      const minWindowSize = Math.floor(highlightLen * WINDOW_SIZE_MIN_RATIO);
-      const maxWindowSize = Math.ceil(highlightLen * WINDOW_SIZE_MAX_RATIO);
+      const minWindowSize = Math.max(
+        1,
+        Math.floor(highlightLen * WINDOW_SIZE_MIN_RATIO),
+      );
+      const maxWindowSize = Math.max(
+        minWindowSize,
+        Math.ceil(highlightLen * WINDOW_SIZE_MAX_RATIO),
+      );
+      const windowStep = highlightLen < WINDOW_SIZE_STEP ? 1 : WINDOW_SIZE_STEP;
 
       let bestMatch: {
         start: number;
@@ -247,7 +265,7 @@ const findHighlightMatches = (
       windowLoop: for (
         let windowSize = minWindowSize;
         windowSize <= maxWindowSize;
-        windowSize += WINDOW_SIZE_STEP
+        windowSize += windowStep
       ) {
         for (
           let i = 0;

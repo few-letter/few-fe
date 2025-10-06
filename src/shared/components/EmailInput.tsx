@@ -58,7 +58,7 @@ export const EmailInput = ({
           "bg-gray2 font-body6 text-gray10 placeholder:text-gray5 rounded-sm border-1 border-transparent px-16 py-12 transition-all duration-200 focus:outline-none",
           error
             ? "border-red3 bg-red1 focus:border-red3"
-            : "boreder-transparent focus:border-blue3",
+            : "border-transparent focus:border-blue3",
         )}
       />
       {error && (

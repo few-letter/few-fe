@@ -19,7 +19,8 @@ export const CategoryList = <
     <div className="flex justify-center lg:block">
       <ul className="flex flex-row flex-wrap justify-center gap-8 lg:flex-col lg:gap-2">
         {categories.map((category) => {
-          const emoji = CATEGORY_CODE_TO_EMOJI[category.code as CategoryCode];
+          const emoji =
+            CATEGORY_CODE_TO_EMOJI[category.code as CategoryCode] ?? "";
           return (
             <li
               key={category.code}
@@ -35,7 +36,7 @@ export const CategoryList = <
                 handleClick(category.code);
               }}
             >
-              <span className="block lg:hidden">{emoji}</span>
+              emoji<span className="block lg:hidden">{emoji}</span>
               <span>{category.value}</span>
             </li>
           );

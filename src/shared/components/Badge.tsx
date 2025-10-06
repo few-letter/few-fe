@@ -33,7 +33,8 @@ export const Badge = ({
         className,
       )}
     >
-      {showEmoji && emoji} {label}
+      {showEmoji && emoji && `${emoji} `}
+      {label}
     </div>
   );
 };
