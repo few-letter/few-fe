@@ -98,7 +98,7 @@ export const SubscribeForm = ({ categories }: SubscribeFormProps) => {
         <button
           disabled={isDisabled}
           type="submit"
-          className="bg-gray10 font-sub6 disabled:bg-gray4 disabled:text-gray7 w-full rounded-sm py-16 text-white transition-colors"
+          className="bg-gray10 font-body6 disabled:bg-gray4 disabled:text-gray7 w-full rounded-sm py-16 text-white transition-colors"
         >
           {subscriptionMutation.isPending ? "구독 중..." : "구독하기"}
         </button>

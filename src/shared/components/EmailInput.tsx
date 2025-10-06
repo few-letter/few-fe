@@ -55,10 +55,10 @@ export const EmailInput = ({
         onChange={handleEmailChange}
         placeholder={placeholder}
         className={cn(
-          "bg-gray2 font-body6 text-gray10 rounded-sm border px-16 py-12 transition-all duration-200 focus:outline-none",
+          "bg-gray2 font-body6 text-gray10 placeholder:text-gray5 rounded-sm border-1 border-transparent px-16 py-12 transition-all duration-200 focus:outline-none",
           error
             ? "border-red3 bg-red1 focus:border-red3"
-            : "border-gray3 focus:border-blue3",
+            : "boreder-transparent focus:border-blue3",
         )}
       />
       {error && (
