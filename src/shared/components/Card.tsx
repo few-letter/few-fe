@@ -2,7 +2,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 
 import { Badge } from "./Badge";
-import { formatDateToYYYYMMDD } from "@/shared/utils";
+import { formatDateToSlashDate } from "@/shared/utils";
 
 import type { CategoryCode, CodeValueResponse } from "@/shared/types";
 
@@ -14,6 +14,7 @@ interface CardProps {
   summary: string;
   createdAt: Date;
   image?: string;
+  mediaType: CodeValueResponse;
 }
 
 export const Card = ({
@@ -24,6 +25,7 @@ export const Card = ({
   summary,
   createdAt,
   image,
+  mediaType,
 }: CardProps) => {
   return (
     <Link
@@ -47,16 +49,20 @@ export const Card = ({
         )}
         style={{ backgroundImage: image ? `url(${image})` : "none" }}
       />
-      <div className="bg-gray2 flex w-full flex-1 flex-col justify-between px-20 py-20">
-        <div className="space-y-12">
+      <div className="bg-gray2 flex w-full flex-1 px-20 py-20">
+        <div className="flex flex-1 flex-col gap-12">
           <Badge categoryCode={categoryCode} categories={categories} />
-          <div className="font-sub2 text-gray9 line-clamp-2">{headline}</div>
-          <p className="font-body6 text-gray7 line-clamp-5 sm:line-clamp-4">
-            {summary}
-          </p>
-          <p className="font-body6 text-gray7">
-            {formatDateToYYYYMMDD(createdAt)}
-          </p>
+          <div className="space-y-8">
+            <div className="font-sub2 text-gray9 line-clamp-2">{headline}</div>
+            <div className="font-body6 text-gray7 line-clamp-5 sm:line-clamp-4">
+              {summary}
+            </div>
+            <div className="font-body6 text-gray7">
+              <span>{formatDateToSlashDate(createdAt)}</span>
+              <span> · </span>
+              <span>{mediaType.value}</span>
+            </div>
+          </div>
         </div>
       </div>
     </Link>
