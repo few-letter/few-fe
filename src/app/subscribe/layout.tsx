@@ -11,9 +11,9 @@ export default function SubscribeLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
+    <div className="mt-64">
       <Banner />
       {children}
-    </>
+    </div>
   );
 }

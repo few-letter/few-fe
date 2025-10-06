@@ -9,12 +9,24 @@ const CATEGORY_CODE_TO_COLOR: Record<CategoryCode, string> = {
   16: "text-badge-blue",
   32: "text-badge-red",
 } as const;
+
+const CATEGORY_CODE_TO_EMOJI: Record<CategoryCode | "all", string> = {
+  all: "🔥",
+  0: "🔮",
+  2: "💻",
+  4: "🏡",
+  8: "🏛️",
+  16: "💰",
+  32: "🌎",
+} as const;
+
 const MIN_SWIPE_DISTANCE = 50;
 const CAROUSEL_GAP = 24;
 
 export {
   INDICATOR_TOTAL_WIDTH,
   CATEGORY_CODE_TO_COLOR,
+  CATEGORY_CODE_TO_EMOJI,
   MIN_SWIPE_DISTANCE,
   CAROUSEL_GAP,
 };

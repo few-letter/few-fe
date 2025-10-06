@@ -20,6 +20,15 @@ const formatDateToYYYYMMDD = (date: Date | string): string => {
   return `${year}-${month}-${day}`;
 };
 
+const formatDateToSlashDate = (date: Date | string): string => {
+  const dateObj = parseISOString(date);
+  const year = dateObj.getFullYear().toString().slice(-2);
+  const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+  const day = String(dateObj.getDate()).padStart(2, "0");
+
+  return `${year}/${month}/${day}`;
+};
+
 const getRefreshDate = (date: Date | string): Date => {
   const dateObj = parseISOString(date);
   const REFRESH_HOUR = 5;
@@ -37,6 +46,7 @@ const getRefreshDate = (date: Date | string): Date => {
 export {
   formatKoreanDate,
   formatDateToYYYYMMDD,
+  formatDateToSlashDate,
   getRefreshDate,
   parseISOString,
 };

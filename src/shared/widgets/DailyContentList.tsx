@@ -106,6 +106,7 @@ export const DailyContentList = ({
             summary={content.summary}
             image={content.thumbnailImageUrl}
             createdAt={parseISOString(content.createdAt)}
+            mediaType={content.mediaType}
           />
         ))}
       </div>
