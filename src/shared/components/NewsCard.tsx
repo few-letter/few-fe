@@ -35,7 +35,7 @@ export const NewsCard = ({
       {/* 메인 카드 */}
       <div
         className={cn(
-          "flex h-412 rounded-sm",
+          "flex h-412 overflow-hidden rounded-sm",
           "bg-opacity70 bg-cover bg-center bg-no-repeat",
           "relative",
         )}
