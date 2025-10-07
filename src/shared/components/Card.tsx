@@ -1,5 +1,4 @@
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 
 import { Badge } from "./Badge";
 import { formatDateToSlashDate } from "@/shared/utils";
@@ -27,11 +26,12 @@ export const Card = ({
   image,
   mediaType,
 }: CardProps) => {
+  const isWebView = typeof window !== "undefined" && /WebView|wv/.test(navigator.userAgent);
+
   return (
-    <Link
+    <a
       href={link}
-      target="_blank"
-      rel="noreferrer noopener"
+      {...(!isWebView && { target: "_blank", rel: "noreferrer noopener" })}
       className={cn(
         "group border-gray2 relative flex flex-col overflow-hidden rounded-sm",
       )}
@@ -65,7 +65,7 @@ export const Card = ({
           </div>
         </div>
       </div>
-    </Link>
+    </a>
   );
 };
 

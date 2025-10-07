@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
@@ -98,11 +97,13 @@ const RelatedNewsContent = ({
 };
 
 const InlineLink = ({ headline, url }: { headline: string; url?: string }) => {
+  const isWebView =
+    typeof window !== "undefined" && /WebView|wv/.test(navigator.userAgent);
+
   return url ? (
-    <Link
-      target="_blank"
-      rel="noreferrer noopener"
+    <a
       href={url}
+      {...(!isWebView && { target: "_blank", rel: "noreferrer noopener" })}
       className={cn(
         "flex flex-row items-center gap-8",
         "font-body5 text-gray10 lg:text-gray2 visited:text-blue2 truncate",
@@ -117,7 +118,7 @@ const InlineLink = ({ headline, url }: { headline: string; url?: string }) => {
         height={16}
         className="flex-shrink-0"
       />
-    </Link>
+    </a>
   ) : (
     <div className="flex flex-row items-center gap-8">
       <span className="font-body5 text-gray4 max-w-full truncate lg:max-w-[calc(100%-72px)]">

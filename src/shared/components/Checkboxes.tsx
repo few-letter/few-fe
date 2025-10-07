@@ -45,7 +45,7 @@ export const Checkboxes = <T extends { code: CodeType; value: string }>({
                 }}
                 key={option.code}
                 className={cn(
-                  "group cursor-pointer rounded-sm px-12 py-8 transition-colors",
+                  "group cursor-pointer items-center justify-center rounded-sm px-12 py-8 transition-colors",
                   value.includes(option.code)
                     ? "bg-blue2 hover:bg-blue3"
                     : "bg-gray2 hover:bg-gray3",
