@@ -12,3 +12,7 @@ export const QUERY_KEY = {
   GET_CONTENTS: "get-contents",
   GET_CONTENT_DETAIL: "get-content-detail",
 } as const;
+
+export const CLIENT_ROUTES = {
+  SUBSCRIPTION: "/subscription",
+} as const;
