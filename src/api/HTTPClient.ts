@@ -59,7 +59,16 @@ export class HTTPClient {
       const responseClone = response.clone();
 
       if (response.status >= 400) {
-        const error = new HTTPError(requestClone, responseClone, options);
+        const errorBody = await responseClone.json().catch(() => ({}));
+        const serverMessage = errorBody?.message;
+
+        const error = new HTTPError(
+          requestClone,
+          responseClone,
+          options,
+          serverMessage,
+        );
+
         throw error;
       }
 

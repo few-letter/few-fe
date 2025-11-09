@@ -4,7 +4,7 @@ import { API_ROUTES } from "@/shared/constants";
 import type { SuccessBodyDeleteSubscriptionResponse } from "@/shared/types";
 import type { UseMutationOptions } from "@tanstack/react-query";
 
-interface DeleteSubscriptionRequest {
+export interface DeleteSubscriptionRequest {
   email: string;
 }
 
