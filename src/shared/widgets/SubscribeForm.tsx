@@ -36,17 +36,12 @@ export const SubscribeForm = ({ categories }: SubscribeFormProps) => {
   const initializeForm = () => setForm({ email: "", categoryCodes: [] });
   const subscriptionMutation = useMutation({
     ...postSubscriptionsMutation(),
-    onSuccess: (data) => {
-      console.log("구독이 완료되었습니다:", data);
+    onSuccess: () => {
       initializeForm();
       setSuccessToastMessage(SUCCESS_SUBSCRIPTION_TOAST_MESSAGE);
     },
-    onError: (error: Error) => {
-      console.error("구독 중 오류가 발생했습니다:", error.message);
+    onError: () => {
       setErrorToastMessage(ERROR_SUBSCRIPTION_TOAST_MESSAGE);
-    },
-    onMutate: (variables) => {
-      console.log("구독 요청 시작:", variables);
     },
   });
 
