@@ -1,4 +1,4 @@
-import { Banner } from "@/shared/components";
+import { Banner, Header } from "@/shared/components";
 
 export const metadata = {
   title: "Subscribe",
@@ -11,9 +11,12 @@ export default function SubscribeLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="mt-64">
-      <Banner />
-      {children}
-    </div>
+    <>
+      <Header />
+      <div className="mt-64">
+        <Banner />
+        {children}
+      </div>
+    </>
   );
 }
