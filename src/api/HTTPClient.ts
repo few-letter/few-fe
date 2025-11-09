@@ -62,6 +62,14 @@ export class HTTPClient {
         const error = new HTTPError(requestClone, responseClone, options);
         throw error;
       }
+
+      if (
+        response.status === 204 ||
+        response.headers.get("content-length") === "0"
+      ) {
+        return {} as T;
+      }
+
       try {
         const parsedResponse = await response.json();
 
@@ -141,9 +149,18 @@ export class HTTPClient {
 
   public async delete<T>(
     [path, searchParams]: PathWithParams,
+    body?: unknown,
     options: RequestInit = {},
   ): Promise<T> {
     const urlDef = new URLDef(path, searchParams);
-    return this._fetch(urlDef, "DELETE", options);
+    const requestOptions: RequestInit = {
+      ...options,
+      body: typeof body === "string" ? body : JSON.stringify(body),
+      headers: {
+        "Content-Type": "application/json",
+        ...options.headers,
+      },
+    };
+    return this._fetch(urlDef, "DELETE", requestOptions);
   }
 }
