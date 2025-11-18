@@ -4,6 +4,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 
 import { CategoryList } from "@/shared/components";
+import { CLIENT_ROUTES } from "@/shared/constants";
 import { DailyContentList } from "@/shared/widgets/DailyContentList";
 import { SubscribeLottie } from "./SubscribeLottie";
 
@@ -29,7 +30,7 @@ export const DailyFewSummary = ({
           <div className="bg-gray2 relative hidden h-160 w-282 rounded-sm p-16 lg:flex lg:flex-col lg:items-center lg:justify-end">
             <SubscribeLottie className="absolute top-0 left-0" />
             <Link
-              href="/subscribe"
+              href={CLIENT_ROUTES.SUBSCRIPTION}
               className="hover:bg-gray10 absolute w-250 rounded-sm bg-black py-8 text-center hover:cursor-pointer"
             >
               <span className="font-body3 text-white">

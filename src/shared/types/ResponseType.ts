@@ -99,6 +99,15 @@ interface SuccessBodyPostSubscriptionsResponse {
   message: string;
 }
 
+/**
+ * DELETE subscriptions
+ */
+
+interface SuccessBodyDeleteSubscriptionResponse {
+  data: Record<string, never>;
+  message: string;
+}
+
 export type {
   SuccessBodyBrowseContentResponses, //GET contents
   BrowseContentsResponse,
@@ -112,4 +121,5 @@ export type {
   Success, //POST contents/schedule, POST contents/groups/schedule
   SuccessBodyPostSubscriptionsResponse, //POST subscriptions
   PostRequestBody,
+  SuccessBodyDeleteSubscriptionResponse, //DELETE subscriptions
 };

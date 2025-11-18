@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { CLIENT_ROUTES } from "@/shared/constants";
 
 export const Header = ({ underline = true }: { underline?: boolean }) => {
   return (
@@ -17,7 +18,7 @@ export const Header = ({ underline = true }: { underline?: boolean }) => {
             보고싶은 뉴스 선택하고&nbsp;
           </span>
           <span className="font-sub5 text-blue3">
-            <Link href="/subscribe">무료 구독하기</Link>
+            <Link href={CLIENT_ROUTES.SUBSCRIPTION}>무료 구독하기</Link>
           </span>
         </p>
       </div>

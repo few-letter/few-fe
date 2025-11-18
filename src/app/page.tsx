@@ -4,6 +4,7 @@ import {
   DailyFewSection,
   DailyFewSummary,
 } from "@/shared/widgets";
+import { Header } from "@/shared/components";
 
 import { getGroupsOptions, getCategoriesOptions } from "@/shared/remotes";
 import { getQueryClient } from "@/api/client/queryClient";
@@ -30,6 +31,7 @@ export default async function Home() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
+      <Header />
       <main className="m-auto max-w-1200">
         <section className="px-16">
           <DailyFewHeader currentDate={newsDateFormattedKorean} />
