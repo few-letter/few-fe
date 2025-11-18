@@ -13,6 +13,12 @@ export const metadata: Metadata = {
   authors: [{ name: "FEW", url: "https://github.com/few-letter" }],
   creator: "FEW",
   publisher: "FEW",
+  icons: {
+    icon: [{ url: "/favicons/favicon-32x32.png", sizes: "32x32", type: "image/png" }],
+    apple: [{ url: "/favicons/apple-icon-180x180.png", sizes: "180x180", type: "image/png" }],
+    other: [{ url: "/favicons/android-icon-192x192.png", sizes: "192x192", type: "image/png" }],
+  },
+  manifest: "/favicons/manifest.json",
 };
 
 export default function RootLayout({
