@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useMutation, UseMutationResult } from "@tanstack/react-query";
-import { useState } from "react";
+import { useState, Suspense } from "react";
 
 import { Toast } from "@/shared/components";
 import { deleteSubscriptionMutation } from "@/shared/remotes/deleteSubscription";
@@ -21,6 +21,14 @@ interface DeleteSubscriptionPageToast {
 }
 
 export default function DeleteSubscriptionPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <DeleteSubscriptionContent />
+    </Suspense>
+  );
+}
+
+function DeleteSubscriptionContent() {
   const searchParams = useSearchParams();
   const email = searchParams.get("email");
   const [toast, setToast] = useState<DeleteSubscriptionPageToast>({
