@@ -14,5 +14,7 @@ export const QUERY_KEY = {
 } as const;
 
 export const CLIENT_ROUTES = {
+  HOME: "/",
   SUBSCRIPTION: "/subscription",
+  DELETE_SUBSCRIPTION: "/delete-subscription",
 } as const;

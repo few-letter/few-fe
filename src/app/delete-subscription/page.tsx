@@ -11,6 +11,7 @@ import {
   SUCCESS_UNSUBSCRIPTION_TOAST_MESSAGE,
   ERROR_UNSUBSCRIPTION_TOAST_MESSAGE,
 } from "@/shared/constants/util";
+import { CLIENT_ROUTES } from "@/shared/constants";
 
 import type { SuccessBodyDeleteSubscriptionResponse } from "@/shared/types";
 import type { DeleteSubscriptionRequest } from "@/shared/remotes/deleteSubscription";
@@ -40,12 +41,12 @@ function DeleteSubscriptionContent() {
   const unsubscribeMutation = useMutation({
     ...deleteSubscriptionMutation(),
     onSuccess: () => {
-      setToast({ success: SUCCESS_UNSUBSCRIPTION_TOAST_MESSAGE });
+      setToast({ success: SUCCESS_UNSUBSCRIPTION_TOAST_MESSAGE, error: null });
       setIsConfirmed(true);
     },
     onError: (error: Error) => {
       const errorMessage = error.message || ERROR_UNSUBSCRIPTION_TOAST_MESSAGE;
-      setToast({ error: errorMessage });
+      setToast({ error: errorMessage, success: null });
     },
   });
 
@@ -130,7 +131,7 @@ const SuccessPage = () => {
   const router = useRouter();
 
   const handleGoHome = () => {
-    router.push("/");
+    router.push(CLIENT_ROUTES.HOME);
   };
 
   return (
