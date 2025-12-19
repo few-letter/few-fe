@@ -20,14 +20,10 @@ export default async function Home() {
   const newsDateFormatted = formatDateToYYYYMMDD(newsDate);
   const newsDateFormattedKorean = formatKoreanDate(newsDate);
 
-  const categoriesResponse = await queryClient.fetchQuery(
-    getCategoriesOptions(),
-  );
-  const groupsResponse = await queryClient.fetchQuery(
-    getGroupsOptions(newsDateFormatted),
-  );
-  const categoriesData = categoriesResponse.data;
-  const groupsData = groupsResponse.data.groups;
+  await Promise.all([
+    queryClient.prefetchQuery(getCategoriesOptions()),
+    queryClient.prefetchQuery(getGroupsOptions(newsDateFormatted)),
+  ]);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
@@ -36,12 +32,12 @@ export default async function Home() {
         <section className="px-16">
           <DailyFewHeader currentDate={newsDateFormattedKorean} />
           <div className="flex w-full flex-col gap-24 overflow-hidden pb-40 md:flex-row">
-            <DailyFewSection news={groupsData} categories={categoriesData} />
+            <DailyFewSection />
           </div>
         </section>
         <div className="bg-gray2 h-16 w-full lg:hidden" />
         <section className="px-16">
-          <DailyFewSummary categories={categoriesData} />
+          <DailyFewSummary />
         </section>
       </main>
     </HydrationBoundary>
