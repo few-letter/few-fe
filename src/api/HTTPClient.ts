@@ -15,6 +15,13 @@ export class HTTPClient {
 
   constructor() {
     this.baseURL = process.env.NEXT_PUBLIC_API_URL || "";
+
+    if (!this.baseURL && typeof window === "undefined") {
+      console.warn(
+        "[HTTPClient] NEXT_PUBLIC_API_URL is not set. API calls will fail.",
+      );
+    }
+
     this.middlewares = {
       onRequest: [],
       onResponse: [],
