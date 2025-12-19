@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import {
   DailyFewHeader,
@@ -37,7 +38,9 @@ export default async function Home() {
         </section>
         <div className="bg-gray2 h-16 w-full lg:hidden" />
         <section className="px-16">
-          <DailyFewSummary />
+          <Suspense fallback={<div>loading...</div>}>
+            <DailyFewSummary />
+          </Suspense>
         </section>
       </main>
     </HydrationBoundary>
