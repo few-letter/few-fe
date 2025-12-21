@@ -53,13 +53,25 @@ export class URLDef {
   }
 
   public generateURL(host: string): URL {
+    if (!host || host.trim() === "") {
+      throw new Error(
+        "API base URL is not configured. Please set NEXT_PUBLIC_API_URL environment variable.",
+      );
+    }
+
     const cleanHost = host.replace(/\/$/, "");
     const cleanPath = this.path.startsWith("/") ? this.path : `/${this.path}`;
     const searchParams = this.getSearchParams();
 
-    return new URL(
-      `${cleanPath}${searchParams ? `?${searchParams}` : ""}`,
-      cleanHost,
-    );
+    try {
+      return new URL(
+        `${cleanPath}${searchParams ? `?${searchParams}` : ""}`,
+        cleanHost,
+      );
+    } catch {
+      throw new Error(
+        `Invalid URL: base="${cleanHost}", path="${cleanPath}". Check NEXT_PUBLIC_API_URL format.`,
+      );
+    }
   }
 }

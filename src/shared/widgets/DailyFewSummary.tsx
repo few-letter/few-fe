@@ -7,16 +7,12 @@ import { CategoryList } from "@/shared/components";
 import { CLIENT_ROUTES } from "@/shared/constants";
 import { DailyContentList } from "@/shared/widgets/DailyContentList";
 import { SubscribeLottie } from "./SubscribeLottie";
+import { useCategories } from "@/shared/hooks";
 
-import type { CodeValueResponse } from "@/shared/types";
-
-export const DailyFewSummary = ({
-  categories,
-}: {
-  categories: CodeValueResponse[];
-}) => {
+export const DailyFewSummary = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const categories = useCategories();
   const selectedCategory = searchParams.get("category") || "all";
   const totalCategories = [{ code: "all", value: "전체" }, ...categories];
 
@@ -48,10 +44,7 @@ export const DailyFewSummary = ({
           />
         </nav>
         <article className="w-full">
-          <DailyContentList
-            category={selectedCategory}
-            categories={categories}
-          />
+          <DailyContentList category={selectedCategory} />
         </article>
       </div>
     </>

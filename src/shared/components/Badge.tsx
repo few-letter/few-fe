@@ -1,24 +1,26 @@
+"use client";
+
 import { cn } from "@/lib/utils";
 import {
   CATEGORY_CODE_TO_COLOR,
   CATEGORY_CODE_TO_EMOJI,
 } from "@/shared/constants";
+import { useCategories } from "@/shared/hooks";
 
-import type { CategoryCode, CodeValueResponse } from "@/shared/types";
+import type { CategoryCode } from "@/shared/types";
 
 interface BadgeProps {
   categoryCode: CategoryCode;
-  categories: CodeValueResponse[];
   className?: string;
   showEmoji?: boolean;
 }
 
 export const Badge = ({
   categoryCode,
-  categories,
   className,
   showEmoji = false,
 }: BadgeProps) => {
+  const categories = useCategories();
   const color = CATEGORY_CODE_TO_COLOR[categoryCode];
   const emoji = CATEGORY_CODE_TO_EMOJI[categoryCode];
   const label =

@@ -1,11 +1,9 @@
+import { queryOptions } from "@tanstack/react-query";
+
 import { few } from "@/api/client/few";
 import { API_ROUTES, QUERY_KEY } from "@/shared/constants";
 
-import type {
-  SuccessBodyBrowseGroupGenResponses,
-  BrowseGroupGenResponse,
-} from "../types";
-import type { UseQueryOptions } from "@tanstack/react-query";
+import type { SuccessBodyBrowseGroupGenResponses } from "../types";
 
 const getGroups = async ({
   date,
@@ -20,17 +18,11 @@ const getGroups = async ({
   return response;
 };
 
-const getGroupsOptions = (
-  date: string,
-): UseQueryOptions<
-  SuccessBodyBrowseGroupGenResponses,
-  unknown,
-  BrowseGroupGenResponse[]
-> => {
-  return {
+const getGroupsOptions = (date: string) => {
+  return queryOptions({
     queryKey: [QUERY_KEY.GET_GROUPS, date],
     queryFn: () => getGroups({ date }),
-  };
+  });
 };
 
 export { getGroupsOptions };

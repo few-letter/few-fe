@@ -6,7 +6,6 @@ import { formatDateToSlashDate } from "@/shared/utils";
 import type { CategoryCode, CodeValueResponse } from "@/shared/types";
 
 interface CardProps {
-  categories: CodeValueResponse[];
   categoryCode: CategoryCode;
   link: string;
   headline: string;
@@ -17,7 +16,6 @@ interface CardProps {
 }
 
 export const Card = ({
-  categories,
   categoryCode,
   link,
   headline,
@@ -51,7 +49,7 @@ export const Card = ({
       />
       <div className="bg-gray2 flex w-full flex-1 px-20 py-20">
         <div className="flex flex-1 flex-col gap-12">
-          <Badge categoryCode={categoryCode} categories={categories} />
+          <Badge categoryCode={categoryCode} />
           <div className="space-y-8">
             <div className="font-sub2 text-gray9 line-clamp-2">{headline}</div>
             <div className="font-body6 text-gray7 line-clamp-5 sm:line-clamp-4">
