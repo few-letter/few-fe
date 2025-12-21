@@ -4,11 +4,7 @@ import { cn } from "@/lib/utils";
 import { Badge } from "./Badge";
 import { HighlightedText } from "./HighlightedText";
 
-import type {
-  GroupSourceHeadlineData,
-  CategoryCode,
-  CodeValueResponse,
-} from "@/shared/types";
+import type { GroupSourceHeadlineData, CategoryCode } from "@/shared/types";
 
 interface NewsCardProps {
   categoryCode: CategoryCode;
@@ -16,12 +12,10 @@ interface NewsCardProps {
   summary: string;
   highlightTexts: string[];
   relatedNews: GroupSourceHeadlineData[];
-  categories: CodeValueResponse[];
   image?: string;
 }
 
 export const NewsCard = ({
-  categories,
   headline,
   summary,
   highlightTexts,
@@ -48,7 +42,7 @@ export const NewsCard = ({
         <div className="absolute inset-0 bg-black/70" />
         <div className="relative z-10 flex w-full flex-col justify-between px-40 py-24">
           <div className="space-y-12">
-            <Badge categoryCode={categoryCode} categories={categories} />
+            <Badge categoryCode={categoryCode} />
             <div className="font-sub2 line-clamp-2 text-white">{headline}</div>
             <p className="font-body6 text-gray4 line-clamp-4">
               <HighlightedText text={summary} highlightTexts={highlightTexts} />

@@ -7,17 +7,13 @@ import { Card, CardSkeleton } from "@/shared/components";
 import { getInfiniteContentsOptions } from "@/shared/remotes";
 import { parseISOString } from "@/shared/utils";
 
-import type { CodeValueResponse, BrowseContentsResponse } from "@/shared/types";
+import type { BrowseContentsResponse } from "@/shared/types";
 
 interface DailyContentsListProps {
   category: string;
-  categories: CodeValueResponse[];
 }
 
-export const DailyContentList = ({
-  category,
-  categories,
-}: DailyContentsListProps) => {
+export const DailyContentList = ({ category }: DailyContentsListProps) => {
   const {
     data,
     fetchNextPage,
@@ -99,7 +95,6 @@ export const DailyContentList = ({
         {allContents.map((content, index) => (
           <Card
             key={`${content.id}-${index}`}
-            categories={categories}
             categoryCode={content.category.code}
             link={content.url}
             headline={content.headline}

@@ -1,23 +1,21 @@
 "use client";
 
 import { Carousel, NewsCard } from "@/shared/components";
+import { useGroups } from "@/shared/hooks";
 
-import type { BrowseGroupGenResponse, CodeValueResponse } from "@/shared/types";
+interface DailyFewSectionProps {
+  date: string;
+}
 
-export const DailyFewSection = ({
-  news,
-  categories,
-}: {
-  news: BrowseGroupGenResponse[];
-  categories: CodeValueResponse[];
-}) => {
+export const DailyFewSection = ({ date }: DailyFewSectionProps) => {
+  const groups = useGroups(date);
+
   return (
     <Carousel
-      items={news}
+      items={groups}
       renderItem={(item) => (
         <NewsCard
           highlightTexts={item.highlightTexts}
-          categories={categories}
           categoryCode={item.category}
           headline={item.headline}
           summary={item.summary}
