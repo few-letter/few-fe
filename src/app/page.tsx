@@ -33,7 +33,7 @@ export default async function Home() {
         <section className="px-16">
           <DailyFewHeader currentDate={newsDateFormattedKorean} />
           <div className="flex w-full flex-col gap-24 overflow-hidden pb-40 md:flex-row">
-            <DailyFewSection />
+            <DailyFewSection date={newsDateFormatted} />
           </div>
         </section>
         <div className="bg-gray2 h-16 w-full lg:hidden" />
