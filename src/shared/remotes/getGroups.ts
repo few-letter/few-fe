@@ -1,3 +1,5 @@
+import { queryOptions } from "@tanstack/react-query";
+
 import { few } from "@/api/client/few";
 import { API_ROUTES, QUERY_KEY } from "@/shared/constants";
 
@@ -16,13 +18,11 @@ const getGroups = async ({
   return response;
 };
 
-const getGroupsOptions = (
-  date: string,
-) => {
-  return {
+const getGroupsOptions = (date: string) => {
+  return queryOptions({
     queryKey: [QUERY_KEY.GET_GROUPS, date],
     queryFn: () => getGroups({ date }),
-  };
+  });
 };
 
 export { getGroupsOptions };

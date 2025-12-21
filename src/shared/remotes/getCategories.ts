@@ -1,3 +1,5 @@
+import { queryOptions } from "@tanstack/react-query";
+
 import { few } from "@/api/client/few";
 import { API_ROUTES, QUERY_KEY } from "@/shared/constants";
 
@@ -12,11 +14,11 @@ const getCategories = async () => {
 };
 
 const getCategoriesOptions = () => {
-  return {
+  return queryOptions({
     queryKey: [QUERY_KEY.GET_CATEGORIES],
     queryFn: () => getCategories(),
     staleTime: Infinity,
-  };
+  });
 };
 
 export { getCategoriesOptions };
