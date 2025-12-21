@@ -32,15 +32,19 @@ const formatDateToSlashDate = (date: Date | string): string => {
 const getRefreshDate = (date: Date | string): Date => {
   const dateObj = parseISOString(date);
   const REFRESH_HOUR = 5;
-  const currentHour = dateObj.getHours();
 
-  if (currentHour < REFRESH_HOUR) {
-    const previousDay = new Date(dateObj);
-    previousDay.setDate(dateObj.getDate() - 1);
+  const koreaTime = new Date(
+    dateObj.toLocaleString("en-US", { timeZone: "Asia/Seoul" }),
+  );
+  const koreaHour = koreaTime.getHours();
+
+  if (koreaHour < REFRESH_HOUR) {
+    const previousDay = new Date(koreaTime);
+    previousDay.setDate(koreaTime.getDate() - 1);
     return previousDay;
   }
 
-  return dateObj;
+  return koreaTime;
 };
 
 export {
