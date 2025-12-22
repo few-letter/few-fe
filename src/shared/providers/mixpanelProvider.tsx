@@ -13,7 +13,9 @@ export const MixpanelProvider = ({
 
     if (isServer) return;
 
-    MixpanelService.getInstance();
+    const mixpanelService = MixpanelService.getInstance();
+
+    mixpanelService.startSession();
   }, []);
 
   return <>{children}</>;
