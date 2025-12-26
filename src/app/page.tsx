@@ -4,6 +4,7 @@ import {
   DailyFewHeader,
   DailyFewSection,
   DailyFewSummary,
+  HomeTracker,
 } from "@/shared/widgets";
 import { Header } from "@/shared/components";
 
@@ -28,6 +29,7 @@ export default async function Home() {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
+      <HomeTracker />
       <Header />
       <main className="m-auto max-w-1200">
         <section className="px-16">
