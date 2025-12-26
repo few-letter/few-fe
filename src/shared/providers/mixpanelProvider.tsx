@@ -1,22 +1,30 @@
 "use client";
 
-import { useEffect } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  type ReactNode,
+} from "react";
 import { MixpanelService } from "@/lib/mixpanel";
 
-export const MixpanelProvider = ({
-  children,
-}: {
-  children: React.ReactNode;
-}) => {
+const MixpanelContext = createContext<MixpanelService | null>(null);
+
+export const useMixpanel = () => useContext(MixpanelContext);
+
+export const MixpanelProvider = ({ children }: { children: ReactNode }) => {
+  const [mixpanel, setMixpanel] = useState<MixpanelService | null>(null);
+
   useEffect(() => {
-    const isServer = typeof window === "undefined";
-
-    if (isServer) return;
-
-    const mixpanelService = MixpanelService.getInstance();
-
-    mixpanelService.startSession();
+    const service = MixpanelService.getInstance();
+    service.startSession();
+    setMixpanel(service);
   }, []);
 
-  return <>{children}</>;
+  return (
+    <MixpanelContext.Provider value={mixpanel}>
+      {children}
+    </MixpanelContext.Provider>
+  );
 };

@@ -1,5 +1,7 @@
 import mixpanel from "mixpanel-browser";
 
+import { MIXPANEL_EVENT } from "@/shared/constants";
+
 export class MixpanelService {
   private static instance: MixpanelService;
   private static isProduction = process.env.NODE_ENV === "production";
@@ -30,7 +32,7 @@ export class MixpanelService {
   }
 
   public startSession() {
-    mixpanel.track("session_start", {
+    mixpanel.track(MIXPANEL_EVENT.SESSION_START, {
       page: window.location.pathname,
       referrer: document.referrer,
       user_agent: navigator.userAgent,
