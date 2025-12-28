@@ -1,7 +1,8 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-import { CATEGORY_CODE_TO_EMOJI } from "@/shared/constants";
+import { useMixpanel } from "@/shared/providers";
+import { CATEGORY_CODE_TO_EMOJI, MIXPANEL_EVENT } from "@/shared/constants";
 import type { CategoryCode } from "@/shared/types";
 
 export const CategoryList = <
@@ -15,6 +16,8 @@ export const CategoryList = <
   currentCategoryCode: string | number;
   handleClick: (code: string | number) => void;
 }) => {
+  const mixpanel = useMixpanel();
+
   return (
     <div className="flex justify-center lg:block">
       <ul className="flex flex-row flex-wrap justify-center gap-8 lg:flex-col lg:gap-2">
@@ -34,6 +37,10 @@ export const CategoryList = <
               )}
               onClick={() => {
                 handleClick(category.code);
+
+                mixpanel?.track(MIXPANEL_EVENT.HOME_CATEGORY_CLICK, {
+                  category_id: category.code,
+                });
               }}
             >
               <span className="block lg:hidden">{emoji}</span>
