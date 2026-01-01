@@ -100,6 +100,12 @@ export const SubscribeForm = ({ categories }: SubscribeFormProps) => {
           />
         </div>
         <button
+          onClick={() => {
+            mixpanel?.track(MIXPANEL_EVENT.SUBSCRIBE_SUBMIT_BUTTON_CLICK, {
+              email: form.email,
+              category_ids: form.categoryCodes,
+            });
+          }}
           disabled={isDisabled}
           type="submit"
           className="bg-gray10 font-body6 disabled:bg-gray4 disabled:text-gray7 w-full rounded-sm py-16 text-white transition-colors"
