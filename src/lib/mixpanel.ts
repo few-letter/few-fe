@@ -1,22 +1,22 @@
 import mixpanel from "mixpanel-browser";
 
+import { env } from "@/config/env";
 import { MIXPANEL_EVENT } from "@/shared/constants";
 
 export class MixpanelService {
   private static instance: MixpanelService;
-  private static isProduction = process.env.NODE_ENV === "production";
 
   constructor() {
-    if (!process.env.NEXT_PUBLIC_MIXPANEL_TOKEN) {
+    if (!env.MIXPANEL_TOKEN) {
       throw new Error("NEXT_PUBLIC_MIXPANEL_TOKEN is not set");
     }
 
-    mixpanel.init(process.env.NEXT_PUBLIC_MIXPANEL_TOKEN, {
-      debug: !MixpanelService.isProduction,
-      track_pageview: "full-url",
+    mixpanel.init(env.MIXPANEL_TOKEN, {
+      debug: false,
+      track_pageview: false,
       persistence: "localStorage",
       //SessionReplay
-      record_sessions_percent: MixpanelService.isProduction ? 100 : 0,
+      record_sessions_percent: 100,
       record_idle_timeout_ms: 1800000, //30minutes
       record_max_ms: 3600000, // 1 hour
       autocapture: false,
