@@ -1,20 +1,27 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { useMemo } from "react";
 import Link from "next/link";
 
 import { CategoryList } from "@/shared/components";
 import { CLIENT_ROUTES } from "@/shared/constants";
+import { MIXPANEL_EVENT } from "@/shared/constants";
+import { useMixpanel } from "@/shared/providers";
+import { useCategories } from "@/shared/hooks";
 import { DailyContentList } from "@/shared/widgets/DailyContentList";
 import { SubscribeLottie } from "./SubscribeLottie";
-import { useCategories } from "@/shared/hooks";
 
 export const DailyFewSummary = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const mixpanel = useMixpanel();
   const categories = useCategories();
   const selectedCategory = searchParams.get("category") || "all";
-  const totalCategories = [{ code: "all", value: "전체" }, ...categories];
+  const totalCategories = useMemo(
+    () => [{ code: "all", value: "전체" }, ...categories],
+    [categories],
+  );
 
   return (
     <>
@@ -26,6 +33,9 @@ export const DailyFewSummary = () => {
           <div className="bg-gray2 relative hidden h-160 w-282 rounded-sm p-16 lg:flex lg:flex-col lg:items-center lg:justify-end">
             <SubscribeLottie className="absolute top-0 left-0" />
             <Link
+              onClick={() =>
+                mixpanel?.track(MIXPANEL_EVENT.HOME_MAIN_SUBSCRIBE_CLICK)
+              }
               href={CLIENT_ROUTES.SUBSCRIPTION}
               className="hover:bg-gray10 absolute w-250 rounded-sm bg-black py-8 text-center hover:cursor-pointer"
             >
