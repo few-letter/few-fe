@@ -21,9 +21,13 @@ export const MixpanelProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (!env.ENABLE_MIXPANEL) return;
 
-    const service = MixpanelService.getInstance();
-    service.startSession();
-    setMixpanel(service);
+    try {
+      const service = MixpanelService.getInstance();
+      service.startSession();
+      setMixpanel(service);
+    } catch (error) {
+      console.error("[Mixpanel] 초기화 실패:", error);
+    }
   }, []);
 
   return (
