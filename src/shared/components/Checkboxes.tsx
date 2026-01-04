@@ -13,6 +13,7 @@ interface CheckboxesProps<T extends { code: CodeType; value: string }> {
   options: T[];
   label?: string;
   name?: string;
+  onCheck?: (code: CodeType, checked: boolean) => void;
 }
 
 export const Checkboxes = <T extends { code: CodeType; value: string }>({
@@ -21,12 +22,15 @@ export const Checkboxes = <T extends { code: CodeType; value: string }>({
   options,
   name,
   label,
+  onCheck,
 }: CheckboxesProps<T>) => {
   const toggleChecked = (optionCode: CodeType) => {
+    const isChecked = !value.includes(optionCode);
+    onCheck?.(optionCode, isChecked);
     onChange(
-      value.includes(optionCode)
-        ? value.filter((code) => code !== optionCode)
-        : [...value, optionCode],
+      isChecked
+        ? [...value, optionCode]
+        : value.filter((code) => code !== optionCode),
     );
   };
 

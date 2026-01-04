@@ -1,14 +1,16 @@
 "use client";
 
-import { Checkboxes, EmailInput, Toast } from "@/shared/components";
 import { useState } from "react";
-import { validateEmail } from "@/shared/utils/util";
 import { useMutation } from "@tanstack/react-query";
 import { postSubscriptionsMutation } from "@/shared/remotes/postSubscriptions";
+import { Checkboxes, EmailInput, Toast } from "@/shared/components";
+import { validateEmail } from "@/shared/utils/util";
 import {
   SUCCESS_SUBSCRIPTION_TOAST_MESSAGE,
   ERROR_SUBSCRIPTION_TOAST_MESSAGE,
 } from "@/shared/constants/util";
+import { useMixpanel } from "@/shared/providers";
+import { MIXPANEL_EVENT } from "@/shared/constants";
 
 import type { CategoryCode } from "@/shared/types";
 import type { CodeType } from "@/shared/components/Checkboxes";
@@ -23,6 +25,7 @@ interface SubscribeFormState {
 }
 
 export const SubscribeForm = ({ categories }: SubscribeFormProps) => {
+  const mixpanel = useMixpanel();
   const [form, setForm] = useState<SubscribeFormState>({
     email: "",
     categoryCodes: [],
@@ -85,12 +88,24 @@ export const SubscribeForm = ({ categories }: SubscribeFormProps) => {
           <Checkboxes
             value={form.categoryCodes}
             onChange={handleCategoryCodesChange}
+            onCheck={(code, checkedStatus) => {
+              mixpanel?.track(MIXPANEL_EVENT.SUBSCRIBE_CATEGORY_CHECK, {
+                category_id: code,
+                is_checked: checkedStatus,
+              });
+            }}
             label="받고 싶은 뉴스 카테고리"
             name="categoryCodes"
             options={categories}
           />
         </div>
         <button
+          onClick={() => {
+            mixpanel?.track(MIXPANEL_EVENT.SUBSCRIBE_SUBMIT_BUTTON_CLICK, {
+              email: form.email,
+              category_ids: form.categoryCodes,
+            });
+          }}
           disabled={isDisabled}
           type="submit"
           className="bg-gray10 font-body6 disabled:bg-gray4 disabled:text-gray7 w-full rounded-sm py-16 text-white transition-colors"
