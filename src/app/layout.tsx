@@ -1,7 +1,7 @@
 import "./globals.css";
 
 import { pretendard, numans } from "@/fonts";
-import { QueryClientProviders } from "@/shared/providers";
+import { QueryClientProviders, MixpanelProvider } from "@/shared/providers";
 
 import type { Metadata } from "next";
 
@@ -13,9 +13,23 @@ export const metadata: Metadata = {
   creator: "FEW",
   publisher: "FEW",
   icons: {
-    icon: [{ url: "/favicons/favicon-32x32.png", sizes: "32x32", type: "image/png" }],
-    apple: [{ url: "/favicons/apple-icon-180x180.png", sizes: "180x180", type: "image/png" }],
-    other: [{ url: "/favicons/android-icon-192x192.png", sizes: "192x192", type: "image/png" }],
+    icon: [
+      { url: "/favicons/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      {
+        url: "/favicons/apple-icon-180x180.png",
+        sizes: "180x180",
+        type: "image/png",
+      },
+    ],
+    other: [
+      {
+        url: "/favicons/android-icon-192x192.png",
+        sizes: "192x192",
+        type: "image/png",
+      },
+    ],
   },
   manifest: "/favicons/manifest.json",
 };
@@ -28,7 +42,9 @@ export default function RootLayout({
   return (
     <html lang="ko" className={`${pretendard.className} ${numans.variable}`}>
       <body className="antialiased">
-        <QueryClientProviders>{children}</QueryClientProviders>
+        <QueryClientProviders>
+          <MixpanelProvider>{children}</MixpanelProvider>
+        </QueryClientProviders>
         <footer className="flex h-80 flex-col items-center justify-center">
           <p className="font-caption1 text-gray7">
             © 2025. FEW. All rights reserved.

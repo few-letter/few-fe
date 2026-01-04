@@ -1,8 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { CLIENT_ROUTES } from "@/shared/constants";
+import { useMixpanel } from "@/shared/providers";
+import { MIXPANEL_EVENT } from "@/shared/constants";
 
 export const Header = ({ underline = true }: { underline?: boolean }) => {
+  const mixpanel = useMixpanel();
+
   return (
     <div
       className={`border-gray3 fixed top-0 left-0 z-20 flex w-full items-center justify-center border-b-1 bg-white px-16 py-16 ${
@@ -18,7 +24,14 @@ export const Header = ({ underline = true }: { underline?: boolean }) => {
             보고싶은 뉴스 선택하고&nbsp;
           </span>
           <span className="font-sub5 text-blue3">
-            <Link href={CLIENT_ROUTES.SUBSCRIPTION}>무료 구독하기</Link>
+            <Link
+              href={CLIENT_ROUTES.SUBSCRIPTION}
+              onClick={() =>
+                mixpanel?.track(MIXPANEL_EVENT.HOME_NAV_SUBSCRIBE_CLICK)
+              }
+            >
+              무료 구독하기
+            </Link>
           </span>
         </p>
       </div>
