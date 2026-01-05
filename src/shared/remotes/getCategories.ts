@@ -7,9 +7,9 @@ import type { WorldType } from "@/shared/types";
 
 import type { SuccessBodyListCodeValueResponse } from "@/shared/types";
 
-const getCategories = async (local: WorldType) => {
+const getCategories = async (worldType: WorldType) => {
   const response = await few.get<SuccessBodyListCodeValueResponse>([
-    API_ROUTES.CATEGORIES(local),
+    API_ROUTES.CATEGORIES(worldType),
   ]);
 
   return response;
