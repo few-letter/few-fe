@@ -16,7 +16,7 @@ export const DailyFewSummary = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const mixpanel = useMixpanel();
-  const categories = useCategories();
+  const categories = useCategories("local");
   const selectedCategory = searchParams.get("category") || "all";
   const totalCategories = useMemo(
     () => [{ code: "all", value: "전체" }, ...categories],

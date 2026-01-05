@@ -20,7 +20,7 @@ export const Badge = ({
   className,
   showEmoji = false,
 }: BadgeProps) => {
-  const categories = useCategories();
+  const categories = useCategories("local");
   const color = CATEGORY_CODE_TO_COLOR[categoryCode];
   const emoji = CATEGORY_CODE_TO_EMOJI[categoryCode];
   const label =

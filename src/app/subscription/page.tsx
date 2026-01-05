@@ -6,7 +6,7 @@ import { SubscribeForm } from "@/shared/widgets";
 export default async function SubscribePage() {
   const queryClient = getQueryClient();
   const categoriesResponse = await queryClient.fetchQuery(
-    getCategoriesOptions(),
+    getCategoriesOptions("local"),
   );
   const categories = categoriesResponse.data;
 
