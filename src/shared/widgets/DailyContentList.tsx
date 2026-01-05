@@ -22,7 +22,7 @@ export const DailyContentList = ({ category }: DailyContentsListProps) => {
     isLoading,
     isError,
     refetch,
-  } = useInfiniteQuery(getInfiniteContentsOptions(category));
+  } = useInfiniteQuery(getInfiniteContentsOptions("local", category));
 
   const observerRef = useRef<HTMLDivElement | null>(null);
 
