@@ -23,8 +23,8 @@ export default async function Home() {
   const newsDateFormattedKorean = formatKoreanDate(newsDate);
 
   await Promise.all([
-    queryClient.prefetchQuery(getCategoriesOptions()),
-    queryClient.prefetchQuery(getGroupsOptions(newsDateFormatted)),
+    queryClient.prefetchQuery(getCategoriesOptions("local")),
+    queryClient.prefetchQuery(getGroupsOptions("local", newsDateFormatted)),
   ]);
 
   return (

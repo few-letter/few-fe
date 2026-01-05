@@ -8,7 +8,7 @@ interface DailyFewSectionProps {
 }
 
 export const DailyFewSection = ({ date }: DailyFewSectionProps) => {
-  const groups = useGroups(date);
+  const groups = useGroups("local", date);
 
   return (
     <Carousel
