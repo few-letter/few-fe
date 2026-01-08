@@ -24,7 +24,7 @@ export default async function Home() {
 
   await Promise.all([
     queryClient.prefetchQuery(getCategoriesOptions("local")),
-    queryClient.prefetchQuery(getGroupsOptions("local", newsDateFormatted)),
+    queryClient.prefetchQuery(getGroupsOptions("local")),
   ]);
 
   return (
