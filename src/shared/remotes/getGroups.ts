@@ -7,23 +7,21 @@ import type { SuccessBodyBrowseGroupGenResponses, WorldType } from "../types";
 
 const getGroups = async ({
   worldType,
-  date,
 }: {
   worldType: WorldType;
-  date: string;
 }): Promise<SuccessBodyBrowseGroupGenResponses> => {
   const response = await few.get<SuccessBodyBrowseGroupGenResponses>(
-    [API_ROUTES.GROUPS(worldType), { date }],
+    [API_ROUTES.GROUPS(worldType)],
     { cache: "no-store" },
   );
 
   return response;
 };
 
-const getGroupsOptions = (worldType: WorldType, date: string) => {
+const getGroupsOptions = (worldType: WorldType) => {
   return queryOptions({
-    queryKey: [QUERY_KEY.GET_GROUPS(worldType), date],
-    queryFn: () => getGroups({ worldType, date }),
+    queryKey: [QUERY_KEY.GET_GROUPS(worldType)],
+    queryFn: () => getGroups({ worldType }),
   });
 };
 

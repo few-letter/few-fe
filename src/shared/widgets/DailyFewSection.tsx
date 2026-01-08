@@ -3,12 +3,8 @@
 import { Carousel, NewsCard } from "@/shared/components";
 import { useGroups } from "@/shared/hooks";
 
-interface DailyFewSectionProps {
-  date: string;
-}
-
-export const DailyFewSection = ({ date }: DailyFewSectionProps) => {
-  const groups = useGroups("local", date);
+export const DailyFewSection = () => {
+  const groups = useGroups("local");
 
   return (
     <Carousel
