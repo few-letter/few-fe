@@ -1,6 +1,8 @@
 import { World, WorldType } from "@/shared/types";
 import { CLIENT_ROUTES } from "@/shared/constants";
 
+export const WORLD_TYPES: WorldType[] = Object.values(WorldType);
+
 const LOCAL_WORLD: World = {
   type: WorldType.LOCAL,
   name: "국내 뉴스",
