@@ -1,20 +1,16 @@
-import type { WorldType } from "@/shared/types";
+import { World, WorldType } from "@/shared/types";
+import { CLIENT_ROUTES } from "@/shared/constants";
 
-interface World {
-  type: WorldType;
-  name: string;
-  url: string;
-}
+const LOCAL_WORLD: World = {
+  type: WorldType.LOCAL,
+  name: "국내 뉴스",
+  url: CLIENT_ROUTES.LOCAL,
+};
 
-export const WORLDS: World[] = [
-  {
-    type: "local",
-    name: "국내 뉴스",
-    url: "/local",
-  },
-  {
-    type: "global",
-    name: "해외 뉴스",
-    url: "/global",
-  },
-];
+const GLOBAL_WORLD: World = {
+  type: WorldType.GLOBAL,
+  name: "해외 뉴스",
+  url: CLIENT_ROUTES.GLOBAL,
+};
+
+export const WORLDS: World[] = [LOCAL_WORLD, GLOBAL_WORLD];
