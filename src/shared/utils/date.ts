@@ -11,15 +11,6 @@ const formatKoreanDate = (date: Date | string) => {
   }).format(dateObj);
 };
 
-const formatDateToYYYYMMDD = (date: Date | string): string => {
-  const dateObj = parseISOString(date);
-  const year = dateObj.getFullYear();
-  const month = String(dateObj.getMonth() + 1).padStart(2, "0");
-  const day = String(dateObj.getDate()).padStart(2, "0");
-
-  return `${year}-${month}-${day}`;
-};
-
 const formatDateToSlashDate = (date: Date | string): string => {
   const dateObj = parseISOString(date);
   const year = dateObj.getFullYear().toString().slice(-2);
@@ -49,7 +40,6 @@ const getRefreshDate = (date: Date | string): Date => {
 
 export {
   formatKoreanDate,
-  formatDateToYYYYMMDD,
   formatDateToSlashDate,
   getRefreshDate,
   parseISOString,
