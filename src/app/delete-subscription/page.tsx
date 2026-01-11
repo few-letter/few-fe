@@ -119,7 +119,7 @@ const UnsubscribePage = ({
       <button
         onClick={handleUnsubscribe}
         disabled={unsubscribeMutation.isPending}
-        className="bg-gray10 font-body6 disabled:bg-gray4 disabled:text-gray7 hover:bg-gray9 mt-32 w-full rounded-sm px-88 py-12 text-white transition-colors"
+        className="bg-gray10 font-body6 disabled:bg-gray4 disabled:text-gray7 hover:bg-gray9 mt-32 w-full cursor-pointer rounded-sm px-88 py-12 text-white transition-colors"
       >
         {unsubscribeMutation.isPending ? "처리 중..." : "구독취소"}
       </button>
