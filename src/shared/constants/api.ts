@@ -16,9 +16,3 @@ export const QUERY_KEY = {
   GET_CONTENTS: (worldType: WorldType) => `get-contents-${worldType}`,
   GET_CONTENT_DETAIL: "get-content-detail",
 } as const;
-
-export const CLIENT_ROUTES = {
-  HOME: "/",
-  SUBSCRIPTION: "/subscription",
-  DELETE_SUBSCRIPTION: "/delete-subscription",
-} as const;
