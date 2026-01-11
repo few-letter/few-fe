@@ -6,6 +6,7 @@ import { useEffect, useRef } from "react";
 import { Card, CardSkeleton } from "@/shared/components";
 import { getInfiniteContentsOptions } from "@/shared/remotes";
 import { parseISOString } from "@/shared/utils";
+import { usePathToWorld } from "@/shared/hooks";
 
 import type { BrowseContentsResponse } from "@/shared/types";
 
@@ -14,6 +15,7 @@ interface DailyContentsListProps {
 }
 
 export const DailyContentList = ({ category }: DailyContentsListProps) => {
+  const world = usePathToWorld();
   const {
     data,
     fetchNextPage,
@@ -22,7 +24,7 @@ export const DailyContentList = ({ category }: DailyContentsListProps) => {
     isLoading,
     isError,
     refetch,
-  } = useInfiniteQuery(getInfiniteContentsOptions("local", category));
+  } = useInfiniteQuery(getInfiniteContentsOptions(world, category));
 
   const observerRef = useRef<HTMLDivElement | null>(null);
 

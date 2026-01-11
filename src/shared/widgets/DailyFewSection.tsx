@@ -1,10 +1,11 @@
 "use client";
 
 import { Carousel, NewsCard } from "@/shared/components";
-import { useGroups } from "@/shared/hooks";
+import { useGroups, usePathToWorld } from "@/shared/hooks";
 
 export const DailyFewSection = () => {
-  const groups = useGroups("local");
+  const world = usePathToWorld();
+  const groups = useGroups(world);
 
   return (
     <Carousel
