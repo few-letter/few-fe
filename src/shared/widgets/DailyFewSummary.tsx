@@ -8,7 +8,7 @@ import { CategoryList } from "@/shared/components";
 import { CLIENT_ROUTES } from "@/shared/constants";
 import { MIXPANEL_EVENT } from "@/shared/constants";
 import { useMixpanel } from "@/shared/providers";
-import { useCategories } from "@/shared/hooks";
+import { useCategories, usePathToWorld } from "@/shared/hooks";
 import { DailyContentList } from "@/shared/widgets/DailyContentList";
 import { SubscribeLottie } from "./SubscribeLottie";
 
@@ -16,7 +16,8 @@ export const DailyFewSummary = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const mixpanel = useMixpanel();
-  const categories = useCategories("local");
+  const world = usePathToWorld();
+  const categories = useCategories(world);
   const selectedCategory = searchParams.get("category") || "all";
   const totalCategories = useMemo(
     () => [{ code: "all", value: "전체" }, ...categories],

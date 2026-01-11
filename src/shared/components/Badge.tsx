@@ -5,7 +5,7 @@ import {
   CATEGORY_CODE_TO_COLOR,
   CATEGORY_CODE_TO_EMOJI,
 } from "@/shared/constants";
-import { useCategories } from "@/shared/hooks";
+import { useCategories, usePathToWorld } from "@/shared/hooks";
 
 import type { CategoryCode } from "@/shared/types";
 
@@ -20,7 +20,8 @@ export const Badge = ({
   className,
   showEmoji = false,
 }: BadgeProps) => {
-  const categories = useCategories("local");
+  const world = usePathToWorld();
+  const categories = useCategories(world);
   const color = CATEGORY_CODE_TO_COLOR[categoryCode];
   const emoji = CATEGORY_CODE_TO_EMOJI[categoryCode];
   const label =
