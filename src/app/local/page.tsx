@@ -7,16 +7,16 @@ import {
   HomeTracker,
 } from "@/shared/widgets";
 import { Header } from "@/shared/components";
-
 import { getGroupsOptions, getCategoriesOptions } from "@/shared/remotes";
 import { getQueryClient } from "@/api/client/queryClient";
+import { WorldType } from "@/shared/types";
 
 export default async function Home() {
   const queryClient = getQueryClient();
 
   await Promise.all([
-    queryClient.prefetchQuery(getCategoriesOptions("local")),
-    queryClient.prefetchQuery(getGroupsOptions("local")),
+    queryClient.prefetchQuery(getCategoriesOptions(WorldType.LOCAL)),
+    queryClient.prefetchQuery(getGroupsOptions(WorldType.LOCAL)),
   ]);
 
   return (

@@ -1,8 +1,7 @@
-import "./globals.css";
+import "@/app/globals.css";
 
 import { pretendard, numans } from "@/fonts";
 import { QueryClientProviders, MixpanelProvider } from "@/shared/providers";
-
 import type { Metadata } from "next";
 
 const SITE_URL = "https://www.few-letter.com";
