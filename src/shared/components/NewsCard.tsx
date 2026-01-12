@@ -12,7 +12,7 @@ interface NewsCardProps {
   summary: string;
   highlightTexts: string[];
   relatedNews: GroupSourceHeadlineData[];
-  image?: string;
+  image?: string | null;
 }
 
 export const NewsCard = ({
