@@ -2,19 +2,24 @@
 
 import { cn } from "@/lib/utils";
 
-export interface Tab {
-  value: string;
+export interface Tab<T extends string> {
+  value: T;
   label: string;
 }
 
-interface TabsProps {
-  tabs: Tab[];
-  value: string;
-  onChange: (value: string) => void;
+interface TabsProps<T extends string> {
+  tabs: Tab<T>[];
+  value: T;
+  onChange: (value: T) => void;
   className?: string;
 }
 
-export const Tabs = ({ tabs, value, onChange, className }: TabsProps) => {
+export const Tabs = <T extends string>({
+  tabs,
+  value,
+  onChange,
+  className,
+}: TabsProps<T>) => {
   return (
     <div className={cn("border-gray3 relative border-b", className)}>
       <div className="border-gray3 flex border-b-1 border-solid">
