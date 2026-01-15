@@ -1,5 +1,6 @@
 import { World, WorldType } from "@/shared/types";
 import { CLIENT_ROUTES } from "@/shared/constants";
+import type { Tab } from "@/shared/components/Tabs";
 
 export const WORLD_TYPES: WorldType[] = Object.values(WorldType);
 
@@ -16,3 +17,8 @@ const GLOBAL_WORLD: World = {
 };
 
 export const WORLDS: World[] = [LOCAL_WORLD, GLOBAL_WORLD];
+
+export const WORLD_TABS: Tab[] = [
+  { value: LOCAL_WORLD.type, label: LOCAL_WORLD.name },
+  { value: GLOBAL_WORLD.type, label: GLOBAL_WORLD.name },
+];

@@ -3,20 +3,24 @@
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { postSubscriptionsMutation } from "@/shared/remotes/postSubscriptions";
-import { Checkboxes, EmailInput, Toast } from "@/shared/components";
+import { Checkboxes, EmailInput, Toast, Tabs } from "@/shared/components";
 import { validateEmail } from "@/shared/utils/util";
 import {
   SUCCESS_SUBSCRIPTION_TOAST_MESSAGE,
   ERROR_SUBSCRIPTION_TOAST_MESSAGE,
 } from "@/shared/constants/util";
 import { useMixpanel } from "@/shared/providers";
-import { MIXPANEL_EVENT } from "@/shared/constants";
-
-import type { CategoryCode } from "@/shared/types";
+import { MIXPANEL_EVENT, WORLD_TABS } from "@/shared/constants";
+import {
+  type CategoryCode,
+  type CodeValueResponse,
+  WorldType,
+} from "@/shared/types";
 import type { CodeType } from "@/shared/components/Checkboxes";
 
 interface SubscribeFormProps {
-  categories: { code: CategoryCode; value: string }[];
+  localCategories: CodeValueResponse[];
+  globalCategories: CodeValueResponse[];
 }
 
 interface SubscribeFormState {
@@ -24,12 +28,19 @@ interface SubscribeFormState {
   categoryCodes: CodeType[];
 }
 
-export const SubscribeForm = ({ categories }: SubscribeFormProps) => {
+export const SubscribeForm = ({
+  localCategories,
+  globalCategories,
+}: SubscribeFormProps) => {
   const mixpanel = useMixpanel();
+  const [activeTab, setActiveTab] = useState<string>("local");
   const [form, setForm] = useState<SubscribeFormState>({
     email: "",
     categoryCodes: [],
   });
+
+  const currentCategories =
+    activeTab === WorldType.LOCAL ? localCategories : globalCategories;
   const [successToastMessage, setSuccessToastMessage] = useState<string | null>(
     null,
   );
@@ -84,6 +95,12 @@ export const SubscribeForm = ({ categories }: SubscribeFormProps) => {
           placeholder="뉴스레터를 받을 이메일 주소를 입력해 주세요."
           errorMessage="잘못된 이메일 주소예요."
         />
+        <Tabs
+          tabs={WORLD_TABS}
+          value={activeTab}
+          onChange={setActiveTab}
+          className="border-none"
+        />
         <div className="flex flex-col gap-12">
           <Checkboxes
             value={form.categoryCodes}
@@ -96,7 +113,7 @@ export const SubscribeForm = ({ categories }: SubscribeFormProps) => {
             }}
             label="받고 싶은 뉴스 카테고리"
             name="categoryCodes"
-            options={categories}
+            options={currentCategories}
           />
         </div>
         <button

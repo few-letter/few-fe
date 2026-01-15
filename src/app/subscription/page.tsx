@@ -12,10 +12,16 @@ export const metadata = {
 
 export default async function SubscribePage() {
   const queryClient = getQueryClient();
-  const categoriesResponse = await queryClient.fetchQuery(
-    getCategoriesOptions(WorldType.LOCAL),
+
+  const [localCategoriesResponse, globalCategoriesResponse] = await Promise.all(
+    [
+      queryClient.fetchQuery(getCategoriesOptions(WorldType.LOCAL)),
+      queryClient.fetchQuery(getCategoriesOptions(WorldType.GLOBAL)),
+    ],
   );
-  const categories = categoriesResponse.data;
+
+  const localCategories = localCategoriesResponse.data;
+  const globalCategories = globalCategoriesResponse.data;
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
@@ -30,7 +36,10 @@ export default async function SubscribePage() {
             한줄로 떠먹여주는 AI 요약 뉴스레터, 보고싶은 카테고리만 모아 평일
             아침 9시에 받아보세요.
           </p>
-          <SubscribeForm categories={categories} />
+          <SubscribeForm
+            localCategories={localCategories}
+            globalCategories={globalCategories}
+          />
         </section>
       </div>
     </HydrationBoundary>

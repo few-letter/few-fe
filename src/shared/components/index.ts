@@ -11,3 +11,4 @@ export * from "./LottieComponent";
 export * from "./Checkboxes";
 export * from "./EmailInput";
 export * from "./Toast";
+export * from "./Tabs";
