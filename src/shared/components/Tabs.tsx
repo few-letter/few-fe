@@ -16,29 +16,24 @@ interface TabsProps {
 
 export const Tabs = ({ tabs, value, onChange, className }: TabsProps) => {
   return (
-    <div className={cn("relative border-b border-gray3", className)}>
-      <div className="flex">
+    <div className={cn("border-gray3 relative border-b", className)}>
+      <div className="border-gray3 flex border-b-1 border-solid">
         {tabs.map((tab) => {
           const isSelected = tab.value === value;
           return (
             <button
+              aria-label={`Switch to ${tab.label} tab`}
               key={tab.value}
               type="button"
               role="tab"
               aria-selected={isSelected}
               className={cn(
-                "relative px-16 py-12 text-center transition-colors",
-                "hover:text-gray10",
-                isSelected
-                  ? "font-sub5 text-gray10"
-                  : "font-body4 text-gray6",
+                "text-bold relative flex-1 translate-y-2 px-16 py-12 text-center transition-colors",
+                isSelected ? "font-sub5 text-blue3" : "font-sub5 text-black",
               )}
               onClick={() => onChange(tab.value)}
             >
               {tab.label}
-              {isSelected && (
-                <span className="absolute bottom-0 left-0 h-2 w-full bg-gray10" />
-              )}
             </button>
           );
         })}
