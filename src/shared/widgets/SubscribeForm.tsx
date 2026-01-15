@@ -33,8 +33,11 @@ export const SubscribeForm = ({
   globalCategories,
 }: SubscribeFormProps) => {
   const mixpanel = useMixpanel();
-  const [activeTab, setActiveTab] = useState<string>("local");
-  const [form, setForm] = useState<SubscribeFormState>({
+  const [activeTab, setActiveTab] = useState<WorldType>(WorldType.LOCAL);
+  const [form, setForm] = useState<
+    SubscribeFormState & { worldType: WorldType }
+  >({
+    worldType: WorldType.LOCAL,
     email: "",
     categoryCodes: [],
   });
@@ -47,7 +50,12 @@ export const SubscribeForm = ({
   const [errorToastMessage, setErrorToastMessage] = useState<string | null>(
     null,
   );
-  const initializeForm = () => setForm({ email: "", categoryCodes: [] });
+  const initializeForm = () =>
+    setForm({
+      worldType: WorldType.LOCAL,
+      email: "",
+      categoryCodes: [],
+    });
   const subscriptionMutation = useMutation({
     ...postSubscriptionsMutation(),
     onSuccess: () => {
@@ -71,6 +79,11 @@ export const SubscribeForm = ({
 
   const handleCategoryCodesChange = (value: CodeType[]) => {
     setForm({ ...form, categoryCodes: value });
+  };
+
+  const handleTabChange = (value: WorldType) => {
+    setActiveTab(value);
+    setForm((prev) => ({ ...prev, worldType: value, categoryCodes: [] }));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -98,7 +111,7 @@ export const SubscribeForm = ({
         <Tabs
           tabs={WORLD_TABS}
           value={activeTab}
-          onChange={setActiveTab}
+          onChange={handleTabChange}
           className="border-none"
         />
         <div className="flex flex-col gap-12">
