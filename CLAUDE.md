@@ -146,15 +146,37 @@ NEXT_PUBLIC_MIXPANEL_TOKEN   # Mixpanel 토큰
 3. **Widgets**: 여러 컴포넌트 조합한 페이지 영역
 4. **Presentational**: Props 기반 순수 UI 컴포넌트
 
+## Types
+
+```typescript
+// WorldType - 뉴스 월드 구분
+enum WorldType {
+  LOCAL = "local",    // 국내 뉴스
+  GLOBAL = "global",  // 해외 뉴스
+}
+```
+
+## Client Routes
+
+```typescript
+CLIENT_ROUTES = {
+  HOME: "/",
+  LOCAL: "/local",
+  GLOBAL: "/global",
+  SUBSCRIPTION: "/subscription",
+  DELETE_SUBSCRIPTION: "/delete-subscription",
+}
+```
+
 ## API Routes
 
 ```typescript
 API_ROUTES = {
-  CATEGORIES: "/api/v1/contents/categories",
-  GROUPS: "/api/v1/contents/groups",
-  CONTENTS: "/api/v1/contents",
-  CONTENT_DETAIL: (id) => `/api/v1/contents/${id}`,
-  SUBSCRIBE: "/api/v1/subscriptions",
+  CATEGORIES: (worldType: WorldType) => `/api/v2/contents/${worldType}-news/categories`,
+  GROUPS: (worldType: WorldType) => `/api/v2/contents/${worldType}-news/groups`,
+  CONTENTS: (worldType: WorldType) => `/api/v2/contents/${worldType}-news`,
+  CONTENT_DETAIL: (id: string) => `/api/v2/contents/${id}`,
+  SUBSCRIBE: "/api/v2/subscriptions",
 }
 ```
 
@@ -162,8 +184,9 @@ API_ROUTES = {
 
 ```typescript
 QUERY_KEY = {
-  GET_CATEGORIES: "getCategories",
-  GET_GROUPS: "getGroups",
-  GET_CONTENTS: "getContents",
+  GET_CATEGORIES: (worldType: WorldType) => `get-categories-${worldType}`,
+  GET_GROUPS: (worldType: WorldType) => `get-groups-${worldType}`,
+  GET_CONTENTS: (worldType: WorldType) => `get-contents-${worldType}`,
+  GET_CONTENT_DETAIL: "get-content-detail",
 }
 ```
