@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 import { Badge } from "./Badge";
-import { formatDateToSlashDate } from "@/shared/utils";
+import { toKoreanSlashDate } from "@/shared/utils";
 
 import type { CategoryCode, CodeValueResponse } from "@/shared/types";
 
@@ -10,7 +10,7 @@ interface CardProps {
   link: string;
   headline: string;
   summary: string;
-  createdAt: Date;
+  createdAt: Date | string;
   image?: string;
   mediaType: CodeValueResponse;
 }
@@ -24,7 +24,8 @@ export const Card = ({
   image,
   mediaType,
 }: CardProps) => {
-  const isWebView = typeof window !== "undefined" && /WebView|wv/.test(navigator.userAgent);
+  const isWebView =
+    typeof window !== "undefined" && /WebView|wv/.test(navigator.userAgent);
 
   return (
     <a
@@ -56,7 +57,7 @@ export const Card = ({
               {summary}
             </div>
             <div className="font-body6 text-gray7">
-              <span>{formatDateToSlashDate(createdAt)}</span>
+              <span>{toKoreanSlashDate(createdAt)}</span>
               <span> · </span>
               <span>{mediaType.value}</span>
             </div>
