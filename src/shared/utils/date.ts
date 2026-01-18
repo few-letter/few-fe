@@ -1,56 +1,31 @@
-const parseISOString = (date: Date | string): Date => {
-  return typeof date === "string" ? new Date(date) : date;
-};
+import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 
-const formatKoreanDate = (date: Date | string) => {
-  const dateObj = parseISOString(date);
-  return new Intl.DateTimeFormat("ko-KR", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  }).format(dateObj);
-};
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
-const formatDateToYYYYMMDD = (date: Date | string): string => {
-  const dateObj = parseISOString(date);
-  const year = dateObj.getFullYear();
-  const month = String(dateObj.getMonth() + 1).padStart(2, "0");
-  const day = String(dateObj.getDate()).padStart(2, "0");
+/** 한국 표준시 타임존 */
+const KOREA_TIMEZONE = "Asia/Seoul";
 
-  return `${year}-${month}-${day}`;
-};
+/**
+ * 현재 한국 날짜를 "YYYY년 M월 D일" 형식으로 반환합니다.
+ * @returns 포맷된 한국 날짜 문자열
+ */
+const currentKoreaDate = () =>
+  dayjs().tz(KOREA_TIMEZONE).format("YYYY년 M월 D일");
 
-const formatDateToSlashDate = (date: Date | string): string => {
-  const dateObj = parseISOString(date);
-  const year = dateObj.getFullYear().toString().slice(-2);
-  const month = String(dateObj.getMonth() + 1).padStart(2, "0");
-  const day = String(dateObj.getDate()).padStart(2, "0");
-
-  return `${year}/${month}/${day}`;
-};
-
-const getRefreshDate = (date: Date | string): Date => {
-  const dateObj = parseISOString(date);
-  const REFRESH_HOUR = 5;
-
-  const koreaTime = new Date(
-    dateObj.toLocaleString("en-US", { timeZone: "Asia/Seoul" }),
-  );
-  const koreaHour = koreaTime.getHours();
-
-  if (koreaHour < REFRESH_HOUR) {
-    const previousDay = new Date(koreaTime);
-    previousDay.setDate(koreaTime.getDate() - 1);
-    return previousDay;
-  }
-
-  return koreaTime;
+/**
+ * 날짜를 한국 시간 기준 "YY/MM/DD" 형식으로 변환합니다.
+ * @param date - 변환할 날짜 (Date 객체 또는 ISO 문자열)
+ * @returns 포맷된 날짜 문자열
+ */
+const toKoreanSlashDate = (date: Date | string): string => {
+  return dayjs(date).tz(KOREA_TIMEZONE).format("YY/MM/DD");
 };
 
 export {
-  formatKoreanDate,
-  formatDateToYYYYMMDD,
-  formatDateToSlashDate,
-  getRefreshDate,
-  parseISOString,
+  currentKoreaDate,
+  toKoreanSlashDate,
+  KOREA_TIMEZONE,
 };

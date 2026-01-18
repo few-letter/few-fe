@@ -5,7 +5,6 @@ import { useEffect, useRef } from "react";
 
 import { Card, CardSkeleton } from "@/shared/components";
 import { getInfiniteContentsOptions } from "@/shared/remotes";
-import { parseISOString } from "@/shared/utils";
 
 import type { BrowseContentsResponse } from "@/shared/types";
 
@@ -100,7 +99,7 @@ export const DailyContentList = ({ category }: DailyContentsListProps) => {
             headline={content.headline}
             summary={content.summary}
             image={content.thumbnailImageUrl}
-            createdAt={parseISOString(content.createdAt)}
+            createdAt={content.createdAt}
             mediaType={content.mediaType}
           />
         ))}
