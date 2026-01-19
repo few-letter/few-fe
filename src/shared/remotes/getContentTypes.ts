@@ -18,6 +18,7 @@ const getContentTypesOptions = () => {
     queryKey: [QUERY_KEY.GET_CONTENT_TYPES],
     queryFn: () => getContentTypes(),
     staleTime: Infinity,
+    select: (data) => data.data,
   });
 };
 

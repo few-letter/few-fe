@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
-import { postSubscriptionsMutation } from "@/shared/remotes/postSubscriptions";
+import { useCallback, useState } from "react";
+import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
+import { postSubscriptionsMutation } from "@/shared/remotes";
+import { getContentTypesOptions } from "@/shared/remotes";
 import { Checkboxes, EmailInput, Toast, Tabs } from "@/shared/components";
 import { validateEmail } from "@/shared/utils/util";
 import {
@@ -11,12 +12,9 @@ import {
 } from "@/shared/constants/util";
 import { useMixpanel } from "@/shared/providers";
 import { MIXPANEL_EVENT, WORLD_TABS } from "@/shared/constants";
-import {
-  type CategoryCode,
-  type CodeValueResponse,
-  WorldType,
-} from "@/shared/types";
+import type { CategoryCode, CodeValueResponse } from "@/shared/types";
 import type { CodeType } from "@/shared/components/Checkboxes";
+import { WorldContentType } from "@/shared/constants/world";
 
 interface SubscribeFormProps {
   localCategories: CodeValueResponse[];
@@ -26,6 +24,7 @@ interface SubscribeFormProps {
 interface SubscribeFormState {
   email: string;
   categoryCodes: CodeType[];
+  contentsType: number;
 }
 
 export const SubscribeForm = ({
@@ -33,17 +32,24 @@ export const SubscribeForm = ({
   globalCategories,
 }: SubscribeFormProps) => {
   const mixpanel = useMixpanel();
-  const [activeTab, setActiveTab] = useState<WorldType>(WorldType.LOCAL);
-  const [form, setForm] = useState<
-    SubscribeFormState & { worldType: WorldType }
-  >({
-    worldType: WorldType.LOCAL,
+  const [activeTab, setActiveTab] = useState<WorldContentType>(
+    WorldContentType.LOCAL,
+  );
+  const { data: contentTypes } = useSuspenseQuery(getContentTypesOptions());
+  const getContentTypeCode = useCallback(
+    (type: WorldContentType) =>
+      contentTypes.find((item) => item.value === type)?.code ?? 0,
+    [contentTypes],
+  );
+
+  const [form, setForm] = useState<SubscribeFormState>({
+    contentsType: getContentTypeCode(WorldContentType.LOCAL),
     email: "",
     categoryCodes: [],
   });
 
   const currentCategories =
-    activeTab === WorldType.LOCAL ? localCategories : globalCategories;
+    activeTab === WorldContentType.LOCAL ? localCategories : globalCategories;
   const [successToastMessage, setSuccessToastMessage] = useState<string | null>(
     null,
   );
@@ -52,7 +58,7 @@ export const SubscribeForm = ({
   );
   const initializeForm = () =>
     setForm({
-      worldType: WorldType.LOCAL,
+      contentsType: getContentTypeCode(activeTab),
       email: "",
       categoryCodes: [],
     });
@@ -81,9 +87,13 @@ export const SubscribeForm = ({
     setForm({ ...form, categoryCodes: value });
   };
 
-  const handleTabChange = (value: WorldType) => {
+  const handleTabChange = (value: WorldContentType) => {
     setActiveTab(value);
-    setForm((prev) => ({ ...prev, worldType: value, categoryCodes: [] }));
+    setForm((prev) => ({
+      ...prev,
+      contentsType: getContentTypeCode(value),
+      categoryCodes: [],
+    }));
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
