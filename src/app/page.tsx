@@ -10,13 +10,10 @@ import { Header } from "@/shared/components";
 
 import { getGroupsOptions, getCategoriesOptions } from "@/shared/remotes";
 import { getQueryClient } from "@/api/client/queryClient";
-import { formatKoreanDate, getRefreshDate } from "@/shared/utils";
 import { WorldType } from "@/shared/types";
 
 export default async function Home() {
   const queryClient = getQueryClient();
-  const newsDate = getRefreshDate(new Date());
-  const newsDateFormattedKorean = formatKoreanDate(newsDate);
 
   await Promise.all([
     queryClient.prefetchQuery(getCategoriesOptions(WorldType.LOCAL)),
@@ -29,7 +26,7 @@ export default async function Home() {
       <Header />
       <main className="m-auto max-w-1200">
         <section className="px-16">
-          <DailyFewHeader currentDate={newsDateFormattedKorean} />
+          <DailyFewHeader />
           <div className="flex w-full flex-col gap-24 overflow-hidden pb-40 md:flex-row">
             <DailyFewSection />
           </div>
