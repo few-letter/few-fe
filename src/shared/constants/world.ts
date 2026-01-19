@@ -18,7 +18,7 @@ const GLOBAL_WORLD: World = {
 
 export const WORLDS: World[] = [LOCAL_WORLD, GLOBAL_WORLD];
 
-export const WORLD_TABS: Tab[] = [
+export const WORLD_TABS: Tab<WorldType>[] = [
   { value: LOCAL_WORLD.type, label: LOCAL_WORLD.name },
   { value: GLOBAL_WORLD.type, label: GLOBAL_WORLD.name },
 ];
