@@ -97,6 +97,11 @@ export const metadata: Metadata = {
     ],
   },
   manifest: "/favicons/manifest.json",
+  verification: {
+    other: {
+      "naver-site-verification": "cb19b986b8701fc780568eefc66cd99b2c53bb00",
+    },
+  },
 };
 
 export default function RootLayout({
