@@ -175,10 +175,26 @@ API_ROUTES = {
   CATEGORIES: (worldType: WorldType) => `/api/v2/contents/${worldType}-news/categories`,
   GROUPS: (worldType: WorldType) => `/api/v2/contents/${worldType}-news/groups`,
   CONTENTS: (worldType: WorldType) => `/api/v2/contents/${worldType}-news`,
-  CONTENT_DETAIL: (id: string) => `/api/v2/contents/${id}`,
+  CONTENT_DETAIL: (id: string) => `/api/v1/contents/${id}`,
   SUBSCRIBE: "/api/v2/subscriptions",
 }
 ```
+
+### API Endpoints
+
+| # | 설명 | Method | Endpoint |
+|---|------|--------|----------|
+| 1 | 데일리 few 조회 (국내) | GET | `/api/v2/contents/local-news/groups` |
+| 2 | 데일리 few 조회 (해외) | GET | `/api/v2/contents/global-news/groups` |
+| 3 | 국내 카테고리 조회 | GET | `/api/v2/contents/local-news/categories` |
+| 4 | 해외 카테고리 조회 | GET | `/api/v2/contents/global-news/categories` |
+| 5 | 국내 한줄요약 few 스크롤 | GET | `/api/v2/contents/local-news` |
+| 6 | 해외 한줄요약 few 스크롤 | GET | `/api/v2/contents/global-news` |
+| 7 | 한줄요약 few 상세조회 (국내/해외 동일) | GET | `/api/v1/contents/{id}` |
+| 8 | 구독 시 국내 / 해외 구분 카테고리 조회 | GET | `/api/v1/contents/types` |
+| 9 | 구독 정보 조회 | GET | `/api/v2/subscriptions` |
+| 10 | 구독 등록 | POST | `/api/v2/subscriptions` |
+| 11 | 구독 취소 | DELETE | `/api/v2/subscriptions` |
 
 ## Query Keys
 
