@@ -4,4 +4,5 @@ export const CLIENT_ROUTES = {
   GLOBAL: "/global",
   SUBSCRIPTION: "/subscription",
   DELETE_SUBSCRIPTION: "/delete-subscription",
+  DETAILS: "/details",
 } as const;
