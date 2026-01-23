@@ -7,7 +7,7 @@ export const API_ROUTES = {
   CONTENTS: (worldType: WorldType) => `/api/v2/contents/${worldType}-news`, //카테고리 별 컨텐츠 목록
   CONTENT_TYPES: "/api/v1/contents/types", //컨텐츠 타입 목록
 
-  CONTENT_DETAIL: (id: string) => `/api/v2/contents/${id}`, //컨텐츠 상세(local만 가능)
+  CONTENT_DETAIL: (id: string) => `/api/v1/contents/${id}`, //컨텐츠 상세
   SUBSCRIBE: "/api/v2/subscriptions", //구독
 } as const;
 
