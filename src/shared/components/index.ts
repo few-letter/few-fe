@@ -12,3 +12,5 @@ export * from "./Checkboxes";
 export * from "./EmailInput";
 export * from "./Toast";
 export * from "./Tabs";
+export * from "./Divider";
+export * from "./IconButton";

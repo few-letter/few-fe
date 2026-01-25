@@ -13,12 +13,19 @@ interface BadgeProps {
   categoryCode: CategoryCode;
   className?: string;
   showEmoji?: boolean;
+  variant?: "primary" | "secondary";
 }
+
+const variantStyles = {
+  primary: "bg-white",
+  secondary: "bg-gray2",
+};
 
 export const Badge = ({
   categoryCode,
   className,
   showEmoji = false,
+  variant = "primary",
 }: BadgeProps) => {
   const world = usePathToWorld();
   const categories = useCategories(world);
@@ -30,9 +37,9 @@ export const Badge = ({
   return (
     <div
       className={cn(
-        "text-gray8",
+        "text-gray8 font-caption2 w-fit rounded-sm px-8 py-4",
         color,
-        "font-caption2 w-fit rounded-sm bg-white px-8 py-4",
+        variantStyles[variant],
         className,
       )}
     >

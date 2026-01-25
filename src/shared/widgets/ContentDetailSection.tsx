@@ -3,76 +3,116 @@
 import Image from "next/image";
 
 import { useSuspenseQuery } from "@tanstack/react-query";
+import { ExternalLink, Share } from "lucide-react";
 
+import {
+  Badge,
+  Divider,
+  HighlightedText,
+  IconButton,
+} from "@/shared/components";
 import { getContentDetailOptions } from "@/shared/remotes";
+import type { CategoryCode } from "@/shared/types";
 
 interface ContentDetailSectionProps {
   id: string;
 }
 
-export const ContentDetailSection = ({ id }: ContentDetailSectionProps) => {
-  const { data: content } = useSuspenseQuery(getContentDetailOptions(id));
-
+const ContentDetailThumbnail = ({
+  thumbnailImageUrl,
+  headline,
+}: {
+  thumbnailImageUrl?: string;
+  headline: string;
+}) => {
   return (
-    <article className="py-24">
-      <header className="mb-24">
-        <span className="text-primary text-14 font-medium">
-          {content.category.value}
-        </span>
-        <h1 className="text-24 md:text-32 mt-8 leading-tight font-bold">
-          {content.headline}
-        </h1>
-        <time className="text-gray5 text-14 mt-12 block">
-          {new Date(content.createdAt).toLocaleDateString("ko-KR", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </time>
-      </header>
-
-      {content.thumbnailImageUrl && (
-        <figure className="rounded-8 relative mb-24 aspect-video w-full overflow-hidden">
+    <div className="pt-24 md:py-40">
+      {thumbnailImageUrl && (
+        <figure className="relative aspect-video w-full overflow-hidden rounded-sm">
           <Image
-            src={content.thumbnailImageUrl}
-            alt={content.headline}
+            src={thumbnailImageUrl}
+            alt={headline}
             fill
             className="object-cover"
           />
         </figure>
       )}
+    </div>
+  );
+};
 
-      <section className="mb-24">
-        <h2 className="text-18 font-semibold">요약</h2>
-        <p className="text-gray7 text-16 mt-8 leading-relaxed">
-          {content.summary}
+export const ContentDetailHeader = ({
+  source,
+  categoryCode,
+  headline,
+  createdAt,
+  url,
+}: {
+  source: string;
+  categoryCode: CategoryCode;
+  headline: string;
+  createdAt: string;
+  url: string;
+}) => {
+  return (
+    <header className="flex flex-col gap-16 py-24">
+      <Badge categoryCode={categoryCode} variant="secondary" />
+      <h1 className="font-heading3 font-bold md:text-[32px]">{headline}</h1>
+      <div className="flex items-center gap-8">
+        <span className="font-caption2 text-gray7 md:font-body3">{source}</span>
+        <Divider orientation="vertical" />
+        <time className="font-caption2 text-gray7 md:font-body3">
+          {new Date(createdAt).toLocaleDateString("ko-KR", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </time>
+      </div>
+      <div className="mt-8 flex flex-row gap-12">
+        <IconButton
+          icon={<ExternalLink size={16} />}
+          label="원본 뉴스 보러가기"
+          onClick={() => window.open(url, "_blank")}
+        />
+        <IconButton
+          icon={<Share size={16} />}
+          label="공유하기"
+          onClick={() => {
+            // TODO: 공유하기 기능 구현
+          }}
+        />
+      </div>
+    </header>
+  );
+};
+
+export const ContentDetailSection = ({ id }: ContentDetailSectionProps) => {
+  const { data: content } = useSuspenseQuery(getContentDetailOptions(id));
+
+  return (
+    <article>
+      <ContentDetailThumbnail
+        thumbnailImageUrl={content.thumbnailImageUrl}
+        headline={content.headline}
+      />
+      <ContentDetailHeader
+        source={content.mediaType.value}
+        categoryCode={content.category.code}
+        headline={content.headline}
+        createdAt={content.createdAt}
+        url={content.url}
+      />
+      <section className="mt-40">
+        <p className="font-body6 text-gray7 leading-relaxed">
+          <HighlightedText
+            text={content.summary}
+            highlightTexts={content.highlightTexts}
+            highlightColor="bg-news-highlight"
+          />
         </p>
       </section>
-
-      {content.highlightTexts.length > 0 && (
-        <section className="mb-24">
-          <h2 className="text-18 font-semibold">핵심 포인트</h2>
-          <ul className="mt-8 space-y-8">
-            {content.highlightTexts.map((text, index) => (
-              <li key={index} className="text-gray7 text-16 flex">
-                <span className="text-primary mr-8">•</span>
-                {text}
-              </li>
-            ))}
-          </ul>
-        </section>
-      )}
-
-      <footer className="border-gray3 border-t pt-16">
-        <a
-          href={content.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-primary text-14 hover:underline"
-        >
-          원문 보기
-        </a>
-      </footer>
+      <footer className="h-120" />
     </article>
   );
 };
