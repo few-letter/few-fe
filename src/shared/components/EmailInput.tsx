@@ -62,7 +62,7 @@ export const EmailInput = ({
         )}
       />
       {error && (
-        <div className="text-red3 text-12 font-body6 mt-8 flex items-center">
+        <div className="text-red3 font-body6 mt-8 flex items-center">
           {error}
         </div>
       )}
