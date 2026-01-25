@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 
@@ -43,7 +44,7 @@ export const NewsCard = ({
         }}
       >
         {/* 카드 전체 클릭 링크 */}
-        <a
+        <Link
           href={`${CLIENT_ROUTES.DETAILS}/${id}`}
           className="absolute inset-0 z-20"
           aria-label={headline}

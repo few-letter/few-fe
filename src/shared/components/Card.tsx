@@ -2,6 +2,7 @@ import { cn } from "@/lib/utils";
 
 import { Badge } from "./Badge";
 import { toKoreanSlashDate } from "@/shared/utils";
+import Link from "next/link";
 
 import type { CategoryCode, CodeValueResponse } from "@/shared/types";
 
@@ -28,7 +29,7 @@ export const Card = ({
     typeof window !== "undefined" && /WebView|wv/.test(navigator.userAgent);
 
   return (
-    <a
+    <Link
       href={link}
       {...(!isWebView && { target: "_blank", rel: "noreferrer noopener" })}
       className={cn(
@@ -64,7 +65,7 @@ export const Card = ({
           </div>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 
