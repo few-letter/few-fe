@@ -108,34 +108,29 @@ const RelatedNewsContent = ({
   );
 };
 
-const InlineLink = ({ headline, url }: { headline: string; url?: string }) => {
+const InlineLink = ({ headline, url }: { headline: string; url: string }) => {
   const isWebView =
     typeof window !== "undefined" && /WebView|wv/.test(navigator.userAgent);
 
-  return url ? (
-    <a
-      href={url}
-      {...(!isWebView && { target: "_blank", rel: "noreferrer noopener" })}
-      className={cn(
-        "pointer-events-auto flex flex-row items-center gap-8",
-        "font-body5 text-gray10 lg:text-gray2 visited:text-blue2 truncate",
-        "max-w-full lg:max-w-[calc(100%-72px)]",
-      )}
-    >
-      <span>{headline}</span>
-      <Image
-        src="/images/icons/Icon_Link.png"
-        alt="Link icon"
-        width={16}
-        height={16}
-        className="flex-shrink-0"
-      />
-    </a>
-  ) : (
-    <div className="flex flex-row items-center gap-8">
-      <span className="font-body5 text-gray4 max-w-full truncate lg:max-w-[calc(100%-72px)]">
-        {headline}
-      </span>
+  return (
+    <div className="flex max-w-full justify-start lg:max-w-[calc(100%-72px)]">
+      <a
+        href={url}
+        {...(!isWebView && { target: "_blank", rel: "noreferrer noopener" })}
+        className={cn(
+          "w-fit pointer-events-auto flex flex-row items-center gap-8",
+          "font-body5 text-gray10 lg:text-gray2 visited:text-blue2",
+        )}
+      >
+        <span className="truncate">{headline}</span>
+        <Image
+          src="/images/icons/Icon_Link.png"
+          alt="Link icon"
+          width={16}
+          height={16}
+          className="flex-shrink-0"
+        />
+      </a>
     </div>
   );
 };
