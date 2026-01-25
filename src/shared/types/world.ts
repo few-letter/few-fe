@@ -1,6 +1,6 @@
 export enum WorldType {
-  LOCAL = "local",
-  GLOBAL = "global",
+  LOCAL = "local-news",
+  GLOBAL = "global-news",
 }
 
 export interface World {

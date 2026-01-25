@@ -18,12 +18,7 @@ const GLOBAL_WORLD: World = {
 
 export const WORLDS: World[] = [LOCAL_WORLD, GLOBAL_WORLD];
 
-export enum WorldContentType {
-  LOCAL = "local-news",
-  GLOBAL = "global-news",
-}
-
-export const WORLD_TABS: Tab<WorldContentType>[] = [
-  { value: WorldContentType.LOCAL, label: LOCAL_WORLD.name },
-  { value: WorldContentType.GLOBAL, label: GLOBAL_WORLD.name },
+export const WORLD_TABS: Tab<WorldType>[] = [
+  { value: WorldType.LOCAL, label: LOCAL_WORLD.name },
+  { value: WorldType.GLOBAL, label: GLOBAL_WORLD.name },
 ];

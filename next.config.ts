@@ -13,7 +13,7 @@ const nextConfig: NextConfig = {
     return [
       {
         source: "/",
-        destination: "/local",
+        destination: "/local-news",
         permanent: true,
       },
     ];

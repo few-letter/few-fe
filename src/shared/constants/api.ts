@@ -2,9 +2,9 @@ import type { WorldType } from "@/shared/types";
 
 export const API_ROUTES = {
   CATEGORIES: (worldType: WorldType) =>
-    `/api/v2/contents/${worldType}-news/categories`, //Category List
-  GROUPS: (worldType: WorldType) => `/api/v2/contents/${worldType}-news/groups`, //DailyFew List
-  CONTENTS: (worldType: WorldType) => `/api/v2/contents/${worldType}-news`, //카테고리 별 컨텐츠 목록
+    `/api/v2/contents/${worldType}/categories`, //Category List
+  GROUPS: (worldType: WorldType) => `/api/v2/contents/${worldType}/groups`, //DailyFew List
+  CONTENTS: (worldType: WorldType) => `/api/v2/contents/${worldType}`, //카테고리 별 컨텐츠 목록
   CONTENT_TYPES: "/api/v1/contents/types", //컨텐츠 타입 목록
 
   CONTENT_DETAIL: (id: string) => `/api/v1/contents/${id}`, //컨텐츠 상세

@@ -2,13 +2,13 @@
 
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { getContentTypesOptions } from "@/shared/remotes";
-import { WorldContentType } from "@/shared/constants/world";
+import { WorldType } from "@/shared/types";
 import type { CodeValueResponse } from "@/shared/types";
 
-export const useContentType = (worldContentType: WorldContentType) => {
+export const useContentType = (worldType: WorldType) => {
   const options = getContentTypesOptions();
   const { data } = useSuspenseQuery(options);
-  const currentContentType = data.find((item: CodeValueResponse) => item.value === worldContentType);
+  const currentContentType = data.find((item: CodeValueResponse) => item.value === worldType);
 
   return currentContentType?.code ?? null;
 };

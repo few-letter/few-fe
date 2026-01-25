@@ -151,8 +151,8 @@ NEXT_PUBLIC_MIXPANEL_TOKEN   # Mixpanel 토큰
 ```typescript
 // WorldType - 뉴스 월드 구분
 enum WorldType {
-  LOCAL = "local",    // 국내 뉴스
-  GLOBAL = "global",  // 해외 뉴스
+  LOCAL = "local-news",    // 국내 뉴스
+  GLOBAL = "global-news",  // 해외 뉴스
 }
 ```
 
@@ -161,8 +161,8 @@ enum WorldType {
 ```typescript
 CLIENT_ROUTES = {
   HOME: "/",
-  LOCAL: "/local",
-  GLOBAL: "/global",
+  LOCAL: "/local-news",
+  GLOBAL: "/global-news",
   SUBSCRIPTION: "/subscription",
   DELETE_SUBSCRIPTION: "/delete-subscription",
 }
@@ -172,9 +172,9 @@ CLIENT_ROUTES = {
 
 ```typescript
 API_ROUTES = {
-  CATEGORIES: (worldType: WorldType) => `/api/v2/contents/${worldType}-news/categories`,
-  GROUPS: (worldType: WorldType) => `/api/v2/contents/${worldType}-news/groups`,
-  CONTENTS: (worldType: WorldType) => `/api/v2/contents/${worldType}-news`,
+  CATEGORIES: (worldType: WorldType) => `/api/v2/contents/${worldType}/categories`,
+  GROUPS: (worldType: WorldType) => `/api/v2/contents/${worldType}/groups`,
+  CONTENTS: (worldType: WorldType) => `/api/v2/contents/${worldType}`,
   CONTENT_DETAIL: (id: string) => `/api/v1/contents/${id}`,
   SUBSCRIBE: "/api/v2/subscriptions",
 }
