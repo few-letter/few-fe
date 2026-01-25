@@ -58,7 +58,7 @@ export const NewsCard = ({
         />
         {/* 어두운 배경 레이어 */}
         <div className="absolute inset-0 bg-black/70" />
-        <div className="relative z-10 flex w-full flex-col justify-between px-40 py-24">
+        <div className="pointer-events-none relative z-30 flex w-full flex-col justify-between px-40 py-24">
           <div className="space-y-12">
             <Badge categoryCode={categoryCode} />
             <div className="font-sub2 line-clamp-2 text-white">{headline}</div>
@@ -117,7 +117,7 @@ const InlineLink = ({ headline, url }: { headline: string; url?: string }) => {
       href={url}
       {...(!isWebView && { target: "_blank", rel: "noreferrer noopener" })}
       className={cn(
-        "flex flex-row items-center gap-8",
+        "pointer-events-auto flex flex-row items-center gap-8",
         "font-body5 text-gray10 lg:text-gray2 visited:text-blue2 truncate",
         "max-w-full lg:max-w-[calc(100%-72px)]",
       )}
