@@ -11,7 +11,7 @@ import { usePathname } from "next/navigation";
 
 const WorldLink = ({ world }: { world: World }) => {
   const pathname = usePathname();
-  const isActive = pathname === world.url;
+  const isActive = pathname.startsWith(world.url);
 
   return (
     <Link
