@@ -12,9 +12,9 @@ import {
 } from "@/shared/constants/util";
 import { useMixpanel } from "@/shared/providers";
 import { MIXPANEL_EVENT, WORLD_TABS } from "@/shared/constants";
+import { WorldType } from "@/shared/types";
 import type { CategoryCode, CodeValueResponse } from "@/shared/types";
 import type { CodeType } from "@/shared/components/Checkboxes";
-import { WorldContentType } from "@/shared/constants/world";
 
 interface SubscribeFormProps {
   localCategories: CodeValueResponse[];
@@ -32,24 +32,24 @@ export const SubscribeForm = ({
   globalCategories,
 }: SubscribeFormProps) => {
   const mixpanel = useMixpanel();
-  const [activeTab, setActiveTab] = useState<WorldContentType>(
-    WorldContentType.LOCAL,
+  const [activeTab, setActiveTab] = useState<WorldType>(
+    WorldType.LOCAL,
   );
   const { data: contentTypes } = useSuspenseQuery(getContentTypesOptions());
   const getContentTypeCode = useCallback(
-    (type: WorldContentType) =>
+    (type: WorldType) =>
       contentTypes.find((item) => item.value === type)?.code ?? 0,
     [contentTypes],
   );
 
   const [form, setForm] = useState<SubscribeFormState>({
-    contentsType: getContentTypeCode(WorldContentType.LOCAL),
+    contentsType: getContentTypeCode(WorldType.LOCAL),
     email: "",
     categoryCodes: [],
   });
 
   const currentCategories =
-    activeTab === WorldContentType.LOCAL ? localCategories : globalCategories;
+    activeTab === WorldType.LOCAL ? localCategories : globalCategories;
   const [successToastMessage, setSuccessToastMessage] = useState<string | null>(
     null,
   );
@@ -87,7 +87,7 @@ export const SubscribeForm = ({
     setForm({ ...form, categoryCodes: value });
   };
 
-  const handleTabChange = (value: WorldContentType) => {
+  const handleTabChange = (value: WorldType) => {
     setActiveTab(value);
     setForm((prev) => ({
       ...prev,

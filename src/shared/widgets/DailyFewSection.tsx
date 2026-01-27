@@ -13,6 +13,7 @@ export const DailyFewSection = () => {
       items={groups}
       renderItem={(item) => (
         <NewsCard
+          id={item.id}
           highlightTexts={item.highlightTexts}
           categoryCode={item.category}
           headline={item.headline}

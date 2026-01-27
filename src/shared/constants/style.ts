@@ -20,12 +20,12 @@ const CATEGORY_CODE_TO_EMOJI: Record<CategoryCode | "all", string> = {
 } as const;
 
 const CATEGORY_CODE_TO_IMAGE: Record<CategoryCode, string | null> = {
-  0: 'images/newscard/category0.png',
-  2: "images/newscard/category2.png",
-  4: "images/newscard/category4.png",
-  8: "images/newscard/category8.png",
-  16: "images/newscard/category16.png",
-  32: "images/newscard/category32.png",
+  0: "/images/newscard/category0.png",
+  2: "/images/newscard/category2.png",
+  4: "/images/newscard/category4.png",
+  8: "/images/newscard/category8.png",
+  16: "/images/newscard/category16.png",
+  32: "/images/newscard/category32.png",
 } as const;
 
 const MIN_SWIPE_DISTANCE = 50;

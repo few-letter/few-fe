@@ -62,7 +62,7 @@ export const Toast = ({
       className={cn(
         isVisible ? "opacity-100" : "opacity-0",
         "pointer-events-none fixed top-200 left-1/2 z-50 -translate-x-1/2",
-        "font-body6 text-14 rounded-sm border px-16 py-8 shadow-lg backdrop-blur-sm",
+        "font-body6 rounded-sm border px-16 py-8 shadow-lg backdrop-blur-sm",
         `transform-gpu transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]`,
         styles,
       )}
