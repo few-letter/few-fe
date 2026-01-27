@@ -90,6 +90,8 @@ export const ContentDetailHeader = ({
 export const ContentDetailSection = ({ id }: ContentDetailSectionProps) => {
   const { data: content } = useSuspenseQuery(getContentDetailOptions(id));
 
+  console.log("[DetailPage] content:", content);
+
   return (
     <article>
       <ContentDetailThumbnail
@@ -103,7 +105,7 @@ export const ContentDetailSection = ({ id }: ContentDetailSectionProps) => {
         createdAt={content.createdAt}
         url={content.url}
       />
-      <section className="mt-40">
+      <section className="mt-0 md:mt-40">
         <p className="font-body6 text-gray7 leading-relaxed">
           <HighlightedText
             text={content.summary}
@@ -112,7 +114,7 @@ export const ContentDetailSection = ({ id }: ContentDetailSectionProps) => {
           />
         </p>
       </section>
-      <footer className="h-120" />
+      <footer className="h-24 md:h-120" />
     </article>
   );
 };

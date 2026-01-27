@@ -2,7 +2,7 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 import { getQueryClient } from "@/api/client/queryClient";
 import { getContentDetailOptions } from "@/shared/remotes";
-import { ContentDetailSection } from "@/shared/widgets";
+import { ContentDetailSection, SubscribeForm } from "@/shared/widgets";
 import { Header, Banner } from "@/shared/components";
 
 interface DetailPageLayoutProps {
@@ -11,7 +11,6 @@ interface DetailPageLayoutProps {
 
 export const DetailPageLayout = async ({ id }: DetailPageLayoutProps) => {
   const queryClient = getQueryClient();
-
   await queryClient.prefetchQuery(getContentDetailOptions(id));
 
   return (
@@ -21,6 +20,10 @@ export const DetailPageLayout = async ({ id }: DetailPageLayoutProps) => {
         <ContentDetailSection id={id} />
       </main>
       <Banner />
+      <div className="bg-gray2 h-8 w-full md:hidden" />
+      <section className="m-auto max-w-720 px-16 pt-24 md:px-24 md:pt-80">
+        <SubscribeForm />
+      </section>
     </HydrationBoundary>
   );
 };
