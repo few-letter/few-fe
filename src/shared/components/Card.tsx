@@ -4,11 +4,16 @@ import { Badge } from "./Badge";
 import { toKoreanSlashDate } from "@/shared/utils";
 import Link from "next/link";
 
-import type { CategoryCode, CodeValueResponse } from "@/shared/types";
+import type {
+  CategoryCode,
+  CodeValueResponse,
+  WorldType,
+} from "@/shared/types";
 
 interface CardProps {
+  id: number;
+  worldType: WorldType;
   categoryCode: CategoryCode;
-  link: string;
   headline: string;
   summary: string;
   createdAt: Date | string;
@@ -17,21 +22,18 @@ interface CardProps {
 }
 
 export const Card = ({
+  id,
+  worldType,
   categoryCode,
-  link,
   headline,
   summary,
   createdAt,
   image,
   mediaType,
 }: CardProps) => {
-  const isWebView =
-    typeof window !== "undefined" && /WebView|wv/.test(navigator.userAgent);
-
   return (
     <Link
-      href={link}
-      {...(!isWebView && { target: "_blank", rel: "noreferrer noopener" })}
+      href={`/${worldType}/${id}`}
       className={cn(
         "group border-gray2 relative flex flex-col overflow-hidden rounded-sm",
       )}

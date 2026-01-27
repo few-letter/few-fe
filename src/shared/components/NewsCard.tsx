@@ -6,11 +6,15 @@ import { cn } from "@/lib/utils";
 import { Badge } from "./Badge";
 import { HighlightedText } from "./HighlightedText";
 
-import { CLIENT_ROUTES } from "@/shared/constants";
-import type { GroupSourceHeadlineData, CategoryCode } from "@/shared/types";
+import type {
+  GroupSourceHeadlineData,
+  CategoryCode,
+  WorldType,
+} from "@/shared/types";
 
 interface NewsCardProps {
   id: number;
+  worldType: WorldType;
   categoryCode: CategoryCode;
   headline: string;
   summary: string;
@@ -21,6 +25,7 @@ interface NewsCardProps {
 
 export const NewsCard = ({
   id,
+  worldType,
   headline,
   summary,
   highlightTexts,
@@ -45,7 +50,7 @@ export const NewsCard = ({
       >
         {/* 카드 전체 클릭 링크 */}
         <Link
-          href={`${CLIENT_ROUTES.DETAILS}/${id}`}
+          href={`/${worldType}/${id}`}
           className="absolute inset-0 z-20"
           aria-label={headline}
         />

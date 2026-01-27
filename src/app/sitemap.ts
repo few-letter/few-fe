@@ -11,13 +11,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${baseUrl}/local`,
+      url: `${baseUrl}/local-news`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/global`,
+      url: `${baseUrl}/global-news`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.9,

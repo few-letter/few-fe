@@ -5,12 +5,11 @@ import { getContentDetailOptions } from "@/shared/remotes";
 import { ContentDetailSection } from "@/shared/widgets";
 import { Header, Banner } from "@/shared/components";
 
-interface DetailPageProps {
-  params: Promise<{ id: string }>;
+interface DetailPageLayoutProps {
+  id: string;
 }
 
-export default async function DetailPage({ params }: DetailPageProps) {
-  const { id } = await params;
+export const DetailPageLayout = async ({ id }: DetailPageLayoutProps) => {
   const queryClient = getQueryClient();
 
   await queryClient.prefetchQuery(getContentDetailOptions(id));
@@ -24,4 +23,4 @@ export default async function DetailPage({ params }: DetailPageProps) {
       <Banner />
     </HydrationBoundary>
   );
-}
+};
