@@ -77,7 +77,7 @@ color: green
 
 ### Body 구조 예시 (새 PR):
 
-```
+```markdown
 ※ AI Generated PR
 
 ## 주요 변경사항
@@ -91,7 +91,7 @@ color: green
 
 ### Body 구조 예시 (업데이트된 PR):
 
-```
+```markdown
 ※ AI Generated PR
 
 ## 주요 변경사항

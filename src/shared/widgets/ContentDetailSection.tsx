@@ -73,7 +73,7 @@ export const ContentDetailHeader = ({
         <IconButton
           icon={<ExternalLink size={16} />}
           label="원본 뉴스 보러가기"
-          onClick={() => window.open(url, "_blank")}
+          onClick={() => window.open(url, "_blank", "noopener,noreferrer")}
         />
         <IconButton
           icon={<Share size={16} />}
