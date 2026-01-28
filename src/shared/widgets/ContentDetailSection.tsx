@@ -90,8 +90,6 @@ export const ContentDetailHeader = ({
 export const ContentDetailSection = ({ id }: ContentDetailSectionProps) => {
   const { data: content } = useSuspenseQuery(getContentDetailOptions(id));
 
-  console.log("[DetailPage] content:", content);
-
   return (
     <article>
       <ContentDetailThumbnail
