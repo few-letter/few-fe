@@ -1,9 +1,10 @@
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 import { getQueryClient } from "@/api/client/queryClient";
-import { getContentDetailOptions } from "@/shared/remotes";
+import { getContentDetailOptions, getCategoriesOptions } from "@/shared/remotes";
 import { ContentDetailSection, SubscribeForm } from "@/shared/widgets";
 import { Header, Banner } from "@/shared/components";
+import { WorldType } from "@/shared/types";
 
 interface DetailPageLayoutProps {
   id: string;
@@ -11,7 +12,12 @@ interface DetailPageLayoutProps {
 
 export const DetailPageLayout = async ({ id }: DetailPageLayoutProps) => {
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(getContentDetailOptions(id));
+
+  await Promise.all([
+    queryClient.prefetchQuery(getContentDetailOptions(id)),
+    queryClient.prefetchQuery(getCategoriesOptions(WorldType.LOCAL)),
+    queryClient.prefetchQuery(getCategoriesOptions(WorldType.GLOBAL)),
+  ]);
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
