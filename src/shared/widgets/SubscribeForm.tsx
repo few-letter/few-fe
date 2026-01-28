@@ -2,8 +2,11 @@
 
 import { useCallback, useState } from "react";
 import { useMutation, useSuspenseQuery } from "@tanstack/react-query";
-import { postSubscriptionsMutation } from "@/shared/remotes";
-import { getContentTypesOptions } from "@/shared/remotes";
+import {
+  postSubscriptionsMutation,
+  getContentTypesOptions,
+  getCategoriesOptions,
+} from "@/shared/remotes";
 import { Checkboxes, EmailInput, Toast, Tabs } from "@/shared/components";
 import { validateEmail } from "@/shared/utils/util";
 import {
@@ -13,13 +16,8 @@ import {
 import { useMixpanel } from "@/shared/providers";
 import { MIXPANEL_EVENT, WORLD_TABS } from "@/shared/constants";
 import { WorldType } from "@/shared/types";
-import type { CategoryCode, CodeValueResponse } from "@/shared/types";
+import type { CategoryCode } from "@/shared/types";
 import type { CodeType } from "@/shared/components/Checkboxes";
-
-interface SubscribeFormProps {
-  localCategories: CodeValueResponse[];
-  globalCategories: CodeValueResponse[];
-}
 
 interface SubscribeFormState {
   email: string;
@@ -27,15 +25,18 @@ interface SubscribeFormState {
   contentsType: number;
 }
 
-export const SubscribeForm = ({
-  localCategories,
-  globalCategories,
-}: SubscribeFormProps) => {
+export const SubscribeForm = () => {
   const mixpanel = useMixpanel();
-  const [activeTab, setActiveTab] = useState<WorldType>(
-    WorldType.LOCAL,
-  );
+  const [activeTab, setActiveTab] = useState<WorldType>(WorldType.LOCAL);
   const { data: contentTypes } = useSuspenseQuery(getContentTypesOptions());
+  const { data: localCategoriesResponse } = useSuspenseQuery(
+    getCategoriesOptions(WorldType.LOCAL),
+  );
+  const { data: globalCategoriesResponse } = useSuspenseQuery(
+    getCategoriesOptions(WorldType.GLOBAL),
+  );
+  const localCategories = localCategoriesResponse.data;
+  const globalCategories = globalCategoriesResponse.data;
   const getContentTypeCode = useCallback(
     (type: WorldType) =>
       contentTypes.find((item) => item.value === type)?.code ?? 0,
@@ -109,6 +110,13 @@ export const SubscribeForm = ({
 
   return (
     <>
+      <h1 className="font-heading4 text-gray10 pt-32 pb-8">
+        few. 뉴스 구독하기
+      </h1>
+      <p className="font-body5 text-gray7">
+        한줄로 떠먹여주는 AI 요약 뉴스레터, 보고싶은 카테고리만 모아 평일 아침
+        9시에 받아보세요.
+      </p>
       <form className="mt-40 space-y-32" onSubmit={handleSubmit}>
         <EmailInput
           value={form.email}

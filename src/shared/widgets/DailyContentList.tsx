@@ -96,8 +96,9 @@ export const DailyContentList = ({ category }: DailyContentsListProps) => {
         {allContents.map((content, index) => (
           <Card
             key={`${content.id}-${index}`}
+            id={content.id}
+            worldType={world}
             categoryCode={content.category.code}
-            link={content.url}
             headline={content.headline}
             summary={content.summary}
             image={content.thumbnailImageUrl}
