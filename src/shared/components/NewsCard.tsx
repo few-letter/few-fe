@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 
@@ -9,12 +8,9 @@ import { HighlightedText } from "./HighlightedText";
 import type {
   GroupSourceHeadlineData,
   CategoryCode,
-  WorldType,
 } from "@/shared/types";
 
 interface NewsCardProps {
-  id: number;
-  worldType: WorldType;
   categoryCode: CategoryCode;
   headline: string;
   summary: string;
@@ -24,8 +20,6 @@ interface NewsCardProps {
 }
 
 export const NewsCard = ({
-  id,
-  worldType,
   headline,
   summary,
   highlightTexts,
@@ -34,7 +28,7 @@ export const NewsCard = ({
   image,
 }: NewsCardProps) => {
   return (
-    <article className="group relative">
+    <article className="relative">
       {/* 메인 카드 */}
       <div
         className={cn(
@@ -48,19 +42,6 @@ export const NewsCard = ({
             "polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 80px) 100%, 0 100%)",
         }}
       >
-        {/* 카드 전체 클릭 링크 */}
-        <Link
-          href={`/${worldType}/${id}`}
-          className="absolute inset-0 z-20"
-          aria-label={headline}
-        />
-        {/* 호버 오버레이 */}
-        <div
-          className={cn(
-            "pointer-events-none absolute inset-0 z-10 bg-white opacity-0 transition-opacity duration-200",
-            "group-hover:opacity-20",
-          )}
-        />
         {/* 어두운 배경 레이어 */}
         <div className="absolute inset-0 bg-black/70" />
         <div className="pointer-events-none relative z-30 flex w-full flex-col justify-between px-40 py-24">
