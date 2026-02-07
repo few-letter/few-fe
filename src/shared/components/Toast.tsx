@@ -23,6 +23,7 @@ interface ToastProps {
   type?: "error" | "success" | "info";
   duration?: number;
   onClose?: () => void;
+  className?: string;
 }
 
 export const Toast = ({
@@ -30,6 +31,7 @@ export const Toast = ({
   type = "info",
   duration = 3000,
   onClose,
+  className,
 }: ToastProps) => {
   const [isVisible, setIsVisible] = useState(false);
   const styles = getToastStyles(type);
@@ -60,10 +62,11 @@ export const Toast = ({
   return (
     <div
       className={cn(
-        isVisible ? "opacity-100" : "opacity-0",
-        "pointer-events-none fixed top-200 left-1/2 z-50 -translate-x-1/2",
+        isVisible ? "translate-y-0 opacity-100" : "-translate-y-20 opacity-0",
+        "pointer-events-none fixed top-200 left-16 z-50",
         "font-body6 rounded-sm border px-16 py-8 shadow-lg backdrop-blur-sm",
-        `transform-gpu transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]`,
+        "[transition:translate_150ms_cubic-bezier(0.16,1,0.3,1),opacity_150ms_ease-out]",
+        className,
         styles,
       )}
       onTransitionEnd={handleTransitionEnd}

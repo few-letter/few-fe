@@ -15,8 +15,7 @@ import {
 } from "@/shared/constants/util";
 import { useMixpanel } from "@/shared/providers";
 import { MIXPANEL_EVENT, WORLD_TABS } from "@/shared/constants";
-import { WorldType } from "@/shared/types";
-import type { CategoryCode } from "@/shared/types";
+import { type CategoryCode, WorldType } from "@/shared/types";
 import type { CodeType } from "@/shared/components/Checkboxes";
 
 interface SubscribeFormState {
@@ -162,12 +161,14 @@ export const SubscribeForm = () => {
         </button>
       </form>
       <Toast
+        className="top-180 left-1/2 -translate-x-1/2"
         message={successToastMessage}
         type="success"
         duration={3000}
         onClose={() => setSuccessToastMessage(null)}
       />
       <Toast
+        className="top-180 left-1/2 -translate-x-1/2"
         message={errorToastMessage}
         type="error"
         duration={3000}
