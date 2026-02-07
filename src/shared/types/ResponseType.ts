@@ -37,7 +37,7 @@ interface BrowseContentDetailResponse {
 interface BrowseContentsResponse {
   id: number; //int64
   url: string;
-  thumbnailImageUrl?: string;
+  thumbnailImageUrl?: string | null;
   mediaType: CodeValueResponse;
   headline: string;
   summary: string;
