@@ -9,15 +9,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  async redirects() {
-    return [
-      {
-        source: "/",
-        destination: "/local-news",
-        permanent: true,
-      },
-    ];
-  },
 };
 
 export default nextConfig;
