@@ -34,7 +34,7 @@ export const Header = ({ underline = true }: { underline?: boolean }) => {
     >
       <div className="flex max-w-1200 flex-1 items-center justify-between">
         <div className="flex items-center gap-40">
-          <Link href={CLIENT_ROUTES.HOME}>
+          <Link href={CLIENT_ROUTES.LOCAL}>
             <Image
               src="/images/logo/few.png"
               alt="logo"
