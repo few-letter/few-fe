@@ -140,7 +140,6 @@ export const ContentDetailSection = ({ id }: ContentDetailSectionProps) => {
       </section>
       <footer className="h-24 md:h-120" />
       <Toast
-        className="top-80 left-1/2 -translate-x-1/2"
         message={toastMessage}
         type="success"
         onClose={() => setToastMessage(null)}
