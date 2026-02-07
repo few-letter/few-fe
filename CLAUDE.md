@@ -206,3 +206,15 @@ QUERY_KEY = {
   GET_CONTENT_DETAIL: "get-content-detail",
 }
 ```
+
+## Domain Logic: 카드 이미지
+
+뉴스 카드의 배경 이미지는 API 응답의 `thumbnailImageUrl`을 우선 사용하고, 없을 경우 카테고리별 기본 이미지(`CATEGORY_CODE_TO_IMAGE`)로 폴백한다.
+
+| 컴포넌트 | 이미지 소스 | 클릭 동작 |
+|-----------|------------|-----------|
+| **NewsCard** (데일리 few) | `DailyFewSection`에서 `CATEGORY_CODE_TO_IMAGE[category]`를 `image` prop으로 전달 | 클릭 비활성 (상세 페이지 리다이렉트 없음) |
+| **Card** (한줄요약 few) | API의 `thumbnailImageUrl` 우선, null이면 `CATEGORY_CODE_TO_IMAGE[categoryCode]` 폴백 | 상세 페이지(`/${worldType}/${id}`)로 이동 |
+
+- `CATEGORY_CODE_TO_IMAGE`는 `src/shared/constants/style.ts`에 정의 (`CategoryCode → 이미지 경로` 매핑)
+- 이미지 경로: `/images/newscard/category{code}.png`
