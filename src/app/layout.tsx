@@ -3,17 +3,16 @@ import "@/app/globals.css";
 import { pretendard, numans } from "@/fonts";
 import { QueryClientProviders, MixpanelProvider } from "@/shared/providers";
 import type { Metadata } from "next";
-
-const SITE_URL = "https://www.few-letter.com";
-const SITE_NAME = "FEW Letter";
-const SITE_TITLE = "FEW Letter - AI 뉴스 큐레이션 구독 서비스";
-const SITE_DESCRIPTION =
-  "AI가 매일 엄선한 IT/테크 뉴스를 이메일로 받아보세요. 국내외 주요 뉴스를 한눈에 정리해드립니다.";
+import {
+  SITE_URL,
+  SITE_NAME,
+  SITE_DESCRIPTION,
+} from "@/shared/constants";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: SITE_TITLE,
+    default: `${SITE_NAME} - AI가 엄선한 뉴스레터 구독`,
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
@@ -32,9 +31,9 @@ export const metadata: Metadata = {
     "Newsletter",
     "Tech News",
   ],
-  authors: [{ name: "FEW Letter", url: SITE_URL }],
-  creator: "FEW Letter",
-  publisher: "FEW Letter",
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
   formatDetection: {
     email: false,
     address: false,
@@ -43,22 +42,22 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    url: `${SITE_URL}/local-news`,
+    url: SITE_URL,
     siteName: SITE_NAME,
-    title: SITE_TITLE,
+    title: `${SITE_NAME} - AI가 엄선한 뉴스레터 구독`,
     description: SITE_DESCRIPTION,
     images: [
       {
         url: "/images/Graphic.png",
         width: 612,
         height: 549,
-        alt: "FEW Letter - AI 뉴스 큐레이션",
+        alt: SITE_NAME,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: SITE_TITLE,
+    title: `${SITE_NAME} - AI가 엄선한 뉴스레터 구독`,
     description: SITE_DESCRIPTION,
     images: ["/images/Graphic.png"],
   },
@@ -74,7 +73,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: `${SITE_URL}/local-news`,
+    canonical: SITE_URL,
   },
   icons: {
     icon: [
