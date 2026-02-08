@@ -1,14 +1,10 @@
 import Image from "next/image";
-
 import { cn } from "@/lib/utils";
-
 import { Badge } from "./Badge";
+import { ExternalLink } from "./ExternalLink";
 import { HighlightedText } from "./HighlightedText";
 
-import type {
-  GroupSourceHeadlineData,
-  CategoryCode,
-} from "@/shared/types";
+import type { GroupSourceHeadlineData, CategoryCode } from "@/shared/types";
 
 interface NewsCardProps {
   categoryCode: CategoryCode;
@@ -95,16 +91,12 @@ const RelatedNewsContent = ({
 };
 
 const InlineLink = ({ headline, url }: { headline: string; url: string }) => {
-  const isWebView =
-    typeof window !== "undefined" && /WebView|wv/.test(navigator.userAgent);
-
   return (
     <div className="flex max-w-full justify-start lg:max-w-[calc(100%-72px)]">
-      <a
+      <ExternalLink
         href={url}
-        {...(!isWebView && { target: "_blank", rel: "noreferrer noopener" })}
         className={cn(
-          "w-fit pointer-events-auto flex flex-row items-center gap-8",
+          "pointer-events-auto flex w-fit flex-row items-center gap-8",
           "font-body5 text-gray10 lg:text-gray2 visited:text-blue2",
         )}
       >
@@ -116,7 +108,7 @@ const InlineLink = ({ headline, url }: { headline: string; url: string }) => {
           height={16}
           className="flex-shrink-0"
         />
-      </a>
+      </ExternalLink>
     </div>
   );
 };

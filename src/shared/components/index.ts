@@ -14,4 +14,4 @@ export * from "./Toast";
 export * from "./PageLoading";
 export * from "./Tabs";
 export * from "./Divider";
-export * from "./IconButton";
+export * from "./ExternalLink";
