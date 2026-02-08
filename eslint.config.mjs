@@ -19,14 +19,10 @@ const eslintConfig = [
     rules: {
       // TypeScript
       "@typescript-eslint/no-explicit-any": "error",
-      "@typescript-eslint/no-unused-vars": "warn",
-
       // React
       "react/display-name": "off",
-
       // Next.js
       "@next/next/no-img-element": "warn",
-
       // Unused imports
       "unused-imports/no-unused-imports": "warn",
     },
