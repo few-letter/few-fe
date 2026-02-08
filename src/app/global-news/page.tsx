@@ -10,6 +10,22 @@ import { Header } from "@/shared/components";
 import { getGroupsOptions, getCategoriesOptions } from "@/shared/remotes";
 import { getQueryClient } from "@/api/client/queryClient";
 import { WorldType } from "@/shared/types";
+import type { Metadata } from "next";
+import { SITE_URL, CLIENT_ROUTES } from "@/shared/constants";
+
+const pageUrl = `${SITE_URL}${CLIENT_ROUTES.GLOBAL}`;
+
+export const metadata: Metadata = {
+  title: "해외 AI 뉴스",
+  description:
+    "AI가 매일 엄선한 해외 IT/테크 뉴스레터. 글로벌 뉴스를 한눈에 정리해드립니다.",
+  alternates: {
+    canonical: pageUrl,
+  },
+  openGraph: {
+    url: pageUrl,
+  },
+};
 
 export default async function Home() {
   const queryClient = getQueryClient();
