@@ -1,13 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { CLIENT_ROUTES } from "@/shared/constants";
+import { CLIENT_ROUTES, MIXPANEL_EVENT, WORLDS } from "@/shared/constants";
 import { useMixpanel } from "@/shared/providers";
 import { cn } from "@/lib/utils";
-import { MIXPANEL_EVENT, WORLDS } from "@/shared/constants";
 import { World } from "@/shared/types";
 import { Menu } from "lucide-react";
 import { MobileSheet } from "./MobileSheet";
@@ -44,6 +43,7 @@ export const Header = ({ underline = true }: { underline?: boolean }) => {
   const pathname = usePathname();
   const mixpanel = useMixpanel();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const closeMobileMenu = useCallback(() => setIsMobileMenuOpen(false), []);
 
   return (
     <>
@@ -93,24 +93,21 @@ export const Header = ({ underline = true }: { underline?: boolean }) => {
           </button>
         </div>
       </div>
-      <MobileSheet
-        isOpen={isMobileMenuOpen}
-        onClose={() => setIsMobileMenuOpen(false)}
-      >
+      <MobileSheet isOpen={isMobileMenuOpen} onClose={closeMobileMenu}>
         <nav className="flex flex-col items-center gap-16 py-16">
           {WORLDS.map((world) => (
             <WorldLink
               key={world.type}
               world={world}
               variant="mobile"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={closeMobileMenu}
             />
           ))}
           <Link
             href={CLIENT_ROUTES.SUBSCRIPTION}
             onClick={() => {
               mixpanel?.track(MIXPANEL_EVENT.HOME_NAV_SUBSCRIBE_CLICK);
-              setIsMobileMenuOpen(false);
+              closeMobileMenu();
             }}
             className={cn(
               "font-heading1",

@@ -35,6 +35,8 @@ export const MobileSheet = ({
         "fixed inset-0 z-50 bg-white transition-transform duration-300 ease-in-out",
         isOpen ? "translate-x-0" : "translate-x-full",
       )}
+      aria-hidden={!isOpen}
+      inert={!isOpen ? true : undefined}
     >
       <div className="flex justify-end px-16 py-20">
         <button onClick={onClose} aria-label="메뉴 닫기">
