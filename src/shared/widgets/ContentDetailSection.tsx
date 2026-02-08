@@ -2,21 +2,14 @@
 
 import Image from "next/image";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { ExternalLink, Share } from "lucide-react";
-import { useState } from "react";
+import { ExternalLink } from "lucide-react";
 import {
   Badge,
   Divider,
   HighlightedText,
   IconButton,
-  Toast,
 } from "@/shared/components";
 import { getContentDetailOptions } from "@/shared/remotes";
-import {
-  canUseWebShare,
-  copyToClipboard,
-  shareViaWebShare,
-} from "@/shared/utils";
 
 import type { CategoryCode } from "@/shared/types";
 
@@ -53,14 +46,12 @@ export const ContentDetailHeader = ({
   headline,
   createdAt,
   url,
-  onShare,
 }: {
   source: string;
   categoryCode: CategoryCode;
   headline: string;
   createdAt: string;
   url: string;
-  onShare: () => void;
 }) => {
   return (
     <header className="flex flex-col gap-16 py-24">
@@ -83,11 +74,6 @@ export const ContentDetailHeader = ({
           label="원본 뉴스 보러가기"
           onClick={() => window.open(url, "_blank", "noopener,noreferrer")}
         />
-        <IconButton
-          icon={<Share size={16} />}
-          label="공유하기"
-          onClick={onShare}
-        />
       </div>
     </header>
   );
@@ -95,25 +81,6 @@ export const ContentDetailHeader = ({
 
 export const ContentDetailSection = ({ id }: ContentDetailSectionProps) => {
   const { data: content } = useSuspenseQuery(getContentDetailOptions(id));
-  const [toastMessage, setToastMessage] = useState<string | null>(null);
-
-  const handleShare = async () => {
-    const shareUrl = window.location.href;
-
-    if (canUseWebShare()) {
-      const result = await shareViaWebShare({
-        title: content.headline,
-        url: shareUrl,
-      });
-      if (result === "success" || result === "cancelled") return;
-    }
-
-    const copied = await copyToClipboard(shareUrl);
-
-    setToastMessage(
-      copied ? "링크가 복사되었습니다." : "링크 복사에 실패했습니다.",
-    );
-  };
 
   return (
     <article>
@@ -127,7 +94,6 @@ export const ContentDetailSection = ({ id }: ContentDetailSectionProps) => {
         headline={content.headline}
         createdAt={content.createdAt}
         url={content.url}
-        onShare={handleShare}
       />
       <section className="mt-0 md:mt-40">
         <p className="font-body6 text-gray7 leading-relaxed">
@@ -139,11 +105,6 @@ export const ContentDetailSection = ({ id }: ContentDetailSectionProps) => {
         </p>
       </section>
       <footer className="h-24 md:h-120" />
-      <Toast
-        message={toastMessage}
-        type="success"
-        onClose={() => setToastMessage(null)}
-      />
     </article>
   );
 };
