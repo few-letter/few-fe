@@ -1,6 +1,6 @@
 "use client";
 
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 import { X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useScrollLock } from "@/shared/hooks";
@@ -18,6 +18,17 @@ export const MobileSheet = ({
 }: MobileSheetProps) => {
   useScrollLock(isOpen);
 
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isOpen, onClose]);
+
   return (
     <div
       className={cn(
@@ -30,7 +41,7 @@ export const MobileSheet = ({
           <X size={24} />
         </button>
       </div>
-      {children}
+      {isOpen && children}
     </div>
   );
 };
