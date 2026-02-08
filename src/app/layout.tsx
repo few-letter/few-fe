@@ -1,8 +1,7 @@
-import "./globals.css";
+import "@/app/globals.css";
 
 import { pretendard, numans } from "@/fonts";
 import { QueryClientProviders, MixpanelProvider } from "@/shared/providers";
-
 import type { Metadata } from "next";
 
 const SITE_URL = "https://www.few-letter.com";
@@ -44,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "ko_KR",
-    url: SITE_URL,
+    url: `${SITE_URL}/local-news`,
     siteName: SITE_NAME,
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
@@ -75,7 +74,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: SITE_URL,
+    canonical: `${SITE_URL}/local-news`,
   },
   icons: {
     icon: [

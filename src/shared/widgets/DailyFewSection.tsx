@@ -1,10 +1,12 @@
 "use client";
 
 import { Carousel, NewsCard } from "@/shared/components";
-import { useGroups } from "@/shared/hooks";
+import { useGroups, usePathToWorld } from "@/shared/hooks";
+import { CATEGORY_CODE_TO_IMAGE } from "@/shared/constants";
 
 export const DailyFewSection = () => {
-  const groups = useGroups("local");
+  const world = usePathToWorld();
+  const groups = useGroups(world);
 
   return (
     <Carousel
@@ -16,6 +18,7 @@ export const DailyFewSection = () => {
           headline={item.headline}
           summary={item.summary}
           relatedNews={item.groupSourceHeadlines}
+          image={CATEGORY_CODE_TO_IMAGE[item.category]}
         />
       )}
       numColumns={2}

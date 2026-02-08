@@ -1,20 +1,24 @@
-import type { WorldType } from "@/shared/types";
+import { World, WorldType } from "@/shared/types";
+import { CLIENT_ROUTES } from "@/shared/constants";
+import type { Tab } from "@/shared/components/Tabs";
 
-interface World {
-  type: WorldType;
-  name: string;
-  url: string;
-}
+export const WORLD_TYPES: WorldType[] = Object.values(WorldType);
 
-export const WORLDS: World[] = [
-  {
-    type: "local",
-    name: "국내 뉴스",
-    url: "/local",
-  },
-  {
-    type: "global",
-    name: "해외 뉴스",
-    url: "/global",
-  },
+const LOCAL_WORLD: World = {
+  type: WorldType.LOCAL,
+  name: "국내 뉴스",
+  url: CLIENT_ROUTES.LOCAL,
+};
+
+const GLOBAL_WORLD: World = {
+  type: WorldType.GLOBAL,
+  name: "해외 뉴스",
+  url: CLIENT_ROUTES.GLOBAL,
+};
+
+export const WORLDS: World[] = [LOCAL_WORLD, GLOBAL_WORLD];
+
+export const WORLD_TABS: Tab<WorldType>[] = [
+  { value: WorldType.LOCAL, label: LOCAL_WORLD.name },
+  { value: WorldType.GLOBAL, label: GLOBAL_WORLD.name },
 ];

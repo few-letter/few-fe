@@ -16,15 +16,28 @@ interface BrowseContentsResponses {
  * GET contents/{id}
  */
 
-interface SuccessBodyBrowseContentResponse {
-  data: BrowseContentsResponse;
+interface SuccessBodyBrowseContentDetailResponse {
+  data: BrowseContentDetailResponse;
   message: string;
+}
+
+interface BrowseContentDetailResponse {
+  id: number; //int64
+  thumbnailImageUrl?: string;
+  mediaType: CodeValueResponse;
+  url: string;
+  headline: string;
+  summary: string;
+  highlightTexts: string[];
+  category: CodeValueResponse;
+  region?: CodeValueResponse;
+  createdAt: string; // ISO 8601 날짜 문자열
 }
 
 interface BrowseContentsResponse {
   id: number; //int64
   url: string;
-  thumbnailImageUrl?: string;
+  thumbnailImageUrl?: string | null;
   mediaType: CodeValueResponse;
   headline: string;
   summary: string;
@@ -111,7 +124,8 @@ interface SuccessBodyDeleteSubscriptionResponse {
 export type {
   SuccessBodyBrowseContentResponses, //GET contents
   BrowseContentsResponse,
-  SuccessBodyBrowseContentResponse, //GET contents/{id}
+  SuccessBodyBrowseContentDetailResponse, //GET contents/{id}
+  BrowseContentDetailResponse,
   SuccessBodyBrowseGroupGenResponses, //GET contents/groups
   CategoryCode,
   BrowseGroupGenResponse,

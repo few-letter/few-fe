@@ -5,7 +5,7 @@ import {
   CATEGORY_CODE_TO_COLOR,
   CATEGORY_CODE_TO_EMOJI,
 } from "@/shared/constants";
-import { useCategories } from "@/shared/hooks";
+import { useCategories, usePathToWorld } from "@/shared/hooks";
 
 import type { CategoryCode } from "@/shared/types";
 
@@ -13,14 +13,22 @@ interface BadgeProps {
   categoryCode: CategoryCode;
   className?: string;
   showEmoji?: boolean;
+  variant?: "primary" | "secondary";
 }
+
+const variantStyles = {
+  primary: "bg-white",
+  secondary: "bg-gray2",
+};
 
 export const Badge = ({
   categoryCode,
   className,
   showEmoji = false,
+  variant = "primary",
 }: BadgeProps) => {
-  const categories = useCategories("local");
+  const world = usePathToWorld();
+  const categories = useCategories(world);
   const color = CATEGORY_CODE_TO_COLOR[categoryCode];
   const emoji = CATEGORY_CODE_TO_EMOJI[categoryCode];
   const label =
@@ -29,9 +37,9 @@ export const Badge = ({
   return (
     <div
       className={cn(
-        "text-gray8",
+        "text-gray8 font-caption2 w-fit rounded-sm px-8 py-4",
         color,
-        "font-caption2 w-fit rounded-sm bg-white px-8 py-4",
+        variantStyles[variant],
         className,
       )}
     >

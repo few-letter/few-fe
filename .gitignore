@@ -47,4 +47,4 @@ next-env.d.ts
 *storybook.log
 setting.json
 
-/.claude/
+/.claude/skills/*

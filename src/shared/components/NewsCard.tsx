@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-
 import { Badge } from "./Badge";
+import { ExternalLink } from "./ExternalLink";
 import { HighlightedText } from "./HighlightedText";
 
 import type { GroupSourceHeadlineData, CategoryCode } from "@/shared/types";
@@ -12,7 +12,7 @@ interface NewsCardProps {
   summary: string;
   highlightTexts: string[];
   relatedNews: GroupSourceHeadlineData[];
-  image?: string;
+  image?: string | null;
 }
 
 export const NewsCard = ({
@@ -24,7 +24,7 @@ export const NewsCard = ({
   image,
 }: NewsCardProps) => {
   return (
-    <div className="relative">
+    <article className="relative">
       {/* 메인 카드 */}
       <div
         className={cn(
@@ -40,7 +40,7 @@ export const NewsCard = ({
       >
         {/* 어두운 배경 레이어 */}
         <div className="absolute inset-0 bg-black/70" />
-        <div className="relative z-10 flex w-full flex-col justify-between px-40 py-24">
+        <div className="pointer-events-none relative z-30 flex w-full flex-col justify-between px-40 py-24">
           <div className="space-y-12">
             <Badge categoryCode={categoryCode} />
             <div className="font-sub2 line-clamp-2 text-white">{headline}</div>
@@ -49,7 +49,7 @@ export const NewsCard = ({
             </p>
           </div>
           {/* 관련기사 - lg 이상에서만 카드 안에 표시 */}
-          <div className="hidden space-y-12 lg:block">
+          <div className="relative z-30 hidden space-y-12 lg:block">
             <RelatedNewsContent relatedNews={relatedNews} />
           </div>
         </div>
@@ -65,7 +65,7 @@ export const NewsCard = ({
       <div className="mt-16 space-y-12 lg:hidden">
         <RelatedNewsContent relatedNews={relatedNews} />
       </div>
-    </div>
+    </article>
   );
 };
 
@@ -90,34 +90,25 @@ const RelatedNewsContent = ({
   );
 };
 
-const InlineLink = ({ headline, url }: { headline: string; url?: string }) => {
-  const isWebView =
-    typeof window !== "undefined" && /WebView|wv/.test(navigator.userAgent);
-
-  return url ? (
-    <a
-      href={url}
-      {...(!isWebView && { target: "_blank", rel: "noreferrer noopener" })}
-      className={cn(
-        "flex flex-row items-center gap-8",
-        "font-body5 text-gray10 lg:text-gray2 visited:text-blue2 truncate",
-        "max-w-full lg:max-w-[calc(100%-72px)]",
-      )}
-    >
-      <span>{headline}</span>
-      <Image
-        src="/images/icons/Icon_Link.png"
-        alt="Link icon"
-        width={16}
-        height={16}
-        className="flex-shrink-0"
-      />
-    </a>
-  ) : (
-    <div className="flex flex-row items-center gap-8">
-      <span className="font-body5 text-gray4 max-w-full truncate lg:max-w-[calc(100%-72px)]">
-        {headline}
-      </span>
+const InlineLink = ({ headline, url }: { headline: string; url: string }) => {
+  return (
+    <div className="flex max-w-full justify-start lg:max-w-[calc(100%-72px)]">
+      <ExternalLink
+        href={url}
+        className={cn(
+          "pointer-events-auto flex w-fit flex-row items-center gap-8",
+          "font-body5 text-gray10 lg:text-gray2 visited:text-blue2",
+        )}
+      >
+        <span className="truncate">{headline}</span>
+        <Image
+          src="/images/icons/Icon_Link.png"
+          alt="Link icon"
+          width={16}
+          height={16}
+          className="flex-shrink-0"
+        />
+      </ExternalLink>
     </div>
   );
 };

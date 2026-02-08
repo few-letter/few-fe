@@ -2,35 +2,39 @@ import { cn } from "@/lib/utils";
 
 import { Badge } from "./Badge";
 import { toKoreanSlashDate } from "@/shared/utils";
+import Link from "next/link";
 
-import type { CategoryCode, CodeValueResponse } from "@/shared/types";
+import type {
+  CategoryCode,
+  CodeValueResponse,
+  WorldType,
+} from "@/shared/types";
+import { CATEGORY_CODE_TO_IMAGE } from "../constants";
 
 interface CardProps {
+  id: number;
+  worldType: WorldType;
   categoryCode: CategoryCode;
-  link: string;
   headline: string;
   summary: string;
   createdAt: Date | string;
-  image?: string;
+  image?: string | null;
   mediaType: CodeValueResponse;
 }
 
 export const Card = ({
+  id,
+  worldType,
   categoryCode,
-  link,
   headline,
   summary,
   createdAt,
   image,
   mediaType,
 }: CardProps) => {
-  const isWebView =
-    typeof window !== "undefined" && /WebView|wv/.test(navigator.userAgent);
-
   return (
-    <a
-      href={link}
-      {...(!isWebView && { target: "_blank", rel: "noreferrer noopener" })}
+    <Link
+      href={`/${worldType}/${id}`}
       className={cn(
         "group border-gray2 relative flex flex-col overflow-hidden rounded-sm",
       )}
@@ -46,7 +50,11 @@ export const Card = ({
           "relative flex min-h-160 min-w-282",
           "bg-opacity70 bg-cover bg-center bg-no-repeat",
         )}
-        style={{ backgroundImage: image ? `url(${image})` : "none" }}
+        style={{
+          backgroundImage: image
+            ? `url(${image})`
+            : `url(${CATEGORY_CODE_TO_IMAGE[categoryCode]})`,
+        }}
       />
       <div className="bg-gray2 flex w-full flex-1 px-20 py-20">
         <div className="flex flex-1 flex-col gap-12">
@@ -64,7 +72,7 @@ export const Card = ({
           </div>
         </div>
       </div>
-    </a>
+    </Link>
   );
 };
 

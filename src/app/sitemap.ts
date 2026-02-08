@@ -5,19 +5,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     {
-      url: baseUrl,
+      url: `${baseUrl}/local-news`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 1,
     },
     {
-      url: `${baseUrl}/local`,
-      lastModified: new Date(),
-      changeFrequency: "daily",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/global`,
+      url: `${baseUrl}/global-news`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.9,
