@@ -12,7 +12,15 @@ import { World } from "@/shared/types";
 import { Menu } from "lucide-react";
 import { MobileSheet } from "./MobileSheet";
 
-const WorldLink = ({ world }: { world: World }) => {
+const WorldLink = ({
+  world,
+  onClick,
+  variant = "desktop",
+}: {
+  world: World;
+  onClick?: () => void;
+  variant?: "desktop" | "mobile";
+}) => {
   const pathname = usePathname();
   const isActive =
     pathname === world.url || pathname.startsWith(`${world.url}/`);
@@ -20,7 +28,12 @@ const WorldLink = ({ world }: { world: World }) => {
   return (
     <Link
       href={world.url}
-      className={cn("font-sub5 text-semibold", isActive && "text-blue3")}
+      onClick={onClick}
+      className={
+        variant === "desktop"
+          ? cn("font-sub5 text-semibold", isActive && "text-blue3")
+          : cn("font-heading1", isActive ? "text-blue3" : "text-black")
+      }
     >
       {world.name}
     </Link>
@@ -84,23 +97,14 @@ export const Header = ({ underline = true }: { underline?: boolean }) => {
         onClose={() => setIsMobileMenuOpen(false)}
       >
         <nav className="flex flex-col items-center gap-16 py-16">
-          {WORLDS.map((world) => {
-            const isActive =
-              pathname === world.url || pathname.startsWith(`${world.url}/`);
-            return (
-              <Link
-                key={world.type}
-                href={world.url}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={cn(
-                  "font-heading1",
-                  isActive ? "text-blue3" : "text-black",
-                )}
-              >
-                {world.name}
-              </Link>
-            );
-          })}
+          {WORLDS.map((world) => (
+            <WorldLink
+              key={world.type}
+              world={world}
+              variant="mobile"
+              onClick={() => setIsMobileMenuOpen(false)}
+            />
+          ))}
           <Link
             href={CLIENT_ROUTES.SUBSCRIPTION}
             onClick={() => {
