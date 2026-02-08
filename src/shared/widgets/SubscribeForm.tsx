@@ -15,8 +15,7 @@ import {
 } from "@/shared/constants/util";
 import { useMixpanel } from "@/shared/providers";
 import { MIXPANEL_EVENT, WORLD_TABS } from "@/shared/constants";
-import { WorldType } from "@/shared/types";
-import type { CategoryCode } from "@/shared/types";
+import { type CategoryCode, WorldType } from "@/shared/types";
 import type { CodeType } from "@/shared/components/Checkboxes";
 
 interface SubscribeFormState {

@@ -1,17 +1,16 @@
 "use client";
 
 import Image from "next/image";
-
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { ExternalLink, Share } from "lucide-react";
-
+import { ExternalLink as ExternalLinkIcon } from "lucide-react";
 import {
   Badge,
   Divider,
+  ExternalLink,
   HighlightedText,
-  IconButton,
 } from "@/shared/components";
 import { getContentDetailOptions } from "@/shared/remotes";
+
 import type { CategoryCode } from "@/shared/types";
 
 interface ContentDetailSectionProps {
@@ -70,18 +69,13 @@ export const ContentDetailHeader = ({
         </time>
       </div>
       <div className="mt-8 flex flex-row gap-12">
-        <IconButton
-          icon={<ExternalLink size={16} />}
-          label="원본 뉴스 보러가기"
-          onClick={() => window.open(url, "_blank", "noopener,noreferrer")}
-        />
-        <IconButton
-          icon={<Share size={16} />}
-          label="공유하기"
-          onClick={() => {
-            // TODO: 공유하기 기능 구현
-          }}
-        />
+        <ExternalLink
+          href={url}
+          className="bg-gray2 font-body5 text-gray8 hover:bg-gray3 flex cursor-pointer items-center gap-4 rounded-sm px-8 py-4"
+        >
+          <ExternalLinkIcon size={16} />
+          원본 뉴스 보러가기
+        </ExternalLink>
       </div>
     </header>
   );
