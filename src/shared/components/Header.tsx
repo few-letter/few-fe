@@ -83,7 +83,7 @@ export const Header = ({ underline = true }: { underline?: boolean }) => {
         isOpen={isMobileMenuOpen}
         onClose={() => setIsMobileMenuOpen(false)}
       >
-        <nav className="flex flex-col items-center gap-32 pt-40">
+        <nav className="flex flex-col items-center gap-16 py-16">
           {WORLDS.map((world) => {
             const isActive =
               pathname === world.url || pathname.startsWith(`${world.url}/`);
@@ -93,7 +93,7 @@ export const Header = ({ underline = true }: { underline?: boolean }) => {
                 href={world.url}
                 onClick={() => setIsMobileMenuOpen(false)}
                 className={cn(
-                  "text-[24px] font-bold",
+                  "font-heading1",
                   isActive ? "text-blue3" : "text-black",
                 )}
               >
@@ -108,7 +108,7 @@ export const Header = ({ underline = true }: { underline?: boolean }) => {
               setIsMobileMenuOpen(false);
             }}
             className={cn(
-              "text-[24px] font-bold",
+              "font-heading1",
               pathname === CLIENT_ROUTES.SUBSCRIPTION
                 ? "text-blue3"
                 : "text-black",

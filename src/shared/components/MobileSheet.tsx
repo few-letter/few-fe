@@ -11,7 +11,11 @@ interface MobileSheetProps {
   children: ReactNode;
 }
 
-export const MobileSheet = ({ isOpen, onClose, children }: MobileSheetProps) => {
+export const MobileSheet = ({
+  isOpen,
+  onClose,
+  children,
+}: MobileSheetProps) => {
   useScrollLock(isOpen);
 
   return (
@@ -21,7 +25,7 @@ export const MobileSheet = ({ isOpen, onClose, children }: MobileSheetProps) => 
         isOpen ? "translate-x-0" : "translate-x-full",
       )}
     >
-      <div className="flex justify-end px-16 py-16">
+      <div className="flex justify-end px-16 py-20">
         <button onClick={onClose} aria-label="메뉴 닫기">
           <X size={24} />
         </button>
