@@ -48,9 +48,10 @@ export const Header = ({ underline = true }: { underline?: boolean }) => {
   return (
     <>
       <div
-        className={`border-gray3 fixed top-0 left-0 z-20 flex w-full items-center justify-center border-b-1 bg-white px-16 py-16 ${
-          underline ? "border-b-1" : "border-b-0"
-        }`}
+        className={cn(
+          "border-gray3 fixed top-0 left-0 z-20 flex w-full items-center justify-center bg-white px-16 py-16",
+          underline ? "border-b-1" : "border-b-0",
+        )}
       >
         <div className="flex max-w-1200 flex-1 items-center justify-between">
           <div className="flex items-center gap-40">
