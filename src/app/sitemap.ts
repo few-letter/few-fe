@@ -1,23 +1,23 @@
 import type { MetadataRoute } from "next";
 
-export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://www.few-letter.com";
+import { SITE_URL } from "@/shared/constants";
 
+export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
-      url: `${baseUrl}/local-news`,
+      url: `${SITE_URL}/local-news`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 1,
     },
     {
-      url: `${baseUrl}/global-news`,
+      url: `${SITE_URL}/global-news`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.9,
     },
     {
-      url: `${baseUrl}/subscription`,
+      url: `${SITE_URL}/subscription`,
       lastModified: new Date(),
       changeFrequency: "monthly",
       priority: 0.8,
