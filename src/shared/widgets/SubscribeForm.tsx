@@ -102,7 +102,7 @@ export const SubscribeForm = () => {
     if (isDisabled) return;
 
     subscriptionMutation.mutate({
-      contentType: form.contentsType,
+      contentsType: form.contentsType,
       email: form.email,
       categoryCodes: form.categoryCodes as CategoryCode[],
     });
