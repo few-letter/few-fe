@@ -1,5 +1,7 @@
+import type { Metadata } from "next";
 import { Suspense } from "react";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
+import { getQueryClient } from "@/api/client/queryClient";
 import {
   DailyFewHeader,
   DailyFewSection,
@@ -8,9 +10,7 @@ import {
 } from "@/shared/widgets";
 import { Header } from "@/shared/components";
 import { getGroupsOptions, getCategoriesOptions } from "@/shared/remotes";
-import { getQueryClient } from "@/api/client/queryClient";
 import { WorldType } from "@/shared/types";
-import type { Metadata } from "next";
 import { SITE_URL, CLIENT_ROUTES } from "@/shared/constants";
 
 const pageUrl = `${SITE_URL}${CLIENT_ROUTES.GLOBAL}`;

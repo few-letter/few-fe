@@ -6,13 +6,14 @@ import type { Metadata } from "next";
 import {
   SITE_URL,
   SITE_NAME,
+  SITE_TITLE,
   SITE_DESCRIPTION,
 } from "@/shared/constants";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: `${SITE_NAME} - AI가 엄선한 뉴스레터 구독`,
+    default: SITE_TITLE,
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
@@ -44,7 +45,7 @@ export const metadata: Metadata = {
     locale: "ko_KR",
     url: SITE_URL,
     siteName: SITE_NAME,
-    title: `${SITE_NAME} - AI가 엄선한 뉴스레터 구독`,
+    title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     images: [
       {
@@ -57,7 +58,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} - AI가 엄선한 뉴스레터 구독`,
+    title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     images: ["/images/Graphic.png"],
   },
