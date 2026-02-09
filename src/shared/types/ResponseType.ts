@@ -99,6 +99,7 @@ interface Success {
  */
 
 interface PostRequestBody {
+  contentType: number;
   email: string;
   categoryCodes: CategoryCode[];
 }
