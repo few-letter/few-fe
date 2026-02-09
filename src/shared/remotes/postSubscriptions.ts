@@ -7,11 +7,10 @@ import type {
 } from "@/shared/types";
 import type { UseMutationOptions } from "@tanstack/react-query";
 
-const postSubscriptions = async ({ email, categoryCodes }: PostRequestBody) => {
-  const categoryCodesNumber = categoryCodes.map((code) => Number(code));
+const postSubscriptions = async (requestBody: PostRequestBody) => {
   const response = await few.post<SuccessBodyPostSubscriptionsResponse>(
     [API_ROUTES.SUBSCRIBE],
-    { email, categoryCodes: categoryCodesNumber },
+    requestBody,
   );
 
   return response;
