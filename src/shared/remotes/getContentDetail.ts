@@ -22,4 +22,4 @@ const getContentDetailOptions = (id: string) =>
     select: (data) => data.data,
   });
 
-export { getContentDetailOptions };
+export { getContentDetail, getContentDetailOptions };
