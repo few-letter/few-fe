@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 
 import { CLIENT_ROUTES } from "@/shared/constants";
 import { generateContentMetadata } from "@/shared/utils";
-import { DetailPageLayout } from "@/shared/widgets";
+import { DetailPageLayout } from "@/shared/widgets/DetailPageLayout";
 
 interface GlobalNewsDetailPageProps {
   params: Promise<{ id: string }>;
