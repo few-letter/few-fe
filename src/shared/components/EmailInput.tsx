@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import { validateEmail } from "@/shared/utils/util";
+import { validateEmail } from "@/shared/utils";
 
 import type { ChangeEvent } from "react";
 
