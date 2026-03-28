@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { isWebView } from "@/shared/utils";
 
 interface ExternalLinkProps {
   href: string;
@@ -13,16 +14,16 @@ export const ExternalLink = ({
   className,
   children,
 }: ExternalLinkProps) => {
-  const [isWebView, setIsWebView] = useState(false);
+  const [isInWebView, setIsInWebView] = useState(false);
 
   useEffect(() => {
-    setIsWebView(/WebView|wv/.test(navigator.userAgent));
+    setIsInWebView(isWebView());
   }, []);
 
   return (
     <a
       href={href}
-      {...(!isWebView && { target: "_blank", rel: "noreferrer noopener" })}
+      {...(!isInWebView && { target: "_blank", rel: "noreferrer noopener" })}
       className={className}
     >
       {children}

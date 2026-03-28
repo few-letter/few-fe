@@ -1,15 +1,18 @@
 "use client";
 
+import { useState, useCallback } from "react";
 import Image from "next/image";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { ExternalLink as ExternalLinkIcon } from "lucide-react";
+import { ExternalLink as ExternalLinkIcon, Share2 } from "lucide-react";
 import {
   Badge,
   Divider,
   ExternalLink,
   HighlightedText,
+  Toast,
 } from "@/shared/components";
 import { getContentDetailOptions } from "@/shared/remotes";
+import { copyToClipboard, isMobileDevice } from "@/shared/utils";
 
 import type { CategoryCode } from "@/shared/types";
 
@@ -53,6 +56,32 @@ export const ContentDetailHeader = ({
   createdAt: string;
   url: string;
 }) => {
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const handleShare = useCallback(async () => {
+    const currentUrl = window.location.href;
+
+    if (isMobileDevice() && typeof navigator.share === "function") {
+      try {
+        await navigator.share({
+          title: headline,
+          text: `${source} - ${headline}`,
+          url: currentUrl,
+        });
+        return;
+      } catch (error) {
+        if (error instanceof Error && error.name === "AbortError") {
+          return;
+        }
+      }
+    }
+
+    const copied = await copyToClipboard(currentUrl);
+    if (copied) {
+      setToastMessage("링크가 복사되었습니다");
+    }
+  }, [headline, source]);
+
   return (
     <header className="flex flex-col gap-16 py-24">
       <Badge categoryCode={categoryCode} variant="secondary" />
@@ -76,7 +105,19 @@ export const ContentDetailHeader = ({
           <ExternalLinkIcon size={16} />
           원본 뉴스 보러가기
         </ExternalLink>
+        <button
+          onClick={handleShare}
+          className="bg-gray2 font-body5 text-gray8 hover:bg-gray3 flex cursor-pointer items-center gap-4 rounded-sm px-8 py-4"
+        >
+          <Share2 size={16} />
+          공유하기
+        </button>
       </div>
+      <Toast
+        message={toastMessage}
+        type="success"
+        onClose={() => setToastMessage(null)}
+      />
     </header>
   );
 };

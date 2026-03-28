@@ -2,8 +2,10 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 
 import { getQueryClient } from "@/api/client/queryClient";
 import { getContentDetailOptions, getCategoriesOptions } from "@/shared/remotes";
-import { ContentDetailSection, SubscribeForm } from "@/shared/widgets";
-import { Header, Banner } from "@/shared/components";
+import { ContentDetailSection } from "@/shared/widgets/ContentDetailSection";
+import { SubscribeForm } from "@/shared/widgets/SubscribeForm";
+import { Header } from "@/shared/components/Header";
+import { Banner } from "@/shared/components/Banner";
 import { WorldType } from "@/shared/types";
 
 interface DetailPageLayoutProps {

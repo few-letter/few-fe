@@ -3,8 +3,9 @@ import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { getQueryClient } from "@/api/client/queryClient";
 import { getCategoriesOptions } from "@/shared/remotes";
 import { WorldType } from "@/shared/types";
-import { Banner, Header } from "@/shared/components";
-import { SubscribeForm } from "@/shared/widgets";
+import { Banner } from "@/shared/components/Banner";
+import { Header } from "@/shared/components/Header";
+import { SubscribeForm } from "@/shared/widgets/SubscribeForm";
 import { SITE_URL, CLIENT_ROUTES } from "@/shared/constants";
 
 const pageUrl = `${SITE_URL}${CLIENT_ROUTES.SUBSCRIPTION}`;

@@ -8,7 +8,7 @@ import {
   getCategoriesOptions,
 } from "@/shared/remotes";
 import { Checkboxes, EmailInput, Toast, Tabs } from "@/shared/components";
-import { validateEmail } from "@/shared/utils/util";
+import { validateEmail } from "@/shared/utils";
 import {
   SUCCESS_SUBSCRIPTION_TOAST_MESSAGE,
   ERROR_SUBSCRIPTION_TOAST_MESSAGE,
