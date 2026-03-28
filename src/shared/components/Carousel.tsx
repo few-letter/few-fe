@@ -109,7 +109,10 @@ export const Carousel = <T,>({
   const transformStyle = useMemo(() => {
     const validIndex = Math.min(currentIndex, totalSlides - 1);
     const isLastSlideOffsetExist =
-      isDesktop && validIndex === totalSlides - 1 && lastSlideOffset > 0;
+      isDesktop &&
+      totalSlides > 1 &&
+      validIndex === totalSlides - 1 &&
+      lastSlideOffset > 0;
     const gapCount = isDesktop ? validIndex + 1 : validIndex;
     const gap = validIndex > 0 ? gapCount * CAROUSEL_GAP : 0;
     const translateX = isLastSlideOffsetExist
@@ -156,7 +159,9 @@ export const Carousel = <T,>({
                 className={cn("w-full min-w-0 flex-shrink-0")}
                 style={{
                   width: isDesktop
-                    ? `calc(${100 / itemsPerView}% - ${CAROUSEL_GAP}px)`
+                    ? items.length === 1
+                      ? "100%"
+                      : `calc(${100 / itemsPerView}% - ${CAROUSEL_GAP}px)`
                     : `calc(${100 / itemsPerView}%)`,
                 }}
               >
