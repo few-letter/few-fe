@@ -2,13 +2,11 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { dehydrate, HydrationBoundary } from "@tanstack/react-query";
 import { getQueryClient } from "@/api/client/queryClient";
-import {
-  DailyFewHeader,
-  DailyFewSection,
-  DailyFewSummary,
-  HomeTracker,
-} from "@/shared/widgets";
-import { Header } from "@/shared/components";
+import { DailyFewHeader } from "@/shared/widgets/DailyFewHeader";
+import { DailyFewSection } from "@/shared/widgets/DailyFewSection";
+import { DailyFewSummary } from "@/shared/widgets/DailyFewSummary";
+import { HomeTracker } from "@/shared/widgets/HomeTracker";
+import { Header } from "@/shared/components/Header";
 import { getGroupsOptions, getCategoriesOptions } from "@/shared/remotes";
 import { WorldType } from "@/shared/types";
 import { SITE_URL, CLIENT_ROUTES } from "@/shared/constants";
