@@ -148,7 +148,9 @@ export const Carousel = <T,>({
         onTouchEnd={onTouchEnd}
       >
         <div
-          className={cn("flex flex-row flex-nowrap", `gap-${CAROUSEL_GAP}`)}
+          // gap-[24px]: 동적 클래스(`gap-${CAROUSEL_GAP}`)는 Tailwind JIT가 빌드 시 감지하지 못하므로
+          // arbitrary value 문법으로 명시해 CSS 생성을 보장한다.
+          className={cn("flex flex-row flex-nowrap", "gap-[24px]")}
           style={transformStyle}
         >
           {items.map((item, index) => {
