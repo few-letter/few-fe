@@ -20,6 +20,8 @@
 
 # production
 /build
+/public/sw.js
+
 
 # misc
 .DS_Store
@@ -48,3 +50,4 @@ next-env.d.ts
 setting.json
 
 /.claude/skills/*
+.mcp.json
