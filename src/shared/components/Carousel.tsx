@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import { cn } from "@/lib/utils";
 import {
   INDICATOR_TOTAL_WIDTH,
@@ -26,6 +26,8 @@ export const Carousel = <T,>({
   numColumns = 2,
 }: CarouselProps<T>) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const currentIndexRef = useRef(currentIndex);
+  currentIndexRef.current = currentIndex;
   const [itemsPerView, setItemsPerView] = useState(numColumns);
   const [isDesktop, setIsDesktop] = useState(false);
   const [lastSlideOffset, setLastSlideOffset] = useState(0);
@@ -57,13 +59,13 @@ export const Carousel = <T,>({
     const residue = items.length % itemsPerView;
     const newTotalSlides = Math.ceil(items.length / itemsPerView);
 
-    if (currentIndex >= newTotalSlides) {
+    if (currentIndexRef.current >= newTotalSlides) {
       setCurrentIndex(newTotalSlides - 1);
     }
     if (residue > 0) {
       setLastSlideOffset((residue / itemsPerView) * 100);
     }
-  }, [items.length, itemsPerView]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [items.length, itemsPerView]);
 
   const goToPrevious = useCallback(() => {
     setCurrentIndex((prev) => (prev > 0 ? prev - 1 : totalSlides - 1));
@@ -109,17 +111,17 @@ export const Carousel = <T,>({
   const transformStyle = useMemo(() => {
     const validIndex = Math.min(currentIndex, totalSlides - 1);
     const isLastSlideOffsetExist =
-      isDesktop && validIndex === totalSlides - 1 && lastSlideOffset > 0;
-    const gapCount = isDesktop ? validIndex + 1 : validIndex;
-    const gap = validIndex > 0 ? gapCount * CAROUSEL_GAP : 0;
+      isDesktop &&
+      totalSlides > 1 &&
+      validIndex === totalSlides - 1 &&
+      lastSlideOffset > 0;
+    const gap = validIndex * CAROUSEL_GAP;
     const translateX = isLastSlideOffsetExist
       ? -((validIndex - 1) * 100 + lastSlideOffset)
       : -(validIndex * 100);
 
     return {
-      transform: isDesktop
-        ? `translateX(${translateX}%)`
-        : `translateX(calc(${translateX}% - ${gap}px))`,
+      transform: `translateX(calc(${translateX}% - ${gap}px))`,
       transition: "transform 0.3s ease-in-out",
     };
   }, [currentIndex, totalSlides, isDesktop, lastSlideOffset]);
@@ -146,7 +148,9 @@ export const Carousel = <T,>({
         onTouchEnd={onTouchEnd}
       >
         <div
-          className={cn("flex flex-row flex-nowrap", `gap-${CAROUSEL_GAP}`)}
+          // gap-[24px]: 동적 클래스(`gap-${CAROUSEL_GAP}`)는 Tailwind JIT가 빌드 시 감지하지 못하므로
+          // arbitrary value 문법으로 명시해 CSS 생성을 보장한다.
+          className={cn("flex flex-row flex-nowrap", "gap-[24px]")}
           style={transformStyle}
         >
           {items.map((item, index) => {
@@ -156,7 +160,9 @@ export const Carousel = <T,>({
                 className={cn("w-full min-w-0 flex-shrink-0")}
                 style={{
                   width: isDesktop
-                    ? `calc(${100 / itemsPerView}% - ${CAROUSEL_GAP}px)`
+                    ? items.length === 1
+                      ? "100%"
+                      : `calc((100% - ${CAROUSEL_GAP * (itemsPerView - 1)}px) / ${itemsPerView})`
                     : `calc(${100 / itemsPerView}%)`,
                 }}
               >
