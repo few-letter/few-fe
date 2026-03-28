@@ -6,7 +6,7 @@ This file provides guidance for Claude Code when working with this project.
 
 **Few Letter** - AI 뉴스 큐레이션 구독 서비스의 프론트엔드 애플리케이션
 
-- **Framework**: Next.js 15.3.8 (App Router, Turbopack)
+- **Framework**: Next.js 16.2.1 (App Router, Turbopack)
 - **Language**: TypeScript (strict mode)
 - **Package Manager**: pnpm 10
 
@@ -14,6 +14,8 @@ This file provides guidance for Claude Code when working with this project.
 
 ```bash
 pnpm dev          # 개발 서버 (Turbopack)
+pnpm dev:webpack  # 개발 서버 (Webpack)
+pnpm dev:pwa      # PWA 로컬 테스트 (빌드 후 실행)
 pnpm build        # 프로덕션 빌드
 pnpm start        # 프로덕션 실행
 pnpm restart      # .next 캐시 삭제 후 개발 서버 재시작
@@ -206,6 +208,32 @@ QUERY_KEY = {
   GET_CONTENT_TYPES: "get-content-types",
 }
 ```
+
+## PWA
+
+**패키지**: `@serwist/turbopack` + `serwist` (Google Workbox 기반)
+
+### 관련 파일
+
+- `src/app/sw.ts` - Service Worker 소스 (빌드 시 `/serwist/sw.js`로 생성됨)
+- `src/app/serwist/[path]/route.ts` - SW 서빙 Route Handler
+- `src/shared/providers/SerwistRegistration.tsx` - SW 등록 Client Component
+- `public/favicons/manifest.json` - Web App Manifest
+- `next.config.ts` - `withSerwist` 플러그인 적용
+
+### 번들러 참고
+
+- `pnpm dev` (Turbopack): SW 비활성화 (개발 환경) → PWA 테스트 시 사용 금지
+- `pnpm dev:pwa` (Turbopack 빌드): PWA 정상 동작 → 로컬 테스트 시 사용
+
+### 로컬 PWA 확인 방법
+
+1. `pnpm dev:pwa` 실행
+2. `localhost:3000` 접속
+3. Chrome DevTools(`F12`) → **Application** 탭
+   - **Service Workers**: `activated and running` 상태 확인
+   - **Manifest**: 앱 이름, 아이콘 등 파싱 결과 확인
+4. 주소창 오른쪽 설치 아이콘(⊕) 표시 → PWA 설치 가능 상태
 
 ## Domain Logic: 카드 이미지
 
