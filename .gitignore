@@ -21,6 +21,7 @@
 # production
 /build
 
+
 # misc
 .DS_Store
 *.pem
@@ -48,3 +49,4 @@ next-env.d.ts
 setting.json
 
 /.claude/skills/*
+.mcp.json
