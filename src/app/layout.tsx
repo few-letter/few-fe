@@ -1,7 +1,11 @@
 import "@/app/globals.css";
 
 import { pretendard, numans } from "@/fonts";
-import { QueryClientProviders, MixpanelProvider } from "@/shared/providers";
+import {
+  QueryClientProviders,
+  MixpanelProvider,
+  SerwistRegistration,
+} from "@/shared/providers";
 import type { Metadata } from "next";
 import {
   SITE_URL,
@@ -111,6 +115,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className={`${pretendard.className} ${numans.variable}`}>
       <body className="antialiased">
+        <SerwistRegistration />
         <QueryClientProviders>
           <MixpanelProvider>{children}</MixpanelProvider>
         </QueryClientProviders>
